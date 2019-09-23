@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_121249) do
+ActiveRecord::Schema.define(version: 2019_09_23_121851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_121249) do
     t.index ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true
   end
 
+  create_table "baskets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "products", default: {}
+    t.uuid "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -120,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_121249) do
     t.string "name", null: false
     t.string "slug", null: false
     t.string "category", null: false
-    t.text "key_words"
+    t.text "key_words", default: [], array: true
     t.text "description"
     t.integer "price", null: false
     t.integer "price_excl_vat", null: false
@@ -128,6 +135,9 @@ ActiveRecord::Schema.define(version: 2019_09_23_121249) do
     t.uuid "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_products_on_category"
+    t.index ["key_words"], name: "index_products_on_key_words"
+    t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 

@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :slug, null: false
       t.string :category, null: false
-      t.text :key_words
+      t.text :key_words, default: [], array: true
       t.text :description
       t.integer :price, null: false
       t.integer :price_excl_vat, null: false
@@ -15,5 +15,8 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     end
 
     add_index :products, :slug, unique: true
+    add_index :products, :category, name: "index_products_on_category"
+    add_index :products, :key_words, name: "index_products_on_key_words"
+    add_index :products, :seller_id, name: "index_products_on_seller_id"
   end
 end
