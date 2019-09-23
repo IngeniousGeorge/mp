@@ -1,0 +1,13 @@
+  test:
+    service: Disk
+    root: <%= Rails.root.join("tmp/storage") %>
+
+  local:
+    service: Disk
+    root: <%= Rails.root.join("storage") %>
+
+  google:
+    service: GCS
+    project: ig-mp
+    credentials: <%= Rails.root.join("keyfile.json") %>
+    bucket: ig-mp
