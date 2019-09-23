@@ -1,0 +1,11 @@
+<%= link_to t(:sign_up), new_client_registration_path %>
+<% if client_signed_in? %>
+  <%= link_to t(:log_out), destroy_client_session_path, method: "delete" %>
+<% else %>
+  <%= link_to t(:sign_in), new_client_session_path %>
+<% end%>
+<% if I18n.locale == :en %>
+  <%= link_to "fr", { locale: 'fr' } %>
+<% else %>
+  <%= link_to "en", { locale: 'en' } %>
+<%end%>

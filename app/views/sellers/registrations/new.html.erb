@@ -1,0 +1,39 @@
+<h2><%= t(:sign_up) %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label t(:name) %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label t(:email) %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label t(:pswd) %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> <%= t(:min_char) %></em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label t(:pswd_confirmation) %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t(:sign_up) %>
+  </div>
+<% end %>
+
+<%= render "sellers/shared/links" %>
+
+<br/>
+<%= current_client.inspect %>
+<br/>
+<%= current_admin.inspect %>
