@@ -1,0 +1,2 @@
+class DbTranslation < ApplicationRecord
+end

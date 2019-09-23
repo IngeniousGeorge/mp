@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_130105) do
+ActiveRecord::Schema.define(version: 2019_09_23_130946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -117,6 +117,16 @@ ActiveRecord::Schema.define(version: 2019_09_23_130105) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_clients_on_slug", unique: true
     t.index ["unlock_token"], name: "index_clients_on_unlock_token", unique: true
+  end
+
+  create_table "db_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "parent_class"
+    t.uuid "parent_id"
+    t.string "parent_atr"
+    t.string "lang"
+    t.text "translation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
