@@ -1,6 +1,6 @@
 class CreateLocations < ActiveRecord::Migration[5.2]
   def change
-    create_table :locations do |t|
+    create_table :locations, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       t.string :name
       t.text :street
       t.string :city

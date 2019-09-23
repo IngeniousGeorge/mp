@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_123630) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "street"
     t.string "city"
