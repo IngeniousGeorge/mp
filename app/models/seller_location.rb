@@ -1,0 +1,2 @@
+class SellerLocation < Location
+end

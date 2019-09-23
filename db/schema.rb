@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_123630) do
+ActiveRecord::Schema.define(version: 2019_09_23_130105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_123630) do
 
   create_table "baskets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "products", default: {}
+    t.uuid "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "client_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "location_id"
     t.uuid "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,6 +161,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_123630) do
     t.index ["key_words"], name: "index_products_on_key_words"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
+  end
+
+  create_table "seller_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "location_id"
+    t.uuid "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sellers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

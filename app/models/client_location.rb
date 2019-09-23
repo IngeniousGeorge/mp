@@ -1,0 +1,2 @@
+class ClientLocation < Location
+end
