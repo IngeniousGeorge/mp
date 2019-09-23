@@ -2,7 +2,7 @@
 
 class DeviseCreateClients < ActiveRecord::Migration[5.2]
   def change
-    create_table :clients do |t|
+    create_table :clients, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -32,8 +32,8 @@ class DeviseCreateClients < ActiveRecord::Migration[5.2]
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
-      t.string :name
-      t.string :slug
+      t.string :name, null: false
+      t.string :slug, null: false
 
       t.timestamps null: false
     end
@@ -42,5 +42,6 @@ class DeviseCreateClients < ActiveRecord::Migration[5.2]
     add_index :clients, :reset_password_token, unique: true
     add_index :clients, :confirmation_token,   unique: true
     add_index :clients, :unlock_token,         unique: true
+    add_index :clients, :slug,                 unique: true
   end
 end
