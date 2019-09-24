@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
+  has_many :locations, as: :owner
   has_one :basket
-  has_many :client_locations
   delegate :products, to: :basket, prefix: true
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable # , :confirmable

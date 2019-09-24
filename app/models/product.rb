@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :seller
   
-  has_one_attached :main_image
+  has_one_attached :logo
   has_many_attached :images
 
   # use slug candidates!

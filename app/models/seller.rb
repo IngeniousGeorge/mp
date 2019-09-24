@@ -1,6 +1,6 @@
 class Seller < ApplicationRecord
+  has_many :locations, as: :owner
   has_many :products
-  has_many :seller_locations
   validates :name, uniqueness: true
 
   has_one_attached :logo

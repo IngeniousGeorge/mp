@@ -1,2 +1,0 @@
-class ClientLocation < Location
-end

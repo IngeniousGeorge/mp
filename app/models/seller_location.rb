@@ -1,2 +1,0 @@
-class SellerLocation < Location
-end

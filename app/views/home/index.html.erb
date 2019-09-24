@@ -1,9 +1,11 @@
 <%= render 'nav/nav_top' %>
 <br/>
 <%= current_client.inspect %>
+<%= current_client.locations.inspect if current_client %>
 <br/>
 <%= current_admin_user.inspect %>
 <br/>
 <%= current_seller.inspect %>
+<%= current_seller.locations.inspect if current_seller %>
 <br/>
 <%= render 'nav/footer' %>

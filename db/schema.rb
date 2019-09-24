@@ -83,13 +83,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "client_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "location_id"
-    t.uuid "client_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -142,17 +135,20 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.string "recipient"
     t.text "street"
     t.string "city"
     t.string "state"
     t.string "country"
     t.string "postal_code"
-    t.float "lat"
-    t.float "lon"
+    t.float "latitude"
+    t.float "longitude"
+    t.uuid "owner_id"
+    t.string "owner_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lat"], name: "index_locations_on_lat"
-    t.index ["lon"], name: "index_locations_on_lon"
+    t.index ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
+    t.index ["owner_type", "owner_id"], name: "index_locations_on_owner"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -171,13 +167,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
     t.index ["key_words"], name: "index_products_on_key_words"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
-  end
-
-  create_table "seller_locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "location_id"
-    t.uuid "seller_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "sellers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
