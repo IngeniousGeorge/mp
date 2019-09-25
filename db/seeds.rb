@@ -20,7 +20,7 @@ if Rails.env.development?
   s1 = Seller.create(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
   l3 = Location.create(name: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", owner_type: "Seller", owner_id: s1.id)
   # path = Rails.root.join("storage")
-  s1.logo.attach()
+  # s1.logo.attach()
   # s1.bg.attach(io: File.open(Rails.root.join("storage")), filename: 'jane-choco_bg.jpeg')
   p1 = Product.create(name: "Chocolate", category: "food", key_words: ["yummy", "great"], description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, seller_id: s1.id)
   # p1.logo.attach(io: File.open(Rails.root.join("storage")), filename: 'jane-choco_chocolate_logo.jpeg')
