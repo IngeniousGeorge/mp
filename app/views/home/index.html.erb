@@ -1,18 +1,9 @@
 <%= render 'nav/nav_top' %>
 <br/>
-<%= current_client.inspect %>
-<br/>
-<%= current_client.locations.inspect if current_client %>
-<br/>
-<%= current_client.basket.inspect if current_client %>
-<br/>
-<%= current_admin_user.inspect %>
-<br/>
-<%= current_seller.inspect %>
-<br/>
-<%= current_seller.locations.inspect if current_seller %>
-<br/>
-<%= current_seller.logo.inspect if current_seller %>
+Home Page
 <br/>
 <%= render 'nav/footer' %>
+<br/>
+<br/>
+<%= render 'layouts/dev_info' %>
 

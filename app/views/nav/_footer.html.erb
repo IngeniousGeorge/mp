@@ -8,3 +8,6 @@
 <% if admin_user_signed_in? %>
   <%= link_to t(:log_out), destroy_admin_user_session_path, method: :delete %>
 <% end%>
+<br/>
+<%= link_to t(:about) %>
+<%= link_to t(:contact) %>
