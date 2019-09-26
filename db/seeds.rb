@@ -1,24 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 if Rails.env.development?
   AdminUser.create!(email: "admin@example.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
 
   c1 = Client.create!(name: "jim", email: "jim@ig.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
   Basket.create(client_id: c1.id)
-  l1 = Location.create(name: "jim norton", street: "Sonnenalle 1", city: "Berlin", country: "Germany", postal_code: "12047", owner_type: "Client", owner_id: c1.id)
+  l1 = Location.create(name: "Home", slug: "home", recipient: "Jim Norton", street: "Sonnenalle 1", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Client", owner_id: c1.id)
 
   c2 = Client.create!(name: "jc", email: "jc@ig.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
   Basket.create(client_id: c2.id)
-  l2 = Location.create(name: "jc", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", owner_type: "Client", owner_id: c2.id)
+  l2 = Location.create(name: "JC", slug: "jc", recipient: "JC Baroulet", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", delivery: true, billing: true, owner_type: "Client", owner_id: c2.id)
 
   s1 = Seller.create(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
-  l3 = Location.create(name: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", owner_type: "Seller", owner_id: s1.id)
+  l3 = Location.create(name: "Office", slug: "office", recipient: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Seller", owner_id: s1.id)
   # path = Rails.root.join("storage")
   # s1.logo.attach()
   # s1.bg.attach(io: File.open(Rails.root.join("storage")), filename: 'jane-choco_bg.jpeg')
@@ -30,7 +22,7 @@ if Rails.env.development?
   # p2.logo.attach(io: File.open(Rails.root.join("storage")), filename: 'jane-choco_marmite_logo.jpeg')
 
   s2 = Seller.create(name: "Jack Jack", slug: "jack-jack", email: "jack@sel.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
-  l4 = Location.create(name: "jack jack", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", owner_type: "Seller", owner_id: s2.id)
+  l4 = Location.create(name: "Warehouse", slug: "warehaouse", recipient: "Mr. Jack Nicholson", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", delivery: true, billing: true, owner_type: "Seller", owner_id: s2.id)
   # SellerLocation.create(location_id: l4.id, seller_id: s2.id)
   # s2.logo.attach(io: File.open(Rails.root.join("storage")), filename: 'jack_logo.png')
   # s2.bg.attach(io: File.open(Rails.root.join("storage")), filename: 'jack_bg.jpeg')

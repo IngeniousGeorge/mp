@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   has_one_attached :logo
   has_many_attached :images
 
-  # use slug candidates!
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: :scoped, scope: :seller
 end

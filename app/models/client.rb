@@ -9,6 +9,10 @@ class Client < ApplicationRecord
   friendly_id :slug_candidates, use: :slugged
 
   def slug_candidates
-    %i[name email]
+    [:name,  :stripped_email, [:name, :stripped_email]]
+  end
+
+  def stripped_email
+    self.email.gsub(/@.*$/, "")
   end
 end
