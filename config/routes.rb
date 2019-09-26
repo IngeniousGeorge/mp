@@ -16,11 +16,13 @@ Rails.application.routes.draw do
     get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
     resources :clients, path: "c", only: [:edit, :update, :destroy], path_names: { edit: "account" } do
       resource :basket, only: [:edit, :update], path_names: { edit: "" }
+      resources :locations, only: [:edit, :update], path_names: { edit: "" }
     end
 
     get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard
-    resources :sellers, path: "s", only: [:show, :edit, :update], path_names: { edit: "account" } do
-      resources :products, path: "p", path_names: { edit: "edit" }
+    resources :sellers, path: "s", only: [:edit, :update], path_names: { edit: "account" } do
+      resources :products, only: [:create, :edit, :update], path: "p", path_names: { edit: "edit" }
+      resources :locations, only: [:edit, :update], path_names: { edit: "" }
     end
 
     #CATALOG:
@@ -38,3 +40,14 @@ Rails.application.routes.draw do
     # end
   end
 end
+
+# get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
+# resources :clients, path: "c", only: [:edit, :update, :destroy], path_names: { edit: "account" } do
+#   resource :basket, only: [:edit, :update], path_names: { edit: "" }
+#   resource :locations, only: [:edit, :update], path_names: { edit: "" }
+# end
+
+# get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard
+# resources :sellers, path: "s", only: [:show, :edit, :update], path_names: { edit: "account" } do
+#   resources :products, path: "p", path_names: { edit: "edit" }
+# end

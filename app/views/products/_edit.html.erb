@@ -1,0 +1,24 @@
+<span>Edit Products</span>
+
+<% @seller.products.each do |product| %>
+  <%= form_with model: product, url: seller_products_path(@seller) do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+    <%= f.label :name, "Slug" %>
+    <%= f.text_field :slug %>
+    <%= f.label :category, "Category" %>
+    <%= f.text_field :category %>
+    <%= f.label :key_words, "Key words" %>
+    <%= f.text_field :key_words %>
+    <%= f.label :description, "Description" %>
+    <%= f.text_field :description %>
+    <%= f.label :price, "Price" %>
+    <%= f.text_field :price %>
+    <%= f.label :price_excl_vat, "Price excl vat" %>
+    <%= f.text_field :price_excl_vat %>
+    <%= f.hidden_field :seller_id, value: @seller.id %>
+    <%= f.submit "Edit" %>
+  <% end %>
+  <br/>
+<% end %>
+

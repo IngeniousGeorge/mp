@@ -6,6 +6,7 @@ class DashboardSellersController < ApplicationController
   def show
     @seller = current_seller
     @products = @seller.products
+    @locations = @seller.locations
   end
 
   private

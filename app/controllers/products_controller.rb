@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         format.html do
-          redirect_to new_seller_product_path(params["seller_id"]), notice: 'Product was successfully created.'
+          redirect_to seller_dashboard_path(params["seller_id"]), notice: 'Product was successfully created.'
         end
         format.json { render :show, status: :created, location: @product }
       else
@@ -82,7 +82,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :category, :key_words, :description, :price, :seller_id)
+    params.require(:product).permit(:name, :category, :key_words, :description, :price, :price_excl_vat, :seller_id)
   end
 
   def current_ability

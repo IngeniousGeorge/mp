@@ -1,7 +1,13 @@
-<%= link_to 'New product', new_seller_product_path(@seller) %>
+<%= render partial: "sellers/edit", seller: @seller %>
+
+<%= render partial: "products/new", seller: @seller %>
 
 <% unless @products.empty? %>
-  <%= link_to 'Edit', edit_seller_product_path(seller_id: @seller.slug, id: @products.first.slug) %>
+  <%= render partial: "products/edit", seller: @seller, product: @products %>
 <% end %>
 
 <%= current_seller.inspect %>
+<br/>
+<%= @seller.inspect %>
+<br/>
+<%= @seller.products.inspect %>
