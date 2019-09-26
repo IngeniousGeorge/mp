@@ -6,6 +6,12 @@
   <%= render partial: "products/edit", seller: @seller, product: @products %>
 <% end %>
 
+<%= render partial: "locations/new", seller: @seller %>
+
+<% unless @locations.empty? %>
+  <%= render partial: "locations/edit", seller: @seller, product: @locations %>
+<% end %>
+
 <%= current_seller.inspect %>
 <br/>
 <%= @seller.inspect %>

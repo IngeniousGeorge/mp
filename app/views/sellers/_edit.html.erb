@@ -1,2 +1,12 @@
-<h1>Sellers#edit</h1>
+<span>Edit Seller</span>
 
+<%= form_with model: @seller, url: seller_path do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <%= f.label :slug, "Slug" %>
+  <%= f.text_field :slug %>
+  <%= f.label :description, "Description" %>
+  <%= f.text_field :description %>
+  <%= f.hidden_field :seller_id, value: @seller.id %>
+  <%= f.submit "Edit" %>
+<% end %>

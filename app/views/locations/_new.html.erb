@@ -1,0 +1,26 @@
+<span>New Address</span>
+<% @location = @seller.locations.new %>
+
+<%= form_with model: @location, url: seller_locations_path(@seller) do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <%= f.label :recipient, "recipient" %>
+  <%= f.text_field :recipient %>
+  <%= f.label :street, "Street" %>
+  <%= f.text_field :street %>
+  <%= f.label :city, "City" %>
+  <%= f.text_field :city %>
+  <%= f.label :state, "State" %>
+  <%= f.text_field :state %>
+  <%= f.label :country, "Country" %>
+  <%= f.text_field :country %>
+  <%= f.label :postal_code, "Postal Code" %>
+  <%= f.text_field :postal_code %>
+  <%= f.label :delivery, "Delivery" %>
+  <%= f.check_box :delivery %>
+  <%= f.label :billing, "Billing" %>
+  <%= f.check_box :billing %>
+  <%= f.hidden_field :owner_type, value: "Seller" %>
+  <%= f.hidden_field :owner_id, value: @seller.id %>
+  <%= f.submit "Create" %>
+<% end %>
