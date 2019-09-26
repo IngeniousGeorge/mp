@@ -7,6 +7,26 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def index_seller
+    seller_id = Seller.where(slug: params['id']).take.id
+    @products = Product.where(seller_id: seller_id)
+    render "index"
+  end
+
+  def index_cat
+    @products = Product.where(category: params['id'])
+    render "index"
+  end
+
+  def index_loc
+    render "index"
+  end
+
+  def index_tag
+    @products = Product.find_by_sql(["SELECT * FROM products WHERE ? = ANY (key_words)", params['id']])
+    render "index"
+  end
+
   def new
     @seller_id = Seller.friendly.find(params[:seller_id]).id
     @product = Product.new()
