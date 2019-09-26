@@ -1,6 +1,21 @@
 <nav><%= render 'nav/nav_top' %></nav>
 <br/>
 <div>Home Page</div>
+<div>All:
+  <%= link_to 'See Catalogue', catalogue_path %>
+</div>
+<div>Sellers:
+  <%= link_to 'Jane Choco', c_seller_path('jane-choco') %>
+  <%= link_to 'Jack Jack', c_seller_path('jack-jack') %>
+</div>
+<div>Categories:
+  <%= link_to 'food', c_category_path('food') %>
+  <%= link_to 'retail', c_category_path('retail') %>
+</div>
+<div>Tags:
+  <%= link_to 'yummy', c_tag_path('yummy') %>
+  <%= link_to 'useful', c_tag_path('useful') %>
+</div>
 <br/>
 <nav><%= render 'nav/footer' %></nav>
 <br/>

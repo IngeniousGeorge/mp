@@ -27,6 +27,9 @@ class ProductsController < ApplicationController
     render "index"
   end
 
+  def show    
+  end
+
   def new
     @seller_id = Seller.friendly.find(params[:seller_id]).id
     @product = Product.new()

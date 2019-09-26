@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
     t.integer "price", null: false
     t.integer "price_excl_vat", null: false
     t.integer "price_discount"
+    t.integer "price_discount_excl_vat"
     t.uuid "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -193,7 +194,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
     t.string "name", null: false
     t.string "slug", null: false
     t.text "description"
-    t.text "categories"
+    t.text "categories", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_sellers_on_confirmation_token", unique: true

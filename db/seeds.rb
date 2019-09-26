@@ -9,7 +9,7 @@ if Rails.env.development?
   Basket.create(client_id: c2.id)
   l2 = Location.create(name: "JC", slug: "jc", recipient: "JC Baroulet", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", delivery: true, billing: true, owner_type: "Client", owner_id: c2.id)
 
-  s1 = Seller.create(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
+  s1 = Seller.create(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", description: "Best chocolates in Berlin", categories: ["food"], confirmed_at: DateTime.now)
   l3 = Location.create(name: "Office", slug: "office", recipient: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Seller", owner_id: s1.id)
   # path = Rails.root.join("storage")
   # s1.logo.attach()
@@ -21,7 +21,7 @@ if Rails.env.development?
   p2 = Product.create(name: "Marmite", category: "food", key_words: ["ewww", "terrible"], description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, seller_id: s1.id)
   # p2.logo.attach(io: File.open(Rails.root.join("storage")), filename: 'jane-choco_marmite_logo.jpeg')
 
-  s2 = Seller.create(name: "Jack Jack", slug: "jack-jack", email: "jack@sel.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
+  s2 = Seller.create(name: "Jack Jack", slug: "jack-jack", email: "jack@sel.com", password: "password", password_confirmation: "password", description: "All you possibly need in Berlin", categories: ["retail"], confirmed_at: DateTime.now)
   l4 = Location.create(name: "Warehouse", slug: "warehaouse", recipient: "Mr. Jack Nicholson", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", delivery: true, billing: true, owner_type: "Seller", owner_id: s2.id)
   # SellerLocation.create(location_id: l4.id, seller_id: s2.id)
   # s2.logo.attach(io: File.open(Rails.root.join("storage")), filename: 'jack_logo.png')

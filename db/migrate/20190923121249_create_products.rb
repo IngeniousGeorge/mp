@@ -9,6 +9,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.integer :price, null: false
       t.integer :price_excl_vat, null: false
       t.integer :price_discount
+      t.integer :price_discount_excl_vat
       t.uuid :seller_id, null: false
 
       t.timestamps

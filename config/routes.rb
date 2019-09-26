@@ -25,12 +25,13 @@ Rails.application.routes.draw do
 
     #CATALOG:
     get '/catalogue', to: 'products#index', as: 'catalogue'
-    get '/seller/:id', to: 'products#index_seller', as: 'c_seller'
+    get '/seller/:id', to: 'sellers#show', as: 'seller_home'
+    get '/seller/:id/p', to: 'products#index_seller', as: 'c_seller'
     get '/cat/:id', to: 'products#index_cat', as: 'c_category'
     get '/loc/:id', to: 'products#index_loc', as: 'c_location'
     get '/tag/:id', to: 'products#index_tag', as: 'c_tag'
 
-    # resources :products, only: [:index, :show]
+    resources :products, only: :show
 
     # concern :manageable do
     #   resources :conversations, :orders...
