@@ -1,27 +1,34 @@
 <span>Edit Address</span>
 
 <% @seller.locations.each do |location| %>
-  <%= form_with model: location, url: seller_locations_path(@seller) do |f| %>
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %>
-    <%= f.label :recipient, "recipient" %>
-    <%= f.text_field :recipient %>
-    <%= f.label :street, "Street" %>
-    <%= f.text_field :street %>
-    <%= f.label :city, "City" %>
-    <%= f.text_field :city %>
-    <%= f.label :state, "State" %>
-    <%= f.text_field :state %>
-    <%= f.label :country, "Country" %>
-    <%= f.text_field :country %>
-    <%= f.label :postal_code, "Postal Code" %>
-    <%= f.text_field :postal_code %>
-    <%= f.label :delivery, "Delivery" %>
-    <%= f.check_box :delivery %>
-    <%= f.label :billing, "Billing" %>
-    <%= f.check_box :billing %>
-    <%= f.hidden_field :owner_type, value: "Seller" %>
-    <%= f.hidden_field :owner_id, value: @seller.id %>
-    <%= f.submit "Create" %>
+  <% if location.slug %>
+    <%= form_with model: location, url: seller_location_path(@seller.slug, location.slug) do |f| %>
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name %>
+      <%= f.label :recipient, "recipient" %>
+      <%= f.text_field :recipient %>
+      <%= f.label :street, "Street" %>
+      <%= f.text_field :street %>
+      <%= f.label :city, "City" %>
+      <%= f.text_field :city %>
+      <%= f.label :state, "State" %>
+      <%= f.text_field :state %>
+      <%= f.label :country, "Country" %>
+      <%= f.text_field :country %>
+      <%= f.label :postal_code, "Postal Code" %>
+      <%= f.text_field :postal_code %>
+      <%= f.label :delivery, "Delivery" %>
+      <%= f.check_box :delivery %>
+      <%= f.label :billing, "Billing" %>
+      <%= f.check_box :billing %>
+      <%= f.hidden_field :owner_type, value: "Seller" %>
+      <%= f.hidden_field :owner_id, value: @seller.id %>
+      <%= f.submit "Edit" %>
+    <% end %>
+    <%= form_with model: location, url: seller_location_path(@seller, location.slug), method: :delete do |f| %>
+      <%= f.hidden_field :owner_type, value: "Seller" %>
+      <%= f.hidden_field :owner_id, value: @seller.id %>
+      <%= f.submit "Delete" %>
+    <% end %>
   <% end %>
 <% end %>

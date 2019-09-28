@@ -20,6 +20,9 @@
       <%= f.hidden_field :seller_id, value: @seller.id %>
       <%= f.submit "Edit" %>
     <% end %>
+    <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), method: :delete do |f| %>
+      <%= f.submit "Delete" %>
+    <% end %>
   <% end %>
   <br/>
 <% end %>

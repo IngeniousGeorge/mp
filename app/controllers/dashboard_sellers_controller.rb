@@ -1,6 +1,6 @@
 class DashboardSellersController < ApplicationController
-  before_action :unauthorize_tempered_urls
   before_action :authenticate_seller!
+  before_action :unauthorize_tempered_urls
   load_and_authorize_resource :seller, find_by: :slug
 
   def show

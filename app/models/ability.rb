@@ -5,7 +5,7 @@ class Ability
     can [:index, :show], [Seller, Product]
     if seller.present?
       can :manage, [Seller, Product], id: seller.id 
-      can :read, :dashboard, id: seller.id
+      # can :read, :dashboard, id: seller.id
     end
   end
 

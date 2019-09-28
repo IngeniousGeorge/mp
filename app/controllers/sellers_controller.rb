@@ -1,17 +1,10 @@
 class SellersController < ApplicationController
   before_action :set_seller, only: [:show, :update]
   before_action :authenticate_seller!, only: [:update]
-  # load_and_authorize_resource :seller, find_by: :slug
-
-  # def index
-  # end
+  load_and_authorize_resource :seller, find_by: :slug
 
   def show
   end
-
-  # def edit
-  #   @seller = current_seller
-  # end
 
   def update
     respond_to do |format|
