@@ -9,7 +9,7 @@
 <%= render partial: "locations/new", seller: @seller %>
 
 <% unless @locations.empty? %>
-  <%= render partial: "locations/edit", seller: @seller, product: @locations %>
+  <%= render partial: "locations/edit", seller: @seller %>
 <% end %>
 
 <%= current_seller.inspect %>
