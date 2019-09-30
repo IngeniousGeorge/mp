@@ -1,6 +1,6 @@
 <span>Edit Products</span>
 
-<% @seller.products.each do |product| %>
+<% @products.each do |product| %>
   <% if product.slug %>
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug) do |f| %>
       <%= f.label :name, "Name" %>

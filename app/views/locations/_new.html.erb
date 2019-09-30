@@ -1,7 +1,6 @@
 <span>New Address</span>
-<% @location = @seller.locations.new %>
 
-<%= form_with model: @location, url: seller_locations_path(@seller) do |f| %>
+<%= form_with model: location, url: url do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
   <%= f.label :recipient, "recipient" %>
@@ -20,7 +19,7 @@
   <%= f.check_box :delivery %>
   <%= f.label :billing, "Billing" %>
   <%= f.check_box :billing %>
-  <%= f.hidden_field :owner_type, value: "Seller" %>
-  <%= f.hidden_field :owner_id, value: @seller.id %>
+  <%= f.hidden_field :owner_type, value: owner_type %>
+  <%= f.hidden_field :owner_id, value: owner_id %>
   <%= f.submit "Create" %>
 <% end %>

@@ -14,9 +14,9 @@ Rails.application.routes.draw do
 
     #DASHBOARDS:
     get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
-    resources :clients, path: "c", only: [:edit, :update, :destroy], path_names: { edit: "account" } do
-      resource :basket, only: [:edit, :update], path_names: { edit: "" }
-      resources :locations, only: [:edit, :update], path_names: { edit: "" }
+    resources :clients, path: "c", only: [:update, :destroy] do
+      resource :basket, only: [:update], path: "b"
+      resources :locations, only: [:create, :edit, :update], path: "l"
     end
 
     get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard

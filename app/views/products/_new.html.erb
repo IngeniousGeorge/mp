@@ -1,7 +1,6 @@
 <span>New Product</span>
-<% @product = @seller.products.new %>
 
-<%= form_with model: @product, url: seller_products_path(@seller) do |f| %>
+<%= form_with model: product, url: seller_products_path(@seller) do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
   <%= f.label :name, "Slug" %>
@@ -19,4 +18,3 @@
   <%= f.hidden_field :seller_id, value: @seller.id %>
   <%= f.submit "Create" %>
 <% end %>
-

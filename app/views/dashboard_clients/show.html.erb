@@ -1,19 +1,19 @@
 <%= render 'nav/nav_top' %>
 
-<%= render partial: "clients/edit", client: @client %>
+<%= render partial: "clients/edit" %>
 
-<%= render partial: "baskets/edit", client: @client, basket: @basket %>
+<%= render partial: "baskets/edit", basket: @basket %>
 
-<%= render partial: "locations/new", client: @client %>
+<%= render partial: "locations/new", locals: { location: @client.locations.new, owner_type: "Client", owner_id: @client.id, url: client_locations_path(@client) } %>
 
 <% unless @locations.empty? %>
-  <%= render partial: "locations/edit", client: @client %>
+  <%= render partial: "locations/edit", locals: { locations: @client.locations, owner: @client, owner_type: "Client", owner_id: @client.id, owner_slug: @client.slug } %>
 <% end %>
 
 <%= render 'nav/footer' %>
 
 <%= current_client.inspect %>
 <br/>
-<%= @client.inspect %>
+<%= @client.locations.inspect %>
 <br/>
-<%= @client.products.inspect %>
+<%= @client.basket.inspect %>

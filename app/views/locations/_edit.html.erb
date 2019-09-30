@@ -1,8 +1,8 @@
 <span>Edit Address</span>
 
-<% @seller.locations.each do |location| %>
+<% locations.each do |location| %>
   <% if location.slug %>
-    <%= form_with model: location, url: seller_location_path(@seller.slug, location.slug) do |f| %>
+    <%= form_with model: location, url: polymorphic_path([owner, location]) do |f| %>
       <%= f.label :name, "Name" %>
       <%= f.text_field :name %>
       <%= f.label :recipient, "recipient" %>
@@ -21,13 +21,13 @@
       <%= f.check_box :delivery %>
       <%= f.label :billing, "Billing" %>
       <%= f.check_box :billing %>
-      <%= f.hidden_field :owner_type, value: "Seller" %>
-      <%= f.hidden_field :owner_id, value: @seller.id %>
+      <%= f.hidden_field :owner_type, value: owner_type %>
+      <%= f.hidden_field :owner_id, value: owner_id %>
       <%= f.submit "Edit" %>
     <% end %>
-    <%= form_with model: location, url: seller_location_path(@seller, location.slug), method: :delete do |f| %>
-      <%= f.hidden_field :owner_type, value: "Seller" %>
-      <%= f.hidden_field :owner_id, value: @seller.id %>
+    <%= form_with model: location, url: polymorphic_path([owner, location]), method: :delete do |f| %>
+      <%= f.hidden_field :owner_type, value: owner_type %>
+      <%= f.hidden_field :owner_id, value: owner_id %>
       <%= f.submit "Delete" %>
     <% end %>
   <% end %>
