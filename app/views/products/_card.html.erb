@@ -1,7 +1,8 @@
 <h3><%= product.name %></h3>
-<% val = {p: product.id, q:1} %>
 
-<%= form_with model: basket, url: basket_path do |f| %>
-  <%= f.hidden_field :products, value: val %>
+<%= form_with model: BasketLine.new, url: basket_lines_path do |f| %>
+  <%= f.hidden_field :product_id, value: product.id %>
+  <%= f.hidden_field :basket_id, value: basket.id %>
+  <%= f.hidden_field :quantity, value: 1 %>
   <%= f.submit "Add to basket" %>
 <% end %>

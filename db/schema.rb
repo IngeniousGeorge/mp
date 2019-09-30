@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_130946) do
+ActiveRecord::Schema.define(version: 2019_09_30_164952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,8 +76,15 @@ ActiveRecord::Schema.define(version: 2019_09_23_130946) do
     t.index ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true
   end
 
+  create_table "basket_lines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "basket_id"
+    t.uuid "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "baskets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.jsonb "products", default: {}
     t.uuid "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
