@@ -1,6 +1,7 @@
 <%= link_to t(:sign_up), new_client_registration_path %>
 <% if client_signed_in? %>
   <%= link_to t(:log_out), destroy_client_session_path, method: "delete" %>
+  <%= link_to t(:account), client_dashboard_path(current_client) %>
 <% else %>
   <%= link_to t(:sign_in), new_client_session_path %>
 <% end%>

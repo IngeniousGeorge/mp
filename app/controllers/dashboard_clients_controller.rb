@@ -1,10 +1,12 @@
 class DashboardClientsController < ApplicationController
-  before_action :unauthorize_tempered_urls
   before_action :authenticate_client!
+  before_action :unauthorize_tempered_urls
   load_and_authorize_resource :client, find_by: :slug
 
   def show
     @client = current_client
+    @basket = @client.basket
+    @locations = @client.locations
   end
 
   private
@@ -15,7 +17,7 @@ class DashboardClientsController < ApplicationController
     end
   end
   
-  # def current_ability
-  #   @current_ability ||= ::Ability.new(current_client)
-  # end
+  def current_ability
+    @current_ability ||= ::Ability.new(current_client)
+  end
 end

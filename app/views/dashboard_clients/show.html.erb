@@ -1,11 +1,19 @@
 <%= render 'nav/nav_top' %>
+
+<%= render partial: "clients/edit", client: @client %>
+
+<%= render partial: "baskets/edit", client: @client, basket: @basket %>
+
+<%= render partial: "locations/new", client: @client %>
+
+<% unless @locations.empty? %>
+  <%= render partial: "locations/edit", client: @client %>
+<% end %>
+
+<%= render 'nav/footer' %>
+
+<%= current_client.inspect %>
 <br/>
 <%= @client.inspect %>
 <br/>
-<%= link_to 'Account', edit_client_path(@client) %>
-<br/>
-<%= link_to 'Basket', edit_client_basket_path(@client) %>
-<br/>
-<%= link_to 'Addresses', edit_client_locations_path(@client) %>
-<br/>
-<%= render 'nav/footer' %>
+<%= @client.products.inspect %>
