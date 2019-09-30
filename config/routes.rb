@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
     resources :clients, path: "c", only: [:update, :destroy] do
       resource :basket, only: [:update], path: "b"
-      resources :locations, only: [:create, :edit, :update], path: "l"
+      resources :locations, only: [:create, :update, :destroy], path: "l"
     end
 
     get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       resources :locations, only: [:create, :update, :destroy], path: "l"
     end
 
-    #CATALOG:
+    #CATALOGUE:
     get '/catalogue', to: 'products#index', as: 'catalogue'
     get '/seller/:id', to: 'sellers#show', as: 'seller_home'
     get '/seller/:id/p', to: 'products#index_seller', as: 'c_seller'
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get '/tag/:id', to: 'products#index_tag', as: 'c_tag'
 
     resources :products, only: :show
+
+    resource :basket, only: :update
 
     # concern :manageable do
     #   resources :conversations, :orders...
