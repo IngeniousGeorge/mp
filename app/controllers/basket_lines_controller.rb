@@ -1,6 +1,21 @@
 class BasketLinesController < ApplicationController
   before_action :set_basket_line
 
+  # from checkout
+  def update
+    respond_to do |format|
+      @basket_line.quantity += basket_line_params["quantity"].to_i
+      if @basket_line.save
+        format.html { redirect_back fallback_location: root_path, notice: "Product added" }
+        format.json { render :show, status: :ok, location: @basket }
+      else
+        format.html { redirect_back fallback_location: root_path, alert: 'Product couldn\'t be added' }
+        format.json { render json: @basket.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # from products _card/show
   def create
     if @basket_line.quantity == nil
       @basket_line.quantity = basket_line_params["quantity"]

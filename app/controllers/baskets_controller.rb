@@ -2,13 +2,8 @@ class BasketsController < ApplicationController
   # before_action :authenticate_client!
   before_action :set_basket, only: [:edit, :update]
 
-  # GET /baskets/1
-  # GET /baskets/1.json
-  def show
-  end
-
-  # GET /baskets/1/edit
   def edit
+    @basket_lines = @basket.basket_lines
   end
 
   # PATCH/PUT /baskets/1

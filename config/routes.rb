@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     #DASHBOARDS:
     get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
     resources :clients, path: "c", only: [:update, :destroy] do
-      resources :basket_lines, only: [:create, :update], path: "b"
+      resource :basket, only: :edit, path: "checkout"
+      resources :basket_lines, only: :update, path: "b"
       resources :locations, only: [:create, :update, :destroy], path: "l"
     end
 
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
 
     resources :products, only: :show
 
+    #CHECKOUT
+    resource :basket, only: :edit, path: "checkout"
     resources :basket_lines, only: [:create, :update]
 
     # concern :manageable do

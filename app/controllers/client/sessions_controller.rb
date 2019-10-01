@@ -12,8 +12,7 @@ class Client::SessionsController < Devise::SessionsController
   def create
     super do |client|
       if db_basket = client.basket && cookie_basket = Basket.find_by(id: cookies['basket_id'])
-        # cookie_basket = Basket.find(cookies['basket_id'])
-        db_basket.merge_basket_products!(cookie_basket)
+        db_basket.merge_baskets(cookie_basket)
         cookie_basket.delete
       end
     end

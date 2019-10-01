@@ -4,12 +4,11 @@ class Basket < ApplicationRecord
 
     public
 
-    def merge_basket_products!(other_basket)
-      self.products.merge!(other_basket.products){|key, oldval, newval| newval + oldval}
-    end
-
-    def change_product(id, quantity)
-      
+    def merge_baskets(other_basket)
+      other_basket.basket_lines.each do |line|
+        line.basket_id = self.id
+        line.save
+      end
     end
 
 end

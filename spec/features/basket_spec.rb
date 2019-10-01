@@ -1,0 +1,6 @@
+it "retrieves basket from cookies if set"
+it "creates a new basket for first visitors"
+it "merges cookie basket with DB basket on sign up"
+it "merges cookie basket with DB basket on sign in"
+it "deletes cookie basket after merges"
+it "keeps same basket after log out"

@@ -5,6 +5,7 @@
 <% else %>
   <%= link_to t(:sign_in), new_client_session_path %>
 <% end%>
+<%= link_to t(:checkout), edit_basket_path %>
 <% if I18n.locale == :en %>
   <%= link_to "fr", { locale: 'fr' } %>
 <% else %>
