@@ -3,7 +3,7 @@
 
 <%= render partial: "sellers/edit" %>
 
-<%= render partial: "products/new", locals: { seller: @seller, product: @seller.products.new } %>
+<%= render partial: "products/new", locals: { seller: @seller, product: @new_product } %>
 
 <% unless @products.empty? %>
   <%= render partial: "products/edit", locals: { seller: @seller, products: @products } %>

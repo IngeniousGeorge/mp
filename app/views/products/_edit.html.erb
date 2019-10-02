@@ -1,23 +1,26 @@
 <span>Edit Products</span>
 
 <% @products.each do |product| %>
-  <% if product.slug %>
+  <% if product.slug && product.prepare_empty_tags %>
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug) do |f| %>
       <%= f.label :name, "Name" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name %><br/>
       <%= f.label :name, "Slug" %>
-      <%= f.text_field :slug %>
+      <%= f.text_field :slug %><br/>
       <%= f.label :category, "Category" %>
-      <%= f.text_field :category %>
-      <%= f.label :key_words, "Key words" %>
-      <%= f.text_field :key_words %>
+      <%= f.text_field :category %><br/>
       <%= f.label :description, "Description" %>
-      <%= f.text_field :description %>
+      <%= f.text_field :description %><br/>
       <%= f.label :price, "Price" %>
-      <%= f.text_field :price %>
+      <%= f.text_field :price %><br/>
       <%= f.label :price_excl_vat, "Price excl vat" %>
-      <%= f.text_field :price_excl_vat %>
+      <%= f.text_field :price_excl_vat %><br/>
       <%= f.hidden_field :seller_id, value: @seller.id %>
+      <%= f.fields_for :product_tags do |tf| %>
+        <%= tf.label :tag %>
+        <%= tf.text_field :tag %>
+        <%= tf.check_box :_destroy %><br/>
+      <% end %>
       <%= f.submit "Edit" %>
     <% end %>
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), method: :delete do |f| %>
@@ -26,4 +29,3 @@
   <% end %>
   <br/>
 <% end %>
-

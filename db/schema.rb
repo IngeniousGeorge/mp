@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_164952) do
+ActiveRecord::Schema.define(version: 2019_10_02_110357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -161,11 +161,18 @@ ActiveRecord::Schema.define(version: 2019_09_30_164952) do
     t.index ["owner_type", "owner_id"], name: "index_locations_on_owner"
   end
 
+  create_table "product_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "tag"
+    t.uuid "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag"], name: "index_product_tags_on_tag"
+  end
+
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
     t.string "category", null: false
-    t.text "key_words", default: [], array: true
     t.text "description"
     t.integer "price", null: false
     t.integer "price_excl_vat", null: false
@@ -175,7 +182,6 @@ ActiveRecord::Schema.define(version: 2019_09_30_164952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_products_on_category"
-    t.index ["key_words"], name: "index_products_on_key_words"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
   end

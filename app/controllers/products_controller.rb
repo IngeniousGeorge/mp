@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
   before_action :set_redirect_path, only: [:create, :update, :destroy]
-  load_and_authorize_resource :seller, :find_by => :slug, only: [:create, :update, :destroy]
+  load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
 
   def index
     # @products = Seller.friendly.find(params[:seller_id]).products
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def index_tag
-    @products = Product.find_by_sql(["SELECT * FROM products WHERE ? = ANY (key_words)", params['id']])
+    @products = Product.where()
     render "index"
   end
 
@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :category, :key_words, :description, :price, :price_excl_vat, :seller_id)
+    params.require(:product).permit(:name, :category, :description, :price, :price_excl_vat, :seller_id, :id, :slug, product_tags_attributes: [:id, :tag, :product_id, :_destroy])
   end
 
   def set_redirect_path
