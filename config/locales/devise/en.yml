@@ -13,6 +13,7 @@ en:
   didnt_receive_unlock_instructions?: "Didn't receive unlock instructions?"
   edit: "Edit"
   email: "Email"
+  name: "Name"
   forgot_your_pswd?: "Forgot your password?"
   leave_blank_if_you_dont_want_to_change_it: "leave blank if you don't want to change it"
   log_out: "Log out"
