@@ -4,13 +4,12 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
 
   def index
-    # @products = Seller.friendly.find(params[:seller_id]).products
     @products = Product.all
   end
 
   def index_seller
-    seller_id = Seller.where(slug: params['id']).take.id
-    @products = Product.where(seller_id: seller_id)
+    @seller = Seller.friendly.find(params['id'])
+    @products = @seller.products
     render "index"
   end
 
@@ -24,11 +23,11 @@ class ProductsController < ApplicationController
   end
 
   def index_tag
-    @products = Product.find_by_sql ["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", params['id']]
+    @products = Product.find_by_sql(["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", params['id']])
     render "index"
   end
 
-  def show    
+  def show
   end
 
   def create
