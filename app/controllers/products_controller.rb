@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def index_tag
-    @products = Product.where()
+    @products = Product.find_by_sql ["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", params['id']]
     render "index"
   end
 

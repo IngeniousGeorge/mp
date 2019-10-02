@@ -12,4 +12,10 @@ class Product < ApplicationRecord
   def prepare_empty_tags
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
   end
+
+  def tags
+    tags = []
+    self.product_tags.each { |t| tags << t.tag }
+    tags
+  end
 end
