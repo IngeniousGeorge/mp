@@ -12,4 +12,8 @@ class Product < ApplicationRecord
   def prepare_empty_tags
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
   end
+
+  def self.categories
+    Category.all
+  end
 end
