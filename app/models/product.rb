@@ -14,6 +14,6 @@ class Product < ApplicationRecord
   end
 
   def self.categories
-    Category.all
+    Category.pluck(:name)
   end
 end

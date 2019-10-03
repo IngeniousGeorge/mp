@@ -1,1 +1,7 @@
-<%= @product.inspect %>
+<%= @product.name %><br/>
+
+<% if @product.images.attached? %>
+  <% @product.images.attachments.each do |i| %>
+    <%= image_tag(i) %>
+  <% end %>
+<% end %>

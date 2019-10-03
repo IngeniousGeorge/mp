@@ -9,6 +9,7 @@ class DashboardSellersController < ApplicationController
     @locations = @seller.locations
     @new_product = @seller.products.new
     @new_product.prepare_empty_tags
+    @categories = Product.categories
   end
 
   private

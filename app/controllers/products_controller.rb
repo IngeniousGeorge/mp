@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
-  before_action :set_redirect_path, only: [:create, :update, :destroy]
+  before_action :set_redirect_path, only: [:create, :update, :destroy, :delete_logo, :delete_images]
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
 
   def index
@@ -66,6 +66,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def delete_logo
+    @logo = ActiveStorage::Attachment.find(Product.friendly.find(params[:id]).logo.id)
+    @logo.purge
+    redirect_to @redirect_path
+  end
+
+  def delete_images
+    Product.friendly.find(params[:id]).images.each do |i|
+      @image = ActiveStorage::Attachment.find(Product.friendly.find(params[:id]).images.first.id)
+      @image.purge
+    end
+    redirect_to @redirect_path
+  end
+
   private
 
   def set_product
@@ -73,7 +87,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :category, :description, :price, :price_excl_vat, :seller_id, :id, :slug, product_tags_attributes: [:id, :tag, :product_id, :_destroy])
+    params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :seller_id, :logo, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy])
   end
 
   def set_redirect_path

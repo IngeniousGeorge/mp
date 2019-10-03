@@ -6,17 +6,21 @@
   <%= f.label :name, "Slug" %>
   <%= f.text_field :slug %><br/>
   <%= f.label :category, "Category" %>
-  <%= f.text_field :category %><br/>
+  <%= f.select(:category, options_for_select(@categories, @seller.categories.first)) %><br/>
   <%= f.label :description, "Description" %>
   <%= f.text_field :description %><br/>
   <%= f.label :price, "Price" %>
   <%= f.text_field :price %><br/>
   <%= f.label :price_excl_vat, "Price excl vat" %>
   <%= f.text_field :price_excl_vat %><br/>
-  <%= f.hidden_field :seller_id, value: @seller.id %>
   <%= f.fields_for :product_tags do |tf| %>
     <%= tf.label :tag %>
     <%= tf.text_field :tag %><br/>
   <% end %>
+  <%= f.label :logo, "Cover picture" %>
+  <%= f.file_field :logo %><br/>
+  <%= f.label :images, "Images" %>
+  <%= f.file_field :images, multiple: true %><br/>  
+  <%= f.hidden_field :seller_id, value: @seller.id %>
   <%= f.submit "Create" %>
 <% end %>
