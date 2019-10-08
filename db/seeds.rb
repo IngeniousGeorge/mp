@@ -25,6 +25,7 @@ if Rails.env.development?
   Location.create(name: "Warehouse", slug: "warehaouse", recipient: "Mr. Jack Nicholson", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", delivery: true, billing: true, owner_type: "Seller", owner_id: s2.id)
   p3 = Product.create(name: "Shoe horn", category: "Retail" , description: "You'll never tie your shoes again", price: 1299, price_excl_vat: 1039, seller_id: s2.id)
   ProductTag.create(tag: "useful", product_id: p3.id)
+  Product.create(name: "Chocolate", category: "Food", description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, seller_id: s2.id)
 end
 
 # DbTranslation.create(

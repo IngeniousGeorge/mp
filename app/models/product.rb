@@ -7,7 +7,12 @@ class Product < ApplicationRecord
   has_many_attached :images
 
   extend FriendlyId
-  friendly_id :name, use: :scoped, scope: :seller
+  # friendly_id :name, use: :scoped, scope: :seller
+  friendly_id :name_and_seller_slug, use: :slugged
+  
+  def name_and_seller_slug
+    "#{name}-#{self.seller.slug}"
+  end
 
   def prepare_empty_tags
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
