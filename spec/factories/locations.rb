@@ -1,13 +1,4 @@
-# FactoryBot.define do
-#   factory :location do
-#     association :client, factory: :client
-
-#   end
-# end
-
 FactoryBot.define do
-  # factory :client
-  # factory :seller
 
   factory :location do
     for_client # default trait if none is specified

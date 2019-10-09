@@ -6,9 +6,10 @@ FactoryBot.define do
     description { "Some description" }
     price { 1000 }
     price_excl_vat { 8000 }
-    
-    # factory :same_name_different_seller do
-    #   association :seller, factory: :seller, name: "Other", email: "other@mp.com"
+
+    # trait :for_seller do
+    #   recipient { "Jim" }
+    #   association :owner, factory: :seller, name: "Jim Loc", email: "loc_email@mp.com"
     # end
   end
 end

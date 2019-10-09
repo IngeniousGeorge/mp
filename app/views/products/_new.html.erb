@@ -1,12 +1,13 @@
 <span>New Product</span>
 
-<%= form_with model: product, url: seller_products_path(@seller) do |f| %>
+<%= form_with model: product, url: seller_products_path(@seller), id: "new_product" do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %><br/>
   <%= f.label :name, "Slug" %>
   <%= f.text_field :slug %><br/>
   <%= f.label :category, "Category" %>
-  <%= f.select(:category, options_for_select(@categories, @seller.categories.first)) %><br/>
+  <%= f.select(:category, options_for_select(Category.all.map(&:name)
+)) %><br/>
   <%= f.label :description, "Description" %>
   <%= f.text_field :description %><br/>
   <%= f.label :price, "Price" %>

@@ -2,7 +2,7 @@
 
 <% @products.each do |product| %>
   <% if product.slug && product.prepare_empty_tags %>
-    <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug) do |f| %>
+    <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug do |f| %>
 
       <%= f.label :name, "Name" %>
       <%= f.text_field :name %><br/>
@@ -31,7 +31,7 @@
 
       <% if product.logo.attached? %>
         <%= image_tag(url_for(product.logo), size: size_small) %>
-        <%= link_to 'Remove', delete_logo_seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%><br/>
+        <%= link_to 'Remove cover', delete_logo_seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%><br/>
       <% end %>
       <%= f.label :logo, "Cover picture:" %>
       <%= f.file_field :logo %><br/>
