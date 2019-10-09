@@ -15,7 +15,9 @@ RSpec.describe "FriendlyId" do
   end
 
   it "makes sure seller slugs are unique" do
-
+    create(:seller, slug: "same")
+    
+    expect { create(:seller, name: "other", slug: "same", email: "other@mp.com") }.to raise_error(/duplicate key value/)
   end
 
   it "gives unique slugs to products" do
