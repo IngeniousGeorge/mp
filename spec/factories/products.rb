@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :product do
     seller
     name { "Chocolate" }
+    slug { "chocolate" }
     category { "Food" }
     description { "Some description" }
     price { 1000 }

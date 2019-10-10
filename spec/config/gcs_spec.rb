@@ -16,7 +16,7 @@ RSpec.describe "Google Cloud Storage", type: :feature do
 
   def add_image
     within("#chocolate-jim") do 
-      attach_file "product_logo", "spec/files/test.png"
+      attach_file "product_logo", "spec/files/test.jpeg"
       click_button "Edit"
     end
   end

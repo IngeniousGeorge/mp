@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   
   has_one_attached :logo
   has_many_attached :images
+  validates_with ProductImagesValidator
 
   extend FriendlyId
   # friendly_id :name, use: :scoped, scope: :seller

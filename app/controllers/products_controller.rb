@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
-  before_action :set_redirect_path, only: [:create, :update, :destroy, :delete_logo, :delete_images]
+  before_action :set_product, only: [:show, :update, :update_attachement, :destroy]
+  before_action :set_redirect_path, only: [:create, :update, :update_attachement, :destroy, :delete_logo, :delete_images]
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
 
   def index
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
         end
         format.json { render :show, status: :created, location: @product }
       else
-        format.html { redirect_to @redirect_path, alert: "Product wasn't successfully created" }
+        format.html { redirect_to @redirect_path, alert: "Product wasn't successfully created" + " " + @product.errors[:image].to_s }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -56,6 +56,10 @@ class ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_attachement
+
   end
 
   def destroy
@@ -93,6 +97,18 @@ class ProductsController < ApplicationController
   def set_redirect_path
     @redirect_path = seller_dashboard_path(params["seller_id"])
   end
+
+  # def check_attachements(product)
+  #   respond_to do |format|
+  #     unless product.logo.attached? && product.images.attached?
+  #       format.html do
+  #         redirect_to @redirect_path, alert: "Products require a cover image and at least one other image"
+  #         return
+  #       end
+  #       format.json { render json: product.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   def current_ability
     @current_ability ||= ::Ability.new(current_seller)
