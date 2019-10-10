@@ -29,26 +29,36 @@
         <%= tf.check_box :_destroy %><br/>
       <% end %>
 
-      <% if product.logo.attached? %>
-        <%= image_tag(url_for(product.logo), size: size_small) %>
-        <%= link_to 'Remove cover', delete_logo_seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%><br/>
-      <% end %>
-      <%= f.label :logo, "Cover picture:" %>
-      <%= f.file_field :logo %><br/>
-
-      <% if product.images.attached? %>
-        <%= link_to 'Remove images', delete_images_seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%><br/>   
-        <% product.images.each do |i| %>
-          <%= image_tag(i, size: size_small) %><br/>
-        <% end %>
-      <% end %>
-      <%= f.label :images, "Images" %>
-      <%= f.file_field :images, multiple: true %>
-
       <%= f.hidden_field :seller_id, value: @seller.id %>
 
       <%= f.submit "Edit" %>
 
+    <% end %>
+
+    <% if product.cover.attached? %>
+      <%= image_tag(url_for(product.cover), size: size_small) %>
+      <%= form_with model: product, url: update_cover_seller_product_path(@seller.slug, product.slug), id: "product_cover_" + product.slug do |af| %>
+        <%= af.label :cover %>
+        <%= af.file_field :cover %>
+        <%= af.submit "Submit"%>
+      <% end %>
+    <% end %>
+
+    <%= form_with model: product, url: attach_image_seller_product_path(@seller.slug, product.slug), id: "new_image_" + product.slug do |af| %>
+          <%= af.label :image %>
+          <%= af.file_field :image, multiple: true %>
+          <%= af.submit "Submit"%>
+        <% end %>
+
+    <% if product.images.attached? %>
+      <% product.images.each do |i| %>
+        <%= image_tag(i, size: size_small) %>
+        <%= form_with model: product, url: delete_image_seller_product_path(@seller.slug, product.slug), id: i.id, class: "del_img" do |af| %>
+          <%= af.label :image %>
+          <%= af.hidden_field :image_id, value: i.id %>
+          <%= af.submit "Delete"%>
+        <% end %> 
+      <% end %>
     <% end %>
 
     <%= link_to 'Remove product', seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%>

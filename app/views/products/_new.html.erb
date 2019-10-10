@@ -18,8 +18,8 @@
     <%= tf.label :tag %>
     <%= tf.text_field :tag %><br/>
   <% end %>
-  <%= f.label :logo, "Cover picture" %>
-  <%= f.file_field :logo %><br/>
+  <%= f.label :cover, "Cover picture" %>
+  <%= f.file_field :cover %><br/>
   <%= f.label :images, "Images" %>
   <%= f.file_field :images, multiple: true %><br/>  
   <%= f.hidden_field :seller_id, value: @seller.id %>

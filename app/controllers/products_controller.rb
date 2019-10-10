@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :update_attachement, :destroy]
-  before_action :set_redirect_path, only: [:create, :update, :update_attachement, :destroy, :delete_logo, :delete_images]
+  before_action :set_product, only: [:show, :update, :update_cover, :attach_image, :delete_image, :destroy]
+  before_action :set_redirect_path, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
 
   def index
@@ -58,8 +58,47 @@ class ProductsController < ApplicationController
     end
   end
 
-  def update_attachement
+  def update_cover
+    respond_to do |format|
+      if @product.cover = params[:product][:cover]
+        format.html do
+          redirect_to @redirect_path, notice: 'Cover was successfully updated.'
+        end
+        format.json { render :show, status: :updated, location: @product }
+      else
+        format.html { redirect_to @redirect_path, alert: "Cover wasn't successfully updated" }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
+  def attach_image
+    respond_to do |format|
+      if @product.images.attach(params[:product][:image])
+        format.html do
+          redirect_to @redirect_path, notice: 'Image was successfully added.'
+        end
+        format.json { render :show, status: :updated, location: @product }
+      else
+        format.html { redirect_to @redirect_path, alert: "Image wasn't successfully added." }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:product][:image_id])
+    respond_to do |format|
+      if image.purge
+        format.html do
+          redirect_to @redirect_path, notice: 'Image was successfully deleted.'
+        end
+        format.json { render :show, status: :updated, location: @product }
+      else
+        format.html { redirect_to @redirect_path, alert: "Image wasn't successfully deleted." }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -70,19 +109,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def delete_logo
-    @logo = ActiveStorage::Attachment.find(Product.friendly.find(params[:id]).logo.id)
-    @logo.purge
-    redirect_to @redirect_path
-  end
-
-  def delete_images
-    Product.friendly.find(params[:id]).images.each do |i|
-      @image = ActiveStorage::Attachment.find(Product.friendly.find(params[:id]).images.first.id)
-      @image.purge
-    end
-    redirect_to @redirect_path
-  end
 
   private
 
@@ -91,24 +117,12 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :seller_id, :logo, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy])
+    params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy])
   end
 
   def set_redirect_path
     @redirect_path = seller_dashboard_path(params["seller_id"])
   end
-
-  # def check_attachements(product)
-  #   respond_to do |format|
-  #     unless product.logo.attached? && product.images.attached?
-  #       format.html do
-  #         redirect_to @redirect_path, alert: "Products require a cover image and at least one other image"
-  #         return
-  #       end
-  #       format.json { render json: product.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
   def current_ability
     @current_ability ||= ::Ability.new(current_seller)

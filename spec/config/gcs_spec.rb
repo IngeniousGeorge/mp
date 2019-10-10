@@ -16,17 +16,17 @@ RSpec.describe "Google Cloud Storage", type: :feature do
 
   def add_image
     within("#chocolate-jim") do 
-      attach_file "product_logo", "spec/files/test.jpeg"
+      attach_file "product_cover", "spec/files/test.jpeg"
       click_button "Edit"
     end
   end
   
-  #Products/edit - logo
+  #Products/edit - cover
   it "stores images on create" do
     product = set_context
     add_image
 
-    expect(product.logo.attached?).to be_truthy
+    expect(product.cover.attached?).to be_truthy
   end
 
   it "can remove images" do
@@ -34,7 +34,7 @@ RSpec.describe "Google Cloud Storage", type: :feature do
     add_image
     click_link "Remove cover"
 
-    expect(product.logo.attached?).to be_falsy
+    expect(product.cover.attached?).to be_falsy
   end
 
 end

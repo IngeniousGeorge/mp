@@ -3,7 +3,7 @@ class Seller < ApplicationRecord
   has_many :products
   validates :name, uniqueness: true
 
-  has_one_attached :logo
+  has_one_attached :cover
   has_one_attached :bg
   has_many_attached :images
 

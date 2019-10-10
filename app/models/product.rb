@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   has_many :product_tags
   accepts_nested_attributes_for :product_tags, allow_destroy: true, reject_if: proc { |attributes| attributes['tag'].blank? }
   
-  has_one_attached :logo
+  has_one_attached :cover
   has_many_attached :images
   validates_with ProductImagesValidator
 
