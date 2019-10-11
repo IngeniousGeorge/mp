@@ -11,12 +11,27 @@ if Rails.env.development?
   
   Category.create([{name: "Food"},{name: "Retail"}])
   
-  s1 = Seller.create(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", description: "Best chocolates in Berlin", confirmed_at: DateTime.now)
+  s1 = Seller.new(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", description: "Best chocolates in Berlin", confirmed_at: DateTime.now)
+  s1.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
+  s1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image1.jpeg'), filename: 'image1.jpeg')
+  s1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image2.jpeg'), filename: 'image2.jpeg')
+  s1.save
+
   Location.create(name: "Office", slug: "office", recipient: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Seller", owner_id: s1.id)
-  p1 = Product.create(name: "Chocolate", category: "Food", description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, seller_id: s1.id)
+
+  p1 = Product.new(name: "Chocolate", category: "Food", description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, seller_id: s1.id)
+  p1.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
+  p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image1.jpeg'), filename: 'image1.jpeg')
+  p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image2.jpeg'), filename: 'image2.jpeg')
+  p1.save
   ProductTag.create(tag: "yummy", product_id: p1.id)
   ProductTag.create(tag: "delicious", product_id: p1.id)
-  p2 = Product.create(name: "Marmite", category: "Food", description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, seller_id: s1.id)
+
+  p2 = Product.new(name: "Marmite", category: "Food", description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, seller_id: s1.id)
+  p2.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
+  p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image1.jpeg'), filename: 'image1.jpeg')
+  p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/image2.jpeg'), filename: 'image2.jpeg')
+  p2.save
   ProductTag.create(tag: "awful", product_id: p2.id)
   ProductTag.create(tag: "just bad", product_id: p2.id)
 
