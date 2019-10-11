@@ -2,7 +2,7 @@
 
 <% locations.each do |location| %>
   <% if location.slug %>
-    <%= form_with model: location, url: polymorphic_path([owner, location]) do |f| %>
+    <%= form_with model: location, url: polymorphic_path([owner, location]), id: location.slug do |f| %>
       <%= f.label :name, "Name" %>
       <%= f.text_field :name %>
       <%= f.label :recipient, "recipient" %>

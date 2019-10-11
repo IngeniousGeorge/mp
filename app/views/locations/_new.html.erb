@@ -1,6 +1,6 @@
 <span>New Address</span>
 
-<%= form_with model: location, url: url do |f| %>
+<%= form_with model: location, url: url, id: "new_address" do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
   <%= f.label :recipient, "recipient" %>

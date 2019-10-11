@@ -39,7 +39,7 @@ def add_seller_image
 end
 
 def delete_seller_image
-  within(".del_img") do 
+  within(first ".del_img") do 
     click_button "Delete"
   end
 end

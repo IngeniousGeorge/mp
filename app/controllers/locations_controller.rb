@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
         end
         format.json { render :show, status: :created, location: @location }
       else
-        format.html { redirect_to @redirect_path, alert: 'Address couldn\'t be saved' }
+        format.html { redirect_to @redirect_path, alert: 'Address couldn\'t be saved. ' + @location.errors[:coordinates].to_s }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end
@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to @redirect_path, notice: 'Address was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
-        format.html { redirect_to @redirect_path, alert: 'Address couldn\'t be saved' }
+        format.html { redirect_to @redirect_path, alert: 'Address couldn\'t be saved. '  + @location.errors[:coordinates].to_s }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end

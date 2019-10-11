@@ -21,6 +21,7 @@ RSpec.describe "Seller - ", type: :feature do
 
     it "deletes an image" do
       set_seller_edit_context
+      add_seller_image
       delete_seller_image
 
       expect(page).to have_text("Image was successfully deleted")

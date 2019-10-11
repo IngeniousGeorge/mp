@@ -53,16 +53,20 @@ class SellersController < ApplicationController
   end
 
   def delete_image
-    image = ActiveStorage::Attachment.find(params[:seller][:image_id])
-    respond_to do |format|
-      if image.purge
-        format.html do
-          redirect_to seller_dashboard_path(@seller), notice: 'Image was successfully deleted.'
+    if @seller.images.count <= 1 
+      redirect_to seller_dashboard_path(@seller), notice: 'You need at least one image'
+    else
+      image = ActiveStorage::Attachment.find(params[:seller][:image_id])
+      respond_to do |format|
+        if image.purge
+          format.html do
+            redirect_to seller_dashboard_path(@seller), notice: 'Image was successfully deleted.'
+          end
+          format.json { render :show, status: :updated, location: @seller }
+        else
+          format.html { redirect_to seller_dashboard_path(@seller), alert: "Image wasn't successfully deleted." }
+          format.json { render json: @seller.errors, status: :unprocessable_entity }
         end
-        format.json { render :show, status: :updated, location: @seller }
-      else
-        format.html { redirect_to seller_dashboard_path(@seller), alert: "Image wasn't successfully deleted." }
-        format.json { render json: @seller.errors, status: :unprocessable_entity }
       end
     end
   end
