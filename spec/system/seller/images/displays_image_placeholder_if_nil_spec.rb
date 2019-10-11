@@ -5,7 +5,7 @@ RSpec.describe "Seller - ", type: :feature do
   
   it "displays the seller show page without images" do
     seller = return_seller_with_purged_image
-    visit sellers_path("en", seller.slug)
+    visit seller_show_path("en", seller.slug)
 
     expect(page).to have_text(seller.name)
   end

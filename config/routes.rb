@@ -34,15 +34,15 @@ Rails.application.routes.draw do
     end
 
     #CATALOGUE:
+    resources :sellers, only: :index
+    resources :products, only: :show
+
     get '/catalogue', to: 'products#index', as: 'catalogue'
-    # get '/seller/:id', to: 'sellers#show', as: 'seller_show'
+    get '/seller/:id', to: 'sellers#show', as: 'seller_show'
     get '/seller/:id/p', to: 'products#index_seller', as: 'c_seller'
     get '/cat/:id', to: 'products#index_cat', as: 'c_category'
     get '/loc/:id', to: 'products#index_loc', as: 'c_location'
     get '/tag/:id', to: 'products#index_tag', as: 'c_tag'
-
-    resources :sellers, only: [:index, :show]
-    resources :products, only: :show
 
     #CHECKOUT
     resource :basket, only: :edit, path: "checkout"

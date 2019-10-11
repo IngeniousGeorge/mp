@@ -1,9 +1,10 @@
 <div>
   <% @sellers.each do |s| %>
     <%= s.name %>
-    <%= image_tag(url_for(s.cover), size: size_small) %>
-    <% s.images.each do |i| %>
-      <%= image_tag(url_for(i), size: size_small) %>
+    
+    <% if s.cover.attached? %>
+      <%= image_tag(url_for(s.cover), size: size_small) %>
     <% end %>
+    
   <% end %>
 </div>
