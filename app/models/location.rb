@@ -1,7 +1,7 @@
 class Location < ApplicationRecord
   belongs_to :owner, polymorphic: true
 
-  after_save :geocode
+  after_validation :geocode
 
   extend FriendlyId
   friendly_id :name, use: :scoped, scope: :owner

@@ -10,3 +10,14 @@
   <%= f.hidden_field :seller_id, value: @seller.id %>
   <%= f.submit "Edit" %>
 <% end %>
+
+<% if @seller.cover.attached? %>
+  <%= image_tag(url_for(@seller.cover), size: size_small) %>
+  <%= form_with model: @seller, url: update_cover_seller_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug do |af| %>
+    <%= af.label :cover %>
+    <%= af.file_field :cover %>
+    <%= af.submit "Submit"%>
+  <% end %>
+<% else %>
+    <div>You don't have a cover image, please concact an administrator.</div>
+<% end %>

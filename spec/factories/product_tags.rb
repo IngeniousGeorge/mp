@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product_tag do
-    tag { "MyString" }
+    tag { "Tag" }
     product_id { "" }
   end
 end

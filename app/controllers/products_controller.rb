@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :update_cover, :attach_image, :delete_image, :destroy]
   before_action :set_redirect_path, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
-  load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :destroy]
+  load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
     @products = Product.all
@@ -23,11 +23,12 @@ class ProductsController < ApplicationController
   end
 
   def index_tag
-    @products = Product.find_by_sql(["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", params['id']])
+    @products = Product.find_by_tag(params['id'])
     render "index"
   end
 
   def show
+    @seller = @product.seller
   end
 
   def create

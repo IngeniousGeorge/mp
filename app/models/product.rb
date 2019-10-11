@@ -8,7 +8,6 @@ class Product < ApplicationRecord
   validates_with ProductImagesValidator
 
   extend FriendlyId
-  # friendly_id :name, use: :scoped, scope: :seller
   friendly_id :name_and_seller_slug, use: :slugged
   
   def name_and_seller_slug
@@ -21,5 +20,9 @@ class Product < ApplicationRecord
 
   def self.categories
     Category.pluck(:name)
+  end
+
+  def self.find_by_tag(tag)
+    Product.find_by_sql(["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", tag])
   end
 end

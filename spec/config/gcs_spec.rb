@@ -1,40 +1,23 @@
 require "rails_helper"
+require "helpers/product_helper"
 
-RSpec.describe "Google Cloud Storage", type: :feature do
-
-  def set_context
-    create(:category)
-    product = create(:product)
-    seller = product.seller
-    visit new_seller_session_path
-    fill_in "seller_email", with: "jim@mp.com"
-    fill_in "seller_password", with: "password"
-    click_button "Sign in"
-    visit seller_dashboard_path("en", seller.slug)
-    return product
-  end
-
-  def add_image
-    within("#chocolate-jim") do 
-      attach_file "product_cover", "spec/files/test.jpeg"
-      click_button "Edit"
-    end
-  end
+RSpec.describe "Google Cloud Storage - ", type: :feature do
   
-  #Products/edit - cover
+  #Products/create - cover
   it "stores images on create" do
-    product = set_context
-    add_image
+    set_create_context
+    add_product_with_cover_and_image
 
-    expect(product.cover.attached?).to be_truthy
+    expect(Product.last.cover.attached?).to be_truthy
   end
 
+  #Products/edit - delete image
   it "can remove images" do
-    product = set_context
-    add_image
-    click_link "Remove cover"
+    set_create_context
+    add_product_with_cover_and_image
+    click_button "Delete"
 
-    expect(product.cover.attached?).to be_falsy
+    expect(Product.last.images.attached?).to be_falsy
   end
 
 end

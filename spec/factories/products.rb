@@ -1,11 +1,10 @@
 FactoryBot.define do
   factory :product do
     seller
-    name { "Chocolate" }
-    slug { "chocolate" }
-    category { "Food" }
-    description { "Some description" }
+    name { "Product Name" }
+    category { "Category" }
+    description { "Product description" }
     price { 1000 }
-    price_excl_vat { 8000 }
+    price_excl_vat { 800 }
   end
 end

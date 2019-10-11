@@ -1,4 +1,5 @@
 require "rails_helper"
+require "helpers/product_helper"
 
 RSpec.describe "FriendlyId" do
 
@@ -20,20 +21,20 @@ RSpec.describe "FriendlyId" do
     expect { create(:seller, name: "other", slug: "same", email: "other@mp.com") }.to raise_error(/duplicate key value/)
   end
 
-  it "gives unique slugs to products" do
-    prod = create(:product)
+  it "gives unique slugs to products based on seller slug" do
+    prod = create_valid_product
 
-    expect(prod.slug).to eq("chocolate-jim")
+    expect(prod.slug).to eq("product-name-seller-name")
   end
 
   it "gives scoped slugs to locations" do
     client_loc = create(:location)
     seller_loc = create(:location, :for_seller)
 
-    expect(client_loc.slug).to eq("office")
-    expect(Client.friendly.find("joe-loc").locations.friendly.find("office").recipient).to eq("Joe")
-    expect(seller_loc.slug).to eq("office")
-    expect(Seller.friendly.find("jim-loc").locations.friendly.find("office").recipient).to eq("Jim")
+    expect(client_loc.slug).to eq("location-name")
+    expect(Client.friendly.find("client-location").locations.friendly.find("location-name").recipient).to eq("Client Recipient")
+    expect(seller_loc.slug).to eq("location-name")
+    expect(Seller.friendly.find("seller-location").locations.friendly.find("location-name").recipient).to eq("Seller Recipient")
   end
 
 end
