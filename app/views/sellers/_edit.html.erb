@@ -13,11 +13,30 @@
 
 <% if @seller.cover.attached? %>
   <%= image_tag(url_for(@seller.cover), size: size_small) %>
-  <%= form_with model: @seller, url: update_cover_seller_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug do |af| %>
+  <%= form_with model: @seller, url: update_cover_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug do |af| %>
     <%= af.label :cover %>
     <%= af.file_field :cover %>
     <%= af.submit "Submit"%>
   <% end %>
 <% else %>
     <div>You don't have a cover image, please concact an administrator.</div>
+<% end %>
+
+<%= form_with model: @seller, url: attach_image_seller_path(@seller.slug), id: "new_image_" + @seller.slug do |af| %>
+      <%= af.label :image %>
+      <%= af.file_field :image, multiple: true %>
+      <%= af.submit "Submit"%>
+    <% end %>
+
+<% if @seller.images.attached? %>
+  <% @seller.images.each do |i| %>
+    <%= image_tag(i, size: size_small) %>
+    <%= form_with model: @seller, url: delete_image_seller_path(@seller.slug), id: i.id, class: "del_img" do |af| %>
+      <%= af.label :image %>
+      <%= af.hidden_field :image_id, value: i.id %>
+      <%= af.submit "Delete"%>
+    <% end %>
+  <% end %>
+<% else %>
+  <div>You don't have images attached, please add some.</div>
 <% end %>

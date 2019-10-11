@@ -20,3 +20,16 @@ def change_seller_cover
     click_button "Submit"
   end
 end
+
+def add_seller_image
+  within("#new_image_seller-name") do 
+    attach_file "seller_image", "spec/files/test2.png"
+    click_button "Submit"
+  end
+end
+
+def delete_seller_image
+  within(".del_img") do 
+    click_button "Delete"
+  end
+end

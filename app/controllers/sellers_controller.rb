@@ -1,6 +1,6 @@
 class SellersController < ApplicationController
-  before_action :set_seller, only: [:show, :update]
-  before_action :authenticate_seller!, only: [:update]
+  before_action :set_seller, only: [:show, :update, :update_cover, :attach_image, :delete_image]
+  before_action :authenticate_seller!, only: [:update, :update_cover, :attach_image, :delete_image]
   # load_and_authorize_resource :seller, find_by: :slug
 
   def show
@@ -18,6 +18,49 @@ class SellersController < ApplicationController
     end
   end
 
+  def update_cover
+    respond_to do |format|
+      if @seller.cover = params[:seller][:cover]
+        format.html do
+          redirect_to seller_dashboard_path(@seller), notice: 'Cover was successfully updated.'
+        end
+        format.json { render :show, status: :updated, location: @seller }
+      else
+        format.html { redirect_to seller_dashboard_path(@seller), alert: "Cover wasn't successfully updated" }
+        format.json { render json: @seller.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def attach_image
+    respond_to do |format|
+      if @seller.images.attach(params[:seller][:image])
+        format.html do
+          redirect_to seller_dashboard_path(@seller), notice: 'Image was successfully added.'
+        end
+        format.json { render :show, status: :updated, location: @seller }
+      else
+        format.html { redirect_to seller_dashboard_path(@seller), alert: "Image wasn't successfully added." }
+        format.json { render json: @seller.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:seller][:image_id])
+    respond_to do |format|
+      if image.purge
+        format.html do
+          redirect_to seller_dashboard_path(@seller), notice: 'Image was successfully deleted.'
+        end
+        format.json { render :show, status: :updated, location: @seller }
+      else
+        format.html { redirect_to seller_dashboard_path(@seller), alert: "Image wasn't successfully deleted." }
+        format.json { render json: @seller.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_seller
@@ -25,7 +68,7 @@ class SellersController < ApplicationController
   end
 
   def seller_params
-    params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories)
+    params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories, :cover, images: [])
   end
 
   def current_ability

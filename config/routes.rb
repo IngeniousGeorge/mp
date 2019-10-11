@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
     get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard
     resources :sellers, path: "s", only: [:update] do
+      member { patch 'update_cover'}
+      member { patch 'attach_image'}
+      member { patch 'delete_image'}
       resources :products, only: [:create, :update, :destroy], path: "p" do
         member { patch 'update_cover'}
         member { patch 'attach_image' }
