@@ -14,6 +14,16 @@ def set_seller_edit_context
   visit seller_dashboard_path("en", seller.slug)
 end
 
+def return_seller_with_purged_image
+  seller = build(:seller)
+  seller.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
+  seller.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.jpeg'), filename: 'test.jpeg')
+  seller.save
+  seller.cover.purge
+  seller.images.purge
+  return seller
+end
+
 def change_seller_cover
   within("#seller_cover_seller-name") do 
     attach_file "seller_cover", "spec/files/test2.png"

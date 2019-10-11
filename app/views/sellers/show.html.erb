@@ -1,2 +1,5 @@
-<h1>Sellers#show</h1>
-<p>Find me in app/views/sellers/show.html.erb</p>
+<%= @seller.name %>
+<%= image_tag(url_for(@seller.cover), size: size_small) %>
+<% @seller.images.each do |i| %>
+  <%= image_tag(url_for(i), size: size_small) %>
+<% end %>

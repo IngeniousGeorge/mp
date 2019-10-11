@@ -4,6 +4,12 @@ class SellersController < ApplicationController
   # load_and_authorize_resource :seller, find_by: :slug
 
   def show
+    @seller.set_cover_placeholder unless @seller.cover.attached?
+    @seller.set_images_placeholder unless @seller.images.attached?
+  end
+
+  def index
+    @sellers = Seller.all
   end
 
   def update

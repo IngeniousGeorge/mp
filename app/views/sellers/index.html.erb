@@ -1,2 +1,9 @@
-<h1>Sellers#index</h1>
-<p>Find me in app/views/sellers/index.html.erb</p>
+<div>
+  <% @sellers.each do |s| %>
+    <%= s.name %>
+    <%= image_tag(url_for(s.cover), size: size_small) %>
+    <% s.images.each do |i| %>
+      <%= image_tag(url_for(i), size: size_small) %>
+    <% end %>
+  <% end %>
+</div>
