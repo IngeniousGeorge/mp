@@ -16,5 +16,4 @@ class Basket < ApplicationRecord
         # line.save
       end
     end
-
 end
