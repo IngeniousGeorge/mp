@@ -1,9 +1,9 @@
 class Client < ApplicationRecord
   has_many :locations, as: :owner
   has_one :basket
-  delegate :lines, to: :basket, prefix: true
+  delegate :lines, :id, to: :basket, prefix: true
 
-  after_save :assign_basket
+  # after_save :assign_basket
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable # , :confirmable
 

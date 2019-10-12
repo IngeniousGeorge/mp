@@ -16,8 +16,8 @@ class Client::RegistrationsController < Devise::RegistrationsController
       basket = Basket.find(cookies['basket_id'])
       basket.client_id = client.id
       basket.save
-      client.basket = basket
-      client.save
+      # client.basket = basket
+      # client.save
     end
   end
 

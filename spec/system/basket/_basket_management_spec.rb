@@ -3,37 +3,37 @@ require "helpers/basket_helper" #includes client_helper, product_helper
 
 RSpec.describe "Seller - ", type: :feature do
 
-  it "creates a new basket for first visitors" do
-    visit root_path
+  # it "creates a new basket for first visitors" do
+  #   visit root_path
 
-    expect(Basket.count).to eq(1)
-  end
+  #   expect(Basket.count).to eq(1)
+  # end
 
-  it "assigns the cookie basket to the client at sign up" do
-    visit root_path
-    cookie_basket_id = Basket.take.id
-    sign_up_client
+  # it "assigns the cookie basket to the client at sign up" do
+  #   visit root_path
+  #   cookie_basket_id = Basket.take.id
+  #   sign_up_client
 
-    expect(Client.take.basket.id).to eq(cookie_basket_id)
-  end
+  #   expect(Client.take.basket.id).to eq(cookie_basket_id)
+  # end
   
-  it "gathers products from cookie basket at sign in" do
-    client = create(:client)
+  # it "gathers products from cookie basket at sign in" do
+  #   client = create(:client)
 
-    visit root_path
-    cookie_basket_id = Basket.take.id
+  #   visit root_path
+  #   cookie_basket_id = Basket.take.id
 
-    product = create_valid_product
-    create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
+  #   product = create_valid_product
+  #   create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
 
-    sign_in_client
+  #   sign_in_client
 
-    expect(client.basket_lines.count).to eq(1)
-    expect(client.basket_lines.first.product_id).to eq(product.id)
-    expect(client.basket.id).to eq(cookie_basket_id)
-    expect(BasketLine.count).to eq(1)
-    expect(Basket.count).to eq(2)
-  end
+  #   expect(client.basket_lines.count).to eq(1)
+  #   expect(client.basket_lines.first.product_id).to eq(product.id)
+  #   expect(client.basket.id).to eq(cookie_basket_id)
+  #   expect(BasketLine.count).to eq(1)
+  #   expect(Basket.count).to eq(2)
+  # end
 
   # it "returns to cookie basket at log out" do
   #   sign_up_client
@@ -42,22 +42,34 @@ RSpec.describe "Seller - ", type: :feature do
   #   expect(Basket.count).to eq(2)
   # end
 
-  
+
   it "adds to client basket when logged in" do
-    # create a prod, client, save its basket_id, log in, add product, expect basket.lines.count to eq 1, and have prod id
-    # product = create_valid_product
-    # sign_up_client
-    # log_out_client
-    # sign_in_client
-    # add_product
+    product = create_valid_product
+    sign_up_client
+    basket = (Client.take.basket)
+    log_out_client
+    sign_in_client
+    add_product_to_basket
+    
+    expect(Client.take.basket_lines.count).to eq(1)
+    expect(basket.lines.count).to eq(1)
+    expect(Client.take.basket_lines.first.product_id).to eq(product.id)
   end
 
   it "adds to cookie basket when logged out" do
-    # create a prod, client, save its basket_id, log in, log out, add product, expect basket.lines.count to eq 0, and see prod id in another basket
+    product = create_valid_product
+    visit root_path
+    basket = (Basket.take)
+    sign_up_client
+    log_out_client
+    add_product_to_basket
+    
+    expect(Client.take.basket_lines.count).to eq(1)
+    expect(basket.lines.count).to eq(1)
+    expect(Client.take.basket_lines.first.product_id).to eq(product.id)
   end
+
 end
-
-
 
 # it "retrieves basket from cookies if set"
 # it "merges cookie basket with DB basket on sign up"
