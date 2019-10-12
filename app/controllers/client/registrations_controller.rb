@@ -12,12 +12,11 @@ class Client::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |client|
-      # take cookie basket, update it with client_id and assign it to client
-      basket = Basket.find(cookies['basket_id'])
-      basket.client_id = client.id
+      # duplicate cookie basket lines to a new basket and assign later to client
+      cookie_basket = Basket.find(cookies['basket_id'])
+      basket = Basket.new(client_id: client.id)
       basket.save
-      # client.basket = basket
-      # client.save
+      basket.duplicate_lines(cookie_basket)
     end
   end
 

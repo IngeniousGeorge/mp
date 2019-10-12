@@ -5,7 +5,7 @@ class DashboardClientsController < ApplicationController
 
   def show
     @client = current_client
-    @basket = @client.basket
+    # @basket = @client.basket
     @locations = @client.locations
   end
 

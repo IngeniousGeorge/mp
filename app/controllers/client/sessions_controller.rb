@@ -12,15 +12,18 @@ class Client::SessionsController < Devise::SessionsController
   def create
     super do |client|
       if db_basket = client.basket && cookie_basket = Basket.find(cookies['basket_id'])
-        db_basket.overwrite_lines(cookie_basket)
+        db_basket.duplicate_lines(cookie_basket)
       end
     end
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super do |client|
+      new_basket = Basket.create!
+      cookies['basket_id'] = new_basket.id
+    end
+  end
 
   # protected
 

@@ -2,7 +2,7 @@
 
 <%= render partial: "clients/edit" %>
 
-<%= render partial: "baskets/edit", basket: @basket %>
+<%= render partial: "baskets/edit", basket: @current_basket %>
 
 <%= render partial: "locations/new", locals: { location: @client.locations.new, owner_type: "Client", owner_id: @client.id, url: client_locations_path(@client) } %>
 

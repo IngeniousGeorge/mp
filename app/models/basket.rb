@@ -9,10 +9,11 @@ class Basket < ApplicationRecord
     public
     
     # called from devise after login
-    def overwrite_lines(other_basket)
+    def duplicate_lines(other_basket)
       other_basket.basket_lines.each do |line|
-        line.basket_id = self.id
-        line.save
+        BasketLine.create(product_id: line.product_id, quantity: line.quantity, basket_id: self.id)
+        # line.basket_id = self.id
+        # line.save
       end
     end
 

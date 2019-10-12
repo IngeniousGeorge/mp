@@ -1,7 +1,5 @@
-<% basket = Basket.find(cookies['basket_id']) %>
-
 <%= @products.each do |product| %>
-  <%= render partial: "products/card", locals: { product: product, basket: basket } %>
+  <%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
 <% end %>
 
 <%= params.inspect %>

@@ -1,78 +1,115 @@
 require "rails_helper"
 require "helpers/basket_helper" #includes client_helper, product_helper
 
-RSpec.describe "Seller - ", type: :feature do
+# Basket management summary
 
-  # it "creates a new basket for first visitors" do
-  #   visit root_path
+# at first visit -> create new basket, save id in cookie (app_controller / set_basket)
+# at sign up -> create new basket, assign to client, gather prods from cookie basket (client/registration_controller)
+# at sign in -> retrieve client basket, gather prods from cookie basket (client/sessions_controller)
+# at log out -> recreates a new basket and assigns id to cookie (client/sessions_controller)
+# after log out -> should use the cookie basket
+# when visiting pages -> app_controller assign client basket if logged in, else the cookie basket (basket model via app_controller)
+# when adding products -> use @current_basket, (client if logged in, else cookie)
 
-  #   expect(Basket.count).to eq(1)
-  # end
+RSpec.describe "Basket - ", type: :feature do
 
-  # it "assigns the cookie basket to the client at sign up" do
-  #   visit root_path
-  #   cookie_basket_id = Basket.take.id
-  #   sign_up_client
-
-  #   expect(Client.take.basket.id).to eq(cookie_basket_id)
-  # end
-  
-  # it "gathers products from cookie basket at sign in" do
-  #   client = create(:client)
-
-  #   visit root_path
-  #   cookie_basket_id = Basket.take.id
-
-  #   product = create_valid_product
-  #   create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
-
-  #   sign_in_client
-
-  #   expect(client.basket_lines.count).to eq(1)
-  #   expect(client.basket_lines.first.product_id).to eq(product.id)
-  #   expect(client.basket.id).to eq(cookie_basket_id)
-  #   expect(BasketLine.count).to eq(1)
-  #   expect(Basket.count).to eq(2)
-  # end
-
-  # it "returns to cookie basket at log out" do
-  #   sign_up_client
-  #   log_out_client
-
-  #   expect(Basket.count).to eq(2)
-  # end
-
-
-  it "adds to client basket when logged in" do
-    product = create_valid_product
-    sign_up_client
-    basket = (Client.take.basket)
-    log_out_client
-    sign_in_client
-    add_product_to_basket
-    
-    expect(Client.take.basket_lines.count).to eq(1)
-    expect(basket.lines.count).to eq(1)
-    expect(Client.take.basket_lines.first.product_id).to eq(product.id)
+  it "creates a new basket for first visitors" do
+    visit root_path
+    expect(Basket.count).to eq(1)
   end
 
-  it "adds to cookie basket when logged out" do
-    product = create_valid_product
+  it "assigns a new basket to the client at sign up" do
+    # we create a first visit basket then sign up
     visit root_path
-    basket = (Basket.take)
+    cookie_basket_id = Basket.take.id
+    sign_up_client
+    # we should have 2 disctinct baskets
+    expect(Client.take.basket.id).not_to be_nil
+    expect(Client.take.basket.id).not_to eq(cookie_basket_id)
+    expect(Basket.count).to eq(2)
+  end
+
+  it "creates a new cookie basket after log out" do
+    # we create first visit basket, a client basket, and another basket after log out
+    visit root_path
     sign_up_client
     log_out_client
+    visit root_path
+    # we should have 3 disctinct baskets
+    expect(Basket.count).to eq(3)
+  end
+
+  it "gathers products from cookie basket at sign up" do
+    # we create a first visit baseket
+    visit root_path
+    cookie_basket_id = Basket.take.id
+    # we add a line to this basket
+    product = create_valid_product
+    create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
+    # we sign up client
+    sign_up_client
+    client = Client.take
+    # we expect both baskets to have a line with the product
+    expect(client.basket_lines.count).to eq(1)
+    expect(client.basket_lines.first.product_id).to eq(product.id)
+    expect(client.basket.id).not_to eq(cookie_basket_id)
+    expect(BasketLine.count).to eq(2)
+    expect(Basket.count).to eq(2)
+  end
+
+  it "gathers products from cookie basket at sign in" do
+    # we create a client
+    sign_up_client
+    client = Client.last
+    log_out_client
+    # we recreate a basket at log out and add a line to it
+    visit root_path
+    cookie_basket_id = Basket.last.id
+    product = create_valid_product
+    create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
+    # we sign in client
+    sign_in_client
+    # we expect both client and cookie basket to have a line with product
+    expect(client.basket_lines.count).to eq(1)
+    expect(client.basket_lines.first.product_id).to eq(product.id)
+    expect(client.basket.id).not_to eq(cookie_basket_id)
+    expect(BasketLine.count).to eq(2)
+    expect(Basket.count).to eq(2)
+  end
+
+  it "uses client basket after sign in" do
+    # we create a client and log out
+    sign_up_client
+    client = Client.take
+    log_out_client
+    #we create a product to add later
+    product = create_valid_product
+    # we log in client and add product twice
+    sign_in_client
     add_product_to_basket
-    
-    expect(Client.take.basket_lines.count).to eq(1)
-    expect(basket.lines.count).to eq(1)
-    expect(Client.take.basket_lines.first.product_id).to eq(product.id)
+    add_product_to_basket
+    # we expect client basket to have 1 line with a quantity of 2
+    expect(client.basket_lines.count).to eq(1) 
+    expect(client.basket_lines.first.quantity).to eq(2) 
+    expect(client.basket_lines.first.product_id).to eq(product.id) 
+  end
+
+  it "uses cookie basket after log out" do
+    # we create a client and log out
+    sign_up_client
+    client = Client.take
+    log_out_client
+    cookie_basket_id = Basket.last.id
+    #we create a product to add later
+    product = create_valid_product
+    # we add product twice
+    add_product_to_basket
+    add_product_to_basket
+    # we expect client basket to have 1 line with a quantity of 2
+    cookie_basket = Basket.find(cookie_basket_id)
+    expect(cookie_basket.lines.count).to eq(1) 
+    expect(cookie_basket.lines.first.quantity).to eq(2) 
+    expect(cookie_basket.lines.first.product_id).to eq(product.id) 
   end
 
 end
-
-# it "retrieves basket from cookies if set"
-# it "merges cookie basket with DB basket on sign up"
-# it "merges cookie basket with DB basket on sign in"
-# it "deletes cookie basket after merges"
-# it "keeps same basket after log out"
