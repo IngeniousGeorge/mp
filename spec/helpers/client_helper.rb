@@ -20,3 +20,14 @@ def sign_in_client(
   fill_in "client_password", with: password
   click_button "Sign in"
 end
+
+def update_client(
+    name: name="Client name",
+    email: email="client@email.com",
+    password: password="password")
+  within("#update_client") do
+    fill_in "client_name", with: name
+    fill_in "client_email", with: email
+    click_button
+  end
+end
