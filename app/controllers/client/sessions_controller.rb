@@ -11,9 +11,9 @@ class Client::SessionsController < Devise::SessionsController
   # POST /resource/sign_in !!! replace Basket.find with more robust method
   def create
     super do |client|
-      if db_basket = client.basket && cookie_basket = Basket.find(cookies['basket_id'])
-        db_basket.duplicate_lines(cookie_basket)
-      end
+      cookie_basket = Basket.find(cookies['basket_id'])
+      basket = client.basket
+      basket.duplicate_lines(cookie_basket)
     end
   end
 

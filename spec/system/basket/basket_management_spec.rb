@@ -64,7 +64,7 @@ RSpec.describe "Basket - ", type: :feature do
     log_out_client
     # we recreate a basket at log out and add a line to it
     visit root_path
-    cookie_basket_id = Basket.last.id
+    cookie_basket_id = Basket.order("created_at").last.id
     product = create_valid_product
     create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
     # we sign in client
@@ -74,7 +74,7 @@ RSpec.describe "Basket - ", type: :feature do
     expect(client.basket_lines.first.product_id).to eq(product.id)
     expect(client.basket.id).not_to eq(cookie_basket_id)
     expect(BasketLine.count).to eq(2)
-    expect(Basket.count).to eq(2)
+    expect(Basket.count).to eq(3)
   end
 
   it "uses client basket after sign in" do
@@ -97,19 +97,16 @@ RSpec.describe "Basket - ", type: :feature do
   it "uses cookie basket after log out" do
     # we create a client and log out
     sign_up_client
-    client = Client.take
     log_out_client
-    cookie_basket_id = Basket.last.id
+    cookie_basket = Basket.order("created_at").last
     #we create a product to add later
     product = create_valid_product
     # we add product twice
     add_product_to_basket
     add_product_to_basket
     # we expect client basket to have 1 line with a quantity of 2
-    cookie_basket = Basket.find(cookie_basket_id)
     expect(cookie_basket.lines.count).to eq(1) 
     expect(cookie_basket.lines.first.quantity).to eq(2) 
     expect(cookie_basket.lines.first.product_id).to eq(product.id) 
   end
-
 end
