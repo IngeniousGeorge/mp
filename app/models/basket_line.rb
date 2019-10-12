@@ -13,7 +13,7 @@ class BasketLine < ApplicationRecord
 
   private 
 
-    def delete_if_nill
+    def delete_if_null
       
     end
 

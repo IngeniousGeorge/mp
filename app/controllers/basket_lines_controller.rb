@@ -2,11 +2,10 @@ class BasketLinesController < ApplicationController
   before_action :set_basket_line
   before_action :set_quantity
 
-  # from checkout
+  # from account/checkout
   def update
     respond_to do |format|
       @basket_line.add_to_line(@quantity)
-      # @basket_line.quantity += basket_line_params["quantity"].to_i
       if @basket_line.save
         format.html { redirect_back fallback_location: root_path, notice: "Product added" }
         format.json { render :show, status: :ok, location: @basket }
@@ -18,10 +17,11 @@ class BasketLinesController < ApplicationController
   end
 
   # from products _card/show
+  # first checking if the product chosen was already in the client's basket
   def create
-    if @basket_line.quantity == nil
-      @basket_line.quantity = basket_line_params["quantity"]
-
+    if @basket_line.quantity == nil 
+      
+      @basket_line.set_absolute_value(@quantity)
       respond_to do |format|
         if @basket_line.save
           format.html { redirect_back fallback_location: root_path, notice: "Product added" }
@@ -34,7 +34,7 @@ class BasketLinesController < ApplicationController
 
     else
       respond_to do |format|
-        @basket_line.quantity += basket_line_params["quantity"].to_i
+        @basket_line.add_to_line(@quantity)
         if @basket_line.save
           format.html { redirect_back fallback_location: root_path, notice: "Product added" }
           format.json { render :show, status: :ok, location: @basket }

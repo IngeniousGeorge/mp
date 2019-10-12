@@ -8,24 +8,19 @@ class Client::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # POST /resource/sign_in
+  # POST /resource/sign_in !!! replace Basket.find with more robust method
   def create
     super do |client|
-      if db_basket = client.basket && cookie_basket = Basket.find_by(id: cookies['basket_id'])
-        db_basket.merge_baskets(cookie_basket)
-        cookie_basket.delete
+      if db_basket = client.basket && cookie_basket = Basket.find(cookies['basket_id'])
+        db_basket.overwrite_lines(cookie_basket)
       end
     end
   end
 
   # DELETE /resource/sign_out
-  def destroy
-    super do |client|
-      basket = Basket.new
-      basket.save
-      cookies['basket_id'] = basket.id
-    end
-  end
+  # def destroy
+  #   super
+  # end
 
   # protected
 

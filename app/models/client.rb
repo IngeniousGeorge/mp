@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
   has_many :locations, as: :owner
   has_one :basket
-  delegate :products, to: :basket, prefix: true
+  delegate :lines, to: :basket, prefix: true
 
   after_save :assign_basket
 

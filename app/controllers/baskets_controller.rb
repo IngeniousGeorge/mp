@@ -1,25 +1,10 @@
 class BasketsController < ApplicationController
   # before_action :authenticate_client!
-  before_action :set_basket, only: [:edit, :update]
+  before_action :set_basket, only: :edit
 
-  def edit
-    @basket_lines = @basket.basket_lines
-  end
-
-  # PATCH/PUT /baskets/1
-  # PATCH/PUT /baskets/1.json
-  def update
-    p @basket.inspect
-    respond_to do |format|
-      if @basket.change_product(basket_params["products"])
-        format.html { redirect_back(fallback_location: root_path) }
-        format.json { render :show, status: :ok, location: @basket }
-      else
-        format.html { render :edit }
-        format.json { render json: @basket.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def edit
+  #   @lines = @basket.basket_lines
+  # end
 
   private
 

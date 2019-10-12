@@ -31,3 +31,7 @@ def update_client(
     click_button
   end
 end
+
+def log_out_client
+  click_link "Log out"
+end
