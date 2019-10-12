@@ -1,10 +1,12 @@
 class BasketLinesController < ApplicationController
   before_action :set_basket_line
+  before_action :set_quantity
 
   # from checkout
   def update
     respond_to do |format|
-      @basket_line.quantity += basket_line_params["quantity"].to_i
+      @basket_line.add_to_line(@quantity)
+      # @basket_line.quantity += basket_line_params["quantity"].to_i
       if @basket_line.save
         format.html { redirect_back fallback_location: root_path, notice: "Product added" }
         format.json { render :show, status: :ok, location: @basket }
@@ -48,6 +50,10 @@ class BasketLinesController < ApplicationController
 
     def set_basket_line
       @basket_line = BasketLine.find_or_initialize_by(basket_id: basket_line_params["basket_id"], product_id: basket_line_params["product_id"])
+    end
+
+    def set_quantity
+      @quantity = basket_line_params["quantity"].to_i
     end
 
     def basket_line_params
