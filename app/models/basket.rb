@@ -3,7 +3,7 @@ class Basket < ApplicationRecord
   has_many :basket_lines
 
   def lines
-    BasketLine.where(basket_id: self.id)
+    basket_lines
   end
 
     public

@@ -1,17 +1,13 @@
-<span>My Basket</span><br/>
-<% @basket.basket_lines.each do |line| %>
-  <%= render partial: "baskets/item", locals: { line: line, product: line.product } %>
-  <%= form_with model: line, url: basket_line_path(line) do |f| %>
-    <%= f.hidden_field :product_id, value: line.product.id %>
-    <%= f.hidden_field :basket_id, value: line.basket.id %>
-    <%= f.hidden_field :quantity, value: 1 %>
-    <%= f.submit "Add to basket" %>
+<% if @current_basket %>
+  <% @current_basket.lines.each do |line| %>
+    <%= render partial: "baskets/item", locals: { line: line, product: line.product } %>
+    <%= form_with model: line, url: basket_line_path(line) do |f| %>
+      <%= f.hidden_field :product_id, value: line.product.id %>
+      <%= f.hidden_field :basket_id, value: line.basket.id %>
+      <%= f.hidden_field :quantity, value: 1 %>
+      <%= f.submit "Add to basket" %>
+    <% end %>
   <% end %>
+<% else %>
+  Basket unavailable.
 <% end %>
-<br/>
-<br/>
-<br/>
-<br/>
-<%= @basket.inspect %>
-<%= @basket_lines.inspect %>
-
