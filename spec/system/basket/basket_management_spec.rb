@@ -10,6 +10,7 @@ require "helpers/basket_helper" #includes client_helper, product_helper
 # after log out -> should use the cookie basket
 # when visiting pages -> app_controller assign client basket if logged in, else the cookie basket (basket model via app_controller)
 # when adding products -> use @current_basket, (client if logged in, else cookie)
+# methods can't be extracted to basket class because of heavy use of cookies method, only available in controllers
 
 RSpec.describe "Basket - ", type: :feature do
 
@@ -21,11 +22,11 @@ RSpec.describe "Basket - ", type: :feature do
   it "assigns a new basket to the client at sign up" do
     # we create a first visit basket then sign up
     visit root_path
-    cookie_basket_id = Basket.take.id
+    cookie_basket_id = last_created_basket.id
     sign_up_client
     # we should have 2 disctinct baskets
-    expect(Client.take.basket.id).not_to be_nil
-    expect(Client.take.basket.id).not_to eq(cookie_basket_id)
+    expect(last_created_client.basket.id).not_to be_nil
+    expect(last_created_client.basket.id).not_to eq(cookie_basket_id)
     expect(Basket.count).to eq(2)
   end
 
@@ -42,13 +43,13 @@ RSpec.describe "Basket - ", type: :feature do
   it "gathers products from cookie basket at sign up" do
     # we create a first visit baseket
     visit root_path
-    cookie_basket_id = Basket.take.id
+    cookie_basket_id = last_created_basket.id
     # we add a line to this basket
     product = create_valid_product
     create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
     # we sign up client
     sign_up_client
-    client = Client.take
+    client = last_created_client
     # we expect both baskets to have a line with the product
     expect(client.basket_lines.count).to eq(1)
     expect(client.basket_lines.first.product_id).to eq(product.id)
@@ -60,11 +61,11 @@ RSpec.describe "Basket - ", type: :feature do
   it "gathers products from cookie basket at sign in" do
     # we create a client
     sign_up_client
-    client = Client.last
+    client = last_created_client
     log_out_client
     # we recreate a basket at log out and add a line to it
     visit root_path
-    cookie_basket_id = Basket.order("created_at").last.id
+    cookie_basket_id = last_created_basket.id
     product = create_valid_product
     create(:basket_line, product_id: product.id, quantity: 1, basket_id: cookie_basket_id)
     # we sign in client
@@ -80,7 +81,7 @@ RSpec.describe "Basket - ", type: :feature do
   it "uses client basket after sign in" do
     # we create a client and log out
     sign_up_client
-    client = Client.take
+    client = last_created_client
     log_out_client
     #we create a product to add later
     product = create_valid_product
@@ -98,7 +99,7 @@ RSpec.describe "Basket - ", type: :feature do
     # we create a client and log out
     sign_up_client
     log_out_client
-    cookie_basket = Basket.order("created_at").last
+    cookie_basket = last_created_basket
     #we create a product to add later
     product = create_valid_product
     # we add product twice

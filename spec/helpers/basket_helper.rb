@@ -7,3 +7,11 @@ def add_product_to_basket
     click_button "Add to basket"
   end
 end
+
+def last_created_basket
+  Basket.order("created_at").last
+end
+
+def last_created_basket_line
+  BasketLine.order("created_at").last
+end

@@ -14,8 +14,7 @@ class Client::RegistrationsController < Devise::RegistrationsController
     super do |client|
       # duplicate cookie basket lines to a new basket and assign later to client
       cookie_basket = Basket.find(cookies['basket_id'])
-      basket = Basket.new(client_id: client.id)
-      basket.save
+      basket = Basket.create!(client_id: client.id)
       basket.duplicate_lines(cookie_basket)
     end
   end

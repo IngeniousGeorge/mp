@@ -10,15 +10,13 @@ class ApplicationController < ActionController::Base
       { locale: I18n.locale }
     end
 
-    def set_current_basket #extract to basket class
+    def set_current_basket
       if current_client
         @current_basket = current_client.basket
       else
         unless cookies['basket_id']
-          basket = Basket.new
-          basket.save
-          @current_basket = basket
-          cookies['basket_id'] = basket.id
+          @current_basket = Basket.create!
+          cookies['basket_id'] = @current_basket.id
         else
           @current_basket = Basket.find(cookies['basket_id'])
         end

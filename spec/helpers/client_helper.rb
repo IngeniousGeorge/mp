@@ -35,3 +35,7 @@ end
 def log_out_client
   click_link "Log out"
 end
+
+def last_created_client
+  Client.order("created_at").last
+end
