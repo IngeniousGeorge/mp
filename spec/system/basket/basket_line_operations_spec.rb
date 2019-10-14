@@ -37,17 +37,48 @@ RSpec.describe "Basket lines - ", type: :feature do
 
   end
 
-  context "from dashboard or checkout - " do
+  context "from dashboard - " do
 
-    it "can add a specific value" do
-
+    it "can set a value" do
+      product = create_valid_product
+      sign_up_client
+      client = last_created_client
+      add_product_to_basket
+      edit_dashboard_basket_line(client, 7)
+      bl = last_created_basket_line
+  
+      expect(BasketLine.count).to eq(1)
+      expect(bl.client).to eq(client)
+      expect(bl.product_id).to eq(product.id)
+      expect(bl.quantity).to eq(7)
     end
 
-    it "can subtract a specific value" do
-
+    it "can remove a line" do
+      create_valid_product
+      sign_up_client
+      client = last_created_client
+      add_product_to_basket
+      remove_dashboard_basket_line(client)
+  
+      expect(BasketLine.count).to eq(0)
     end
-    # it "can set an absolute value"
-    # it "can delete a line"
+
+    it "deletes a line if quantity is zero or less" do
+      create_valid_product
+      sign_up_client
+      client = last_created_client
+      add_product_to_basket
+      edit_dashboard_basket_line(client, 0)
+ 
+      expect(BasketLine.count).to eq(0)
+    end
+
+  end
+
+  context "from checkout - " do
+
+    xit "can set a value"
+    xit "can delete a line"
 
   end
 

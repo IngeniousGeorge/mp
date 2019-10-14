@@ -1,7 +1,9 @@
 class BasketLine < ApplicationRecord
   belongs_to :basket
   belongs_to :product
-  before_save :delete_if_null
+  after_save :delete_if_null
+
+  delegate :client, to: :basket
 
   def add_to_line(quantity)
     self.quantity += quantity
@@ -14,7 +16,7 @@ class BasketLine < ApplicationRecord
   private 
 
     def delete_if_null
-      
+      self.destroy if self.quantity <= 0
     end
 
 end

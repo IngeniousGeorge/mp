@@ -16,6 +16,21 @@ def add_specific_value_to_basket(value)
   end
 end
 
+def edit_dashboard_basket_line(client, value)
+  visit client_dashboard_path("en", client)
+  within(:xpath, "//form[2]") do
+    fill_in "basket_line_quantity", with: value
+    click_button "Edit"
+  end
+end
+
+def remove_dashboard_basket_line(client)
+  visit client_dashboard_path("en", client)
+  within(:xpath, "//form[2]") do
+    click_button "Remove"
+  end
+end
+
 def last_created_basket
   Basket.order("created_at").last
 end

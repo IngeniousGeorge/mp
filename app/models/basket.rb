@@ -6,6 +6,10 @@ class Basket < ApplicationRecord
     basket_lines
   end
 
+  def ordered_lines
+    basket_lines.order(:created_at)
+  end
+
     public
 
     # called from devise after login
