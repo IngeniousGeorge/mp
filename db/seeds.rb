@@ -41,6 +41,8 @@ if Rails.env.development?
   p3 = Product.create(name: "Shoe horn", category: "Retail" , description: "You'll never tie your shoes again", price: 1299, price_excl_vat: 1039, seller_id: s2.id)
   ProductTag.create(tag: "useful", product_id: p3.id)
   Product.create(name: "Chocolate", category: "Food", description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, seller_id: s2.id)
+
+  puts "seeding complete"
 end
 
 # DbTranslation.create(
