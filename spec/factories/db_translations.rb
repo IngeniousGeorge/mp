@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :db_translation do
-    parent_class { "MyString" }
+    parent_class { "Product" }
     parent_id { "" }
-    parent_atr { "MyString" }
-    lang { "MyString" }
-    translation { "MyText" }
+    parent_atr { "Name" }
+    lang { "fr" }
+    translation { "Traduction" }
   end
 end

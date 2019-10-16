@@ -31,6 +31,10 @@ def create_valid_product
   return product
 end
 
+def add_translation_to_product(product)
+  create(:product_translation, product_id: product.id, description: "")
+end
+
 def product_attach_images(product)
   product.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
   product.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.jpeg'), filename: 'test.jpeg')
