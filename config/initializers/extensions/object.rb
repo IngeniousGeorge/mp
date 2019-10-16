@@ -7,7 +7,7 @@ class Object
     sql = "SELECT * FROM " + parent + "_translations WHERE " + parent + "_id='" + self.id + "';"
     translation = translation_class.find_by_sql(sql).first
 
-    translated_object.assign_attributes(translation.attributes.select{ |key, _| translated_class.attribute_names.include? key })
+    translated_object.assign_attributes(translation.attributes.except('id').select{ |key, _| translated_class.attribute_names.include? key })
     return translated_object
   end
 end
