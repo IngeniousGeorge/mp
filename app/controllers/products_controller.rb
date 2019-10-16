@@ -1,10 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :update_cover, :attach_image, :delete_image, :destroy]
   before_action :set_redirect_path, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
+  before_action :translate_product, only: [:show]
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
-    @products = Product.all
+    @products = set_products
+    p @products.inspect
   end
 
   def index_seller
@@ -117,12 +119,25 @@ class ProductsController < ApplicationController
     @product = Product.friendly.find(params[:id])
   end
 
+  def set_products
+    if params['locale'] == I18n.default_locale.to_s
+      @products = Product.all
+    else
+      @products = Product.all.map { |p| p.translate_object(params['locale']) }
+      # @products = Product.all.translate_collection(params['locale'])
+    end
+  end
+    
   def product_params
     params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy])
   end
 
   def set_redirect_path
     @redirect_path = seller_dashboard_path(params["seller_id"])
+  end
+
+  def translate_product
+    @product = @product.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
   end
 
   def current_ability

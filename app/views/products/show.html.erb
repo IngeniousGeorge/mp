@@ -1,4 +1,5 @@
 <%= @product.name %><br/>
+<%= @product.description %>
 
 <% if @product.images.attached? %>
   <% @product.images.attachments.each do |i| %>

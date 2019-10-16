@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_03_091315) do
+ActiveRecord::Schema.define(version: 2019_10_16_102826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -90,8 +90,16 @@ ActiveRecord::Schema.define(version: 2019_10_03_091315) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_translations", force: :cascade do |t|
+    t.string "lang"
+    t.text "name"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -123,16 +131,6 @@ ActiveRecord::Schema.define(version: 2019_10_03_091315) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_clients_on_slug", unique: true
     t.index ["unlock_token"], name: "index_clients_on_unlock_token", unique: true
-  end
-
-  create_table "db_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "parent_class"
-    t.uuid "parent_id"
-    t.string "parent_atr"
-    t.string "lang"
-    t.text "translation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -175,6 +173,15 @@ ActiveRecord::Schema.define(version: 2019_10_03_091315) do
     t.index ["tag"], name: "index_product_tags_on_tag"
   end
 
+  create_table "product_translations", force: :cascade do |t|
+    t.string "lang"
+    t.string "name"
+    t.text "description"
+    t.uuid "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -184,12 +191,21 @@ ActiveRecord::Schema.define(version: 2019_10_03_091315) do
     t.integer "price_excl_vat", null: false
     t.integer "price_discount"
     t.integer "price_discount_excl_vat"
+    t.string "translations", default: "en"
     t.uuid "seller_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_products_on_category"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
+  end
+
+  create_table "seller_translations", force: :cascade do |t|
+    t.string "lang"
+    t.text "description"
+    t.uuid "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sellers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -214,6 +230,7 @@ ActiveRecord::Schema.define(version: 2019_10_03_091315) do
     t.string "slug", null: false
     t.text "description"
     t.text "categories", default: [], array: true
+    t.string "translations", default: "en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_sellers_on_confirmation_token", unique: true

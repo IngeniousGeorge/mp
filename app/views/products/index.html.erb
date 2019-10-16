@@ -1,3 +1,5 @@
+<%= @products.inspect %>
+
 <%= @products.each do |product| %>
   <%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
 <% end %>

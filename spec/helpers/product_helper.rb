@@ -31,8 +31,13 @@ def create_valid_product
   return product
 end
 
-def add_translation_to_product(product)
-  create(:product_translation, product_id: product.id, description: "")
+def add_translation_to_product(product: product, name: name, description: description)
+  create(:product_translation,
+    id: "ecf71d9f-c738-40f3-996d-af0b23829151",
+    lang: "fr",
+    name: name,
+    description: description,
+    product_id: product.id)
 end
 
 def product_attach_images(product)
