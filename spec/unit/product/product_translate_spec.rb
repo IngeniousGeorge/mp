@@ -8,7 +8,7 @@ RSpec.describe "Product translate - " do
     it "gets its name and description translated" do
       product = create_valid_product
       add_translation_to_product(product: product, name: "Nom", description: "Description en français")
-      translated = product.translate("fr")
+      translated = product.translate_object("fr")
 
       expect(translated.name).to eq("Nom")
     end
@@ -16,7 +16,7 @@ RSpec.describe "Product translate - " do
     it "doesn't update the actual object" do
       product = create_valid_product
       add_translation_to_product(product: product, name: "Nom", description: "Description en français")
-      product.translate("fr")
+      product.translate_object("fr")
 
       expect(product.name).to eq("Product Name")
     end
@@ -27,7 +27,7 @@ RSpec.describe "Product translate - " do
 
     it "returns the default language" do
       product = create_valid_product
-      translated = product.translate("fr")
+      translated = product.translate_object("fr")
 
       expect(product.name).to eq("Product Name")
       expect(translated.name).to eq("Product Name")
@@ -35,8 +35,4 @@ RSpec.describe "Product translate - " do
 
   end
 
-
 end
-
-
-

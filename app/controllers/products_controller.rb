@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = set_products
-    p @products.inspect
   end
 
   def index_seller
@@ -120,12 +119,8 @@ class ProductsController < ApplicationController
   end
 
   def set_products
-    if params['locale'] == I18n.default_locale.to_s
-      @products = Product.all
-    else
-      @products = Product.all.map { |p| p.translate_object(params['locale']) }
-      # @products = Product.all.translate_collection(params['locale'])
-    end
+    sql = params['locale'] == I18n.default_locale.to_s ? helpers.select_all : helpers.select_translations
+    @products = Product.find_by_sql(sql)
   end
     
   def product_params
