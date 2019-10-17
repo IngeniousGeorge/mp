@@ -1,7 +1,7 @@
 <h2><%= t(:resend_confirmation_instructions) %></h2>
 
 <%= form_for(resource, as: resource_name, url: seller_confirmation_path, html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render partial: "devise/shared/error_messages" %>
 
   <div class="field">
     <%= f.label t(:email) %><br />

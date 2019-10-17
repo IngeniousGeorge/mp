@@ -13,5 +13,4 @@ RSpec.describe "Client -", type: :feature do
     expect(current_path).not_to eq("/en/clients/sign_in")
     expect(page).to have_selector(".alert-success")
   end
-
 end
