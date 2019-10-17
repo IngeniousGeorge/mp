@@ -1,5 +1,4 @@
 require "rails_helper"
-# require "helpers/basket_helper" #includes client_helper
 
 RSpec.describe "Basket oprations - " do
 
@@ -22,5 +21,4 @@ RSpec.describe "Basket oprations - " do
 
     expect(line.quantity).to eq(8)
   end
-
 end

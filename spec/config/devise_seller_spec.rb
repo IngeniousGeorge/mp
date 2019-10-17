@@ -11,7 +11,7 @@ RSpec.describe "Devise for seller", type: :feature do
     expect(page).to have_selector(".alert-success")
   end
 
-  it "cant create session seller is not registered" do
+  it "can't create session seller is not registered" do
     sign_in_seller
 
     expect(current_path).to eq("/en/sellers/sign_in")

@@ -11,7 +11,7 @@ RSpec.describe "Devise for client", type: :feature do
     expect(Client.count).to eq(1)
   end
 
-  it "cant register if password too short" do
+  it "can't register if password too short" do
     sign_up_client(password: "pass")
 
     expect(current_path).to eq("/en/clients")
@@ -26,7 +26,7 @@ RSpec.describe "Devise for client", type: :feature do
     expect(page).to have_selector(".alert-success")
   end
 
-  it "cant create session if client is not registered" do
+  it "can't create session if client is not registered" do
     sign_in_client
 
     expect(current_path).to eq("/en/clients/sign_in")

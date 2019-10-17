@@ -30,7 +30,3 @@ RSpec.describe "I18n", type: :feature do
   xit "doesn't have any missing translations"
 
 end
-
-
-
-

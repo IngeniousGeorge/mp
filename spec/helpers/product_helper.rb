@@ -32,15 +32,6 @@ def create_valid_product(attributes = {}, seller = nil)
   return product
 end
 
-# def create_second_valid_product(seller, attributes = {})
-#   product = build(:product, seller: seller)
-#   product_attach_images(product)
-#   p attributes
-#   product.assign_attributes(attributes) if attributes != {}
-#   product.save
-#   return product
-# end
-
 def add_translation_to_product(product: product, name: name, description: description)
   create(:product_translation,
     id: "ecf71d9f-c738-40f3-996d-af0b23829151",

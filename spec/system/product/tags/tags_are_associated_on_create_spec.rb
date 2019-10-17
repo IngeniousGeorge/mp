@@ -11,5 +11,4 @@ RSpec.describe "Product - ", type: :feature do
     expect(ProductTag.count).to eq(2)
     expect(ProductTag.take.product_id).to eq(Product.find_by_name("Product Name").id)
   end
-
 end
