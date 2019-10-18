@@ -16,5 +16,4 @@ RSpec.describe "Seller - ", type: :feature do
 
     expect(page).to have_text(@seller.name)
   end
-
 end

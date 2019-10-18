@@ -24,6 +24,14 @@ def return_seller_with_purged_image
   return seller
 end
 
+def add_translation_to_seller(seller:, description:)
+  create(:seller_translation,
+    id: "ecf71d9f-c738-40f3-996d-af0b23829151",
+    lang: "fr",
+    description: description,
+    seller_id: seller.id)
+end
+
 def seller_attach_images(seller)
   seller.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
   seller.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.jpeg'), filename: 'test.jpeg')

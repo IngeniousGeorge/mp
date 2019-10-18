@@ -1,4 +1,5 @@
 <%= @seller.name %>
+<%= @seller.description %>
 <%= image_tag(url_for(@seller.cover), size: size_small) %>
 <% @seller.images.each do |i| %>
   <%= image_tag(url_for(i), size: size_small) %>

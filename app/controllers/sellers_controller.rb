@@ -1,11 +1,11 @@
 class SellersController < ApplicationController
   before_action :set_seller, only: [:show, :update, :update_cover, :attach_image, :delete_image]
+  before_action :translate_seller, only: [:show]
+  before_action :placeholder_images, only: [:show]
   before_action :authenticate_seller!, only: [:update, :update_cover, :attach_image, :delete_image]
   # load_and_authorize_resource :seller, find_by: :slug
 
   def show
-    @seller.set_cover_placeholder unless @seller.cover.attached?
-    @seller.set_images_placeholder unless @seller.images.attached?
   end
 
   def index
@@ -79,6 +79,15 @@ class SellersController < ApplicationController
 
   def seller_params
     params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories, :cover, images: [])
+  end
+
+  def translate_seller
+    @seller = @seller.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+  end
+
+  def placeholder_images
+    @seller.set_cover_placeholder unless @seller.cover.attached?
+    @seller.set_images_placeholder unless @seller.images.attached?    
   end
 
   def current_ability

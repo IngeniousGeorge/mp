@@ -32,7 +32,7 @@ def create_valid_product(attributes = {}, seller = nil)
   return product
 end
 
-def add_translation_to_product(product: product, name: name, description: description)
+def add_translation_to_product(product:, name:, description:)
   create(:product_translation,
     id: "ecf71d9f-c738-40f3-996d-af0b23829151",
     lang: "fr",
