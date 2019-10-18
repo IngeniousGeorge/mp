@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :product_tags
   has_many :product_translations
   accepts_nested_attributes_for :product_tags, allow_destroy: true, reject_if: proc { |attributes| attributes['tag'].blank? }
+  accepts_nested_attributes_for :product_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
   
   has_one_attached :cover
   has_many_attached :images
@@ -19,27 +20,19 @@ class Product < ApplicationRecord
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
   end
 
+  def prepare_empty_translations
+    I18n.non_default_locales_hash.size.times { self.product_translations.build }
+  end
+  # I18n.non_default_locales_hash in config/initializers/extensions/i18n.rb
+
   # translation methods
-    # def translate(lang)
-    #   if translation = self.product_translation(lang)
-    #     translated_product = Product.new(self.attributes)
-    #     translated_product.name = translation.name
-    #     translated_product.description = translation.description
-    #     return translated_product
-    #   else
-    #     self
-    #   end
-    # end
+ 
 
-    # def to
-    #   self.class
+    # def translate_collection(lang, collection)
+    #   translated_products = []
+    #   collection.each { |product| translated_products << product.translate(lang) }
+    #   return translated_products
     # end
-
-    def translate_collection(lang, collection)
-      translated_products = []
-      collection.each { |product| translated_products << product.translate(lang) }
-      return translated_products
-    end
 
     # def product_translation(lang)
     #   self.product_translations.where(lang: lang).take

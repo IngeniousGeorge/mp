@@ -9,12 +9,11 @@ RSpec.describe "Object translate - ", type: :feature do
 
       before do
         product = create_valid_product
-        add_translation_to_product(product: product, name: "Nom", description: "Description en français")
+        add_translation_to_product(product: product, description: "Description en français")
         visit product_path("fr", product)
       end
 
       it "translates from the DB" do
-        expect(page).to have_text("Nom")
         expect(page).to have_text("Description en français")
       end
     end
@@ -27,7 +26,6 @@ RSpec.describe "Object translate - ", type: :feature do
       end
 
       it "returns the default language" do
-        expect(page).to have_text("Product Name")
         expect(page).to have_text("Product description")
       end
     end
@@ -64,7 +62,6 @@ RSpec.describe "Object translate - ", type: :feature do
 
 
   context "category translation - " do
-
 
   end
 end

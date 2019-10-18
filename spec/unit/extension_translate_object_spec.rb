@@ -5,12 +5,11 @@ RSpec.describe "Object extension translate_object - " do
 
     before do
       @product = create_valid_product
-      add_translation_to_product(product: @product, name: "Nom", description: "Description en français")
+      add_translation_to_product(product: @product, description: "Description en français")
       @translated = @product.translate_object("fr")
     end
 
     it "can translate any object" do
-      expect(@translated.name).to eq("Nom")
       expect(@translated.description).to eq("Description en français")
     end
 
@@ -20,7 +19,6 @@ RSpec.describe "Object extension translate_object - " do
     end
 
     it "doesn't update the object itself" do
-      expect(@product.name).to eq("Product Name")
       expect(@product.description).to eq("Product description")
     end
 

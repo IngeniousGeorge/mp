@@ -114,28 +114,28 @@ class ProductsController < ApplicationController
 
   private
 
-  def set_product
-    @product = Product.friendly.find(params[:id])
-  end
+    def set_product
+      @product = Product.friendly.find(params[:id])
+    end
 
-  def set_products
-    sql = params['locale'] == I18n.default_locale.to_s ? helpers.select_all : helpers.select_translations
-    @products = Product.find_by_sql(sql)
-  end
-    
-  def product_params
-    params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy])
-  end
+    def set_products
+      sql = params['locale'] == helpers.default_locale ? helpers.select_all_default_locale : helpers.select_translations
+      @products = Product.find_by_sql(sql)
+    end
+      
+    def product_params
+      params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :translations, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy], product_translations_attributes: [:id, :lang, :description, :product_id])
+    end
 
-  def set_redirect_path
-    @redirect_path = seller_dashboard_path(params["seller_id"])
-  end
+    def set_redirect_path
+      @redirect_path = seller_dashboard_path(params["seller_id"])
+    end
 
-  def translate_product
-    @product = @product.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
-  end
+    def translate_product
+      @product = @product.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+    end
 
-  def current_ability
-    @current_ability ||= ::Ability.new(current_seller)
-  end
+    def current_ability
+      @current_ability ||= ::Ability.new(current_seller)
+    end
 end

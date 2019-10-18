@@ -73,24 +73,24 @@ class SellersController < ApplicationController
 
   private
 
-  def set_seller
-    @seller = Seller.friendly.find(params[:id])
-  end
+    def set_seller
+      @seller = Seller.friendly.find(params[:id])
+    end
 
-  def seller_params
-    params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories, :cover, images: [])
-  end
+    def seller_params
+      params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories, :cover, images: [])
+    end
 
-  def translate_seller
-    @seller = @seller.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
-  end
+    def translate_seller
+      @seller = @seller.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+    end
 
-  def placeholder_images
-    @seller.set_cover_placeholder unless @seller.cover.attached?
-    @seller.set_images_placeholder unless @seller.images.attached?    
-  end
+    def placeholder_images
+      @seller.set_cover_placeholder unless @seller.cover.attached?
+      @seller.set_images_placeholder unless @seller.images.attached?    
+    end
 
-  def current_ability
-    @current_ability ||= ::Ability.new(current_seller)
-  end
+    def current_ability
+      @current_ability ||= ::Ability.new(current_seller)
+    end
 end

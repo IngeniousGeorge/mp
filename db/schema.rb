@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
 
   create_table "product_translations", force: :cascade do |t|
     t.string "lang"
-    t.string "name"
+    t.string "name" #delete
     t.text "description"
     t.uuid "product_id"
     t.datetime "created_at", null: false

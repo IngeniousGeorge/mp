@@ -32,11 +32,10 @@ def create_valid_product(attributes = {}, seller = nil)
   return product
 end
 
-def add_translation_to_product(product:, name:, description:)
+def add_translation_to_product(product:, description:)
   create(:product_translation,
     id: "ecf71d9f-c738-40f3-996d-af0b23829151",
     lang: "fr",
-    name: name,
     description: description,
     product_id: product.id)
 end
@@ -62,6 +61,11 @@ def fill_in_create_form
   fill_in "product_description", with: "Product description"
   fill_in "product_price", with: 1000
   fill_in "product_price_excl_vat", with: 800
+end
+
+def fill_in_translation_form
+  fill_in "product_product_translations_attributes_0_description", with: "description en français"
+  fill_in "product_translations", with: "en|fr"
 end
 
 #images
@@ -112,5 +116,9 @@ end
 def attach_required_images
   attach_file "product_cover", "spec/files/test.jpeg"
   attach_file "product_images", "spec/files/test.jpeg"
+end
+
+def last_created_product
+  Product.order("created_at").last
 end
 

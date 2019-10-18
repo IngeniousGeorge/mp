@@ -1,25 +1,50 @@
 <span>New Product</span>
 
 <%= form_with model: product, url: seller_products_path(@seller), id: "new_product" do |f| %>
+
+  <%= f.label :category, "Category" %>
+  <%= f.select(:category, options_for_select(all_categories)) %>#translate<br/> 
+
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %><br/>
-  <%= f.label :category, "Category" %>
-  <%= f.select(:category, options_for_select(Category.all.map(&:name)
-)) %><br/>
+
+  <%= check_box_tag(:en) %>
+  <%= label_tag("Make available in English") %><br/>
+
   <%= f.label :description, "Description" %>
   <%= f.text_field :description %><br/>
+  
+  <% I18n.non_default_locales_hash.each do |sym, string| %>
+    <%= check_box_tag(sym) %>
+    <%= label_tag("Make available in " + string) %><br/>
+
+    <%= f.fields_for :product_translations do |trans| %>
+      <%= trans.label "Description" %>
+      <%= trans.text_field :description %>
+      <%= trans.hidden_field :lang, value: sym %>
+    <% end %><br/>
+  <% end %>
+
+  <%= f.text_field :translations %>#hidden + javascript<br/>
+
   <%= f.label :price, "Price" %>
   <%= f.text_field :price %><br/>
+
   <%= f.label :price_excl_vat, "Price excl vat" %>
   <%= f.text_field :price_excl_vat %><br/>
-  <%= f.fields_for :product_tags do |tf| %>
-    <%= tf.label :tag %>
-    <%= tf.text_field :tag %><br/>
+
+  <%= f.fields_for :product_tags do |tags| %>
+    <%= tags.label :tag %>
+    <%= tags.text_field :tag %><br/>
   <% end %>
+
   <%= f.label :cover, "Cover picture" %>
   <%= f.file_field :cover %><br/>
+
   <%= f.label :images, "Images" %>
   <%= f.file_field :images, multiple: true %><br/>  
+
   <%= f.hidden_field :seller_id, value: @seller.id %>
+
   <%= f.submit "Create" %>
 <% end %>
