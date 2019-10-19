@@ -1,13 +1,36 @@
 <span>Edit Seller</span>
 
-<%= form_with model: @seller, url: seller_path do |f| %>
+<%= form_with model: @seller, url: seller_path, id: "seller_edit" do |f| %>
+
   <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name %><br/>
+
   <%= f.label :slug, "Slug" %>
-  <%= f.text_field :slug %>
+  <%= f.text_field :slug %><br/>
+
+  <%= check_box_tag(:en) %>
+  <%= label_tag("Make available in English") %><br/>
+
   <%= f.label :description, "Description" %>
-  <%= f.text_field :description %>
+  <%= f.text_field :description %><br/>
+
+  <% I18n.non_default_locales_hash.each do |sym, string| %>
+    <%= check_box_tag(sym) %>
+    <%= label_tag("Make available in " + string) %><br/>
+
+    <%= f.fields_for :seller_translations do |trans| %>
+      <%= trans.label "Description" %>
+      <%= trans.text_field :description %>
+      <%= trans.hidden_field :lang, value: sym %>
+    <% end %><br/>
+  <% end %>
+
+  <%= f.text_field :translations %>#hidden + javascript<br/>
+
+<% if false %>
   <%= f.hidden_field :seller_id, value: @seller.id %>
+<% end %>
+
   <%= f.submit "Edit" %>
 <% end %>
 

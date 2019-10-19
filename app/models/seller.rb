@@ -3,6 +3,7 @@ class Seller < ApplicationRecord
   has_many :products
   has_many :seller_translations
   validates :name, uniqueness: true
+  accepts_nested_attributes_for :seller_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
 
   has_one_attached :cover
   has_many_attached :images
