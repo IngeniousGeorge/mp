@@ -43,8 +43,8 @@ require "helpers/seller_helper" #sign_in_seller
   end
 
   def product_attach_images(product)
-    product.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
-    product.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.jpeg'), filename: 'test.jpeg')
+    product.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
+    product.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.png'), filename: 'test.png')
   end
 
 # form methods
@@ -97,7 +97,7 @@ require "helpers/seller_helper" #sign_in_seller
 
     def add_product_without_cover
       within("#new_product") do 
-        attach_file "product_images", "spec/files/test.jpeg"
+        attach_file "product_images", "spec/files/test.png"
         fill_in_create_form
         click_button "Create"
       end
@@ -105,7 +105,7 @@ require "helpers/seller_helper" #sign_in_seller
 
     def add_product_without_image
       within("#new_product") do 
-        attach_file "product_cover", "spec/files/test.jpeg"
+        attach_file "product_cover", "spec/files/test.png"
         fill_in_create_form
         click_button "Create"
       end
@@ -113,14 +113,14 @@ require "helpers/seller_helper" #sign_in_seller
 
     def change_product_cover
       within("#product_cover_product-name-seller-name") do 
-        attach_file "product_cover", "spec/files/test2.png"
+        attach_file "product_cover", "spec/files/cover.png"
         click_button "Submit"
       end
     end
 
     def add_product_image
       within("#new_image_product-name-seller-name") do 
-        attach_file "product_image", "spec/files/test2.png"
+        attach_file "product_image", "spec/files/product.png"
         click_button "Submit"
       end
     end
@@ -132,8 +132,8 @@ require "helpers/seller_helper" #sign_in_seller
     end
 
     def attach_required_images
-      attach_file "product_cover", "spec/files/test.jpeg"
-      attach_file "product_images", "spec/files/test.jpeg"
+      attach_file "product_cover", "spec/files/test.png"
+      attach_file "product_images", "spec/files/test.png"
     end
 
 # return objects

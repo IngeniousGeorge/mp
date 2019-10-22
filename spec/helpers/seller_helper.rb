@@ -34,21 +34,21 @@
   end
 
   def seller_attach_images(seller)
-    seller.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.jpeg'), filename: 'cover.jpeg')
-    seller.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.jpeg'), filename: 'test.jpeg')
+    seller.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
+    seller.images.attach(io: File.open('/home/ig/Code/mp/spec/files/test.png'), filename: 'test.png')
   end
 
 # form methods
   def change_seller_cover
     within("#seller_cover_seller-name") do 
-      attach_file "seller_cover", "spec/files/test2.png"
+      attach_file "seller_cover", "spec/files/cover.png"
       click_button "Submit"
     end
   end
 
   def add_seller_image
     within("#new_image_seller-name") do 
-      attach_file "seller_image", "spec/files/test2.png"
+      attach_file "seller_image", "spec/files/seller.png"
       click_button "Submit"
     end
   end
@@ -74,6 +74,14 @@
   end
 
 # return objects
+  def last_created_seller
+    Seller.order("created_at").last
+  end
+
+  def last_edited_seller
+    Seller.order("updated_at").last
+  end
+
   def last_edited_seller_translation
     SellerTranslation.order("updated_at").last
   end
