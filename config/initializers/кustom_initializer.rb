@@ -41,3 +41,7 @@ ActiveAdmin.setup do |config|
     end
   end
 end
+
+# Categories
+require 'categorize'
+Categorize.define_all_as_hash

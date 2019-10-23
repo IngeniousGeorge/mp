@@ -88,7 +88,7 @@ if Rails.env.development?
 
   20.times do |i|
     i += 1
-    pi = Product.new(name: "Retail product " + i.to_s, category: 1, description: "Retail product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
+    pi = Product.new(name: "Retail product " + i.to_s, category: 2, description: "Retail product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
     pi.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')

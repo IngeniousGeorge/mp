@@ -1,5 +1,5 @@
 ActiveAdmin.register Seller do
-  permit_params :name, :slug, :email, :password, :description, :categories, :translations
+  permit_params :name, :slug, :email, :password, :description, :translations
 
   index do
     selectable_column
@@ -9,7 +9,6 @@ ActiveAdmin.register Seller do
     column :email
     column :password
     column :description
-    column :categories
     column :translations
     actions
   end
@@ -23,7 +22,6 @@ ActiveAdmin.register Seller do
       f.input :email
       f.input :password
       f.input :description
-      f.input :categories
       f.input :translations
     end
     f.actions

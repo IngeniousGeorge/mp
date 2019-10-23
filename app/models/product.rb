@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :seller
-  has_many :product_tags
-  has_many :product_translations
+  has_many :product_tags, dependent: :destroy
+  has_many :product_translations, dependent: :destroy
   accepts_nested_attributes_for :product_tags, allow_destroy: true, reject_if: proc { |attributes| attributes['tag'].blank? }
   accepts_nested_attributes_for :product_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
   
@@ -23,6 +23,7 @@ class Product < ApplicationRecord
   def prepare_empty_translations
     I18n.non_default_locales_hash.size.times { self.product_translations.build }
   end
+  
   # I18n.non_default_locales_hash in config/initializers/extensions/i18n.rb
 
   # translation methods

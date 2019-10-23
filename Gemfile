@@ -31,6 +31,7 @@ group :development, :test do
   gem 'dotenv', '~> 2.5'
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
   gem 'rspec-rails', '~> 3.8'
+  gem 'simplecov', '~> 0.17.1'
 end
 
 group :development do

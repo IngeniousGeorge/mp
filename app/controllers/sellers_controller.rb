@@ -78,7 +78,7 @@ class SellersController < ApplicationController
     end
 
     def seller_params
-      params.require(:seller).permit(:email, :password, :name, :slug, :description, :categories, :translations, :cover, images: [], seller_translations_attributes: [:id, :lang, :description, :seller_id])
+      params.require(:seller).permit(:email, :password, :name, :slug, :description, :translations, :cover, images: [], seller_translations_attributes: [:id, :lang, :description, :seller_id])
     end
 
     def translate_seller
