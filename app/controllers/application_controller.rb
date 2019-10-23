@@ -26,20 +26,27 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+
+    def authenticate_and_authorize_seller
+      authenticate_seller!
+      if params[:id] != current_seller.slug
+        redirect_to root_path, notice: "Invalid URL" 
+      end
+    end
     
     # rescue_from CanCan::AccessDenied do |exception|
     #   flash[:error] = "Access denied!"
     #   redirect_to root_url
     # end
     
-    def current_ability
-      seller_check = ["products", "sellers", "dashboard_sellers"]
-      if seller_check.include? params[:controller]
-        @current_ability ||= ::Ability.new(current_seller)
-      end
-      client_check = ["baskets", "clients", "dashboard_clients"]
-      if client_check.include? params[:controller]
-        @current_ability ||= ::Ability.new(current_client)
-      end
-    end
+    # def current_ability
+    #   seller_check = ["products", "sellers", "dashboard_sellers"]
+    #   if seller_check.include? params[:controller]
+    #     @current_ability ||= ::Ability.new(current_seller)
+    #   end
+    #   client_check = ["baskets", "clients", "dashboard_clients"]
+    #   if client_check.include? params[:controller]
+    #     @current_ability ||= ::Ability.new(current_client)
+    #   end
+    # end
 end

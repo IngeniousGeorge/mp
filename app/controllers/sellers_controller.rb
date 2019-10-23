@@ -2,8 +2,11 @@ class SellersController < ApplicationController
   before_action :set_seller, only: [:show, :update, :update_cover, :attach_image, :delete_image]
   before_action :translate_seller, only: [:show]
   before_action :placeholder_images, only: [:show]
-  before_action :authenticate_seller!, only: [:update, :update_cover, :attach_image, :delete_image]
-  # load_and_authorize_resource :seller, find_by: :slug
+  before_action :authenticate_and_authorize_seller, only: [:update, :update_cover, :attach_image, :delete_image]
+
+  # before_action :authenticate_seller!, only: [:update, :update_cover, :attach_image, :delete_image]
+
+  # load_and_authorize_resource :seller, find_by: :slug, only: [:update]
 
   def show
   end
@@ -90,7 +93,7 @@ class SellersController < ApplicationController
       @seller.set_images_placeholder unless @seller.images.attached?    
     end
 
-    def current_ability
-      @current_ability ||= ::Ability.new(current_seller)
-    end
+    # def current_ability
+    #   @current_ability ||= ::Ability.new(current_seller)
+    # end
 end

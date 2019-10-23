@@ -16,7 +16,7 @@ class DashboardClientsController < ApplicationController
     end
   end
   
-  def current_ability
-    @current_ability ||= ::Ability.new(current_client)
-  end
+  # def current_ability
+  #   @current_ability ||= ::Ability.new(current_client)
+  # end
 end
