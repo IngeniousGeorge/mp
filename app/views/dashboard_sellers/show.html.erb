@@ -3,16 +3,29 @@
 
 <%= render partial: "sellers/edit" %>
 
-<%= render partial: "products/new", locals: { seller: @seller, product: @new_product } %>
+<%= render partial: "products/new", locals: { 
+  seller: @seller, 
+  product: @new_product } %>
 
 <% unless @products.empty? %>
-  <%= render partial: "products/edit", locals: { seller: @seller, products: @products } %>
+  <%= render partial: "products/edit", locals: { 
+    seller: @seller, 
+    products: @products } %>
 <% end %>
 
-<%= render partial: "locations/new", locals: { location: @seller.locations.new, owner_type: "Seller", owner_id: @seller.id, url: seller_locations_path(@seller) } %>
+<%= render partial: "locations/new", locals: { 
+  location: @seller.locations.new, 
+  owner_type: "Seller", 
+  owner_id: @seller.id, 
+  url: seller_locations_path(@seller) } %>
 
 <% unless @locations.empty? %>
-  <%= render partial: "locations/edit", locals: { locations: @seller.locations, owner: @seller, owner_type: "Seller", owner_id: @seller.id, owner_slug: @seller.slug } %>
+  <%= render partial: "locations/edit", locals: { 
+    locations: @seller.locations, 
+    owner: @seller, 
+    owner_type: "Seller", 
+    owner_id: @seller.id, 
+    owner_slug: @seller.slug } %>
 <% end %>
 
 <nav><%= render 'nav/footer' %></nav>

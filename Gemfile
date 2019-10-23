@@ -31,7 +31,6 @@ group :development, :test do
   gem 'dotenv', '~> 2.5'
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
   gem 'rspec-rails', '~> 3.8'
-  gem 'simplecov', '~> 0.17.1'
 end
 
 group :development do
@@ -45,8 +44,9 @@ end
 
 group :test do
   gem 'capybara', '~> 3.9'
-  gem 'selenium-webdriver', '~> 3.14', '>= 3.14.1'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'selenium-webdriver', '~> 3.14', '>= 3.14.1'
+  gem 'simplecov', '~> 0.17.1'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

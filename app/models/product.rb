@@ -23,25 +23,7 @@ class Product < ApplicationRecord
   def prepare_empty_translations
     I18n.non_default_locales_hash.size.times { self.product_translations.build }
   end
-  
   # I18n.non_default_locales_hash in config/initializers/extensions/i18n.rb
-
-  # translation methods
- 
-
-    # def translate_collection(lang, collection)
-    #   translated_products = []
-    #   collection.each { |product| translated_products << product.translate(lang) }
-    #   return translated_products
-    # end
-
-    # def product_translation(lang)
-    #   self.product_translations.where(lang: lang).take
-    # end
-
-  def self.categories
-    Category.pluck(:name)
-  end
 
   def self.find_by_tag(tag)
     Product.find_by_sql(["SELECT * FROM products WHERE id IN (SELECT product_id FROM product_tags WHERE tag LIKE ?)", tag])

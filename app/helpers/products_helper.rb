@@ -15,9 +15,4 @@ module ProductsHelper
     LEFT JOIN product_translations pt ON p.id = pt.product_id
     WHERE p.translations LIKE '%" + params['locale'] + "%'"
   end
-
-  # options for select
-  def all_categories
-    Category.all.map(&:name)
-  end
 end

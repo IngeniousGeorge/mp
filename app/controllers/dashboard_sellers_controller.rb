@@ -10,7 +10,6 @@ class DashboardSellersController < ApplicationController
     @new_product = @seller.products.new
     @new_product.prepare_empty_tags
     @new_product.prepare_empty_translations
-    @categories = Product.categories
   end
 
   private

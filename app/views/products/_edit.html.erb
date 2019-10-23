@@ -5,7 +5,7 @@
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug do |f| %>
 
       <%= f.label :category, "Category" %>
-      <%= f.select(:category, options_for_select(all_categories)) %>#translate<br/> 
+      <%= f.select(:category, options_for_select(Category.all_as_hash[params['locale']])) %><br/> 
      
       <%= f.label :name, "Name" %>
       <%= f.text_field :name %><br/>
