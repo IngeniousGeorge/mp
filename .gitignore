@@ -32,6 +32,9 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore test coverage
+/coverage
+
 # Ignore dot env files
 .env
 .env.development
