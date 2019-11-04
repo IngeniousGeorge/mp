@@ -5,8 +5,8 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_tags, allow_destroy: true, reject_if: proc { |attributes| attributes['tag'].blank? }
   accepts_nested_attributes_for :product_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
   
-  has_one_attached :cover
-  has_many_attached :images
+  has_one_attached :cover, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
   validates_with ProductImagesValidator
 
   extend FriendlyId

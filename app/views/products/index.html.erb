@@ -1,16 +1,9 @@
-<%= @products.inspect %>
-<br>
+<%= render 'nav/top' %>
+
 <%= @products.each do |product| %>
-<br>
-<br>
-<%= product.inspect %>
-<br>
-<br>
-<%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
-
-<% if false %>
+  <%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
 <% end %>
 
-<% end %>
+<%= "after partial" %>
 
-<%= params.inspect %>
+<%= render 'nav/footer' %>

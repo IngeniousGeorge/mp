@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale, :set_current_basket
+  before_action :categorizer # only in development
 
   private
+
     def set_locale
       if params[:locale].present?
         I18n.locale = params[:locale]
@@ -27,11 +29,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def authenticate_and_authorize_seller
-      authenticate_seller!
-      if params[:id] != current_seller.slug
-        redirect_to root_path, notice: "Invalid URL" 
-      end
+    def categorizer
+      Categorize.define_all_as_hash unless defined? Category.all_as_hash
     end
     
     # rescue_from CanCan::AccessDenied do |exception|
@@ -39,14 +38,14 @@ class ApplicationController < ActionController::Base
     #   redirect_to root_url
     # end
     
-    # def current_ability
-    #   seller_check = ["products", "sellers", "dashboard_sellers"]
-    #   if seller_check.include? params[:controller]
-    #     @current_ability ||= ::Ability.new(current_seller)
-    #   end
-    #   client_check = ["baskets", "clients", "dashboard_clients"]
-    #   if client_check.include? params[:controller]
-    #     @current_ability ||= ::Ability.new(current_client)
-    #   end
-    # end
+    def current_ability
+      seller_check = ["products", "sellers", "dashboard_sellers"]
+      if seller_check.include? params[:controller]
+        @current_ability ||= ::Ability.new(current_seller)
+      end
+      client_check = ["baskets", "clients", "dashboard_clients"]
+      if client_check.include? params[:controller]
+        @current_ability ||= ::Ability.new(current_client)
+      end
+    end
 end
