@@ -5,8 +5,8 @@ class Seller < ApplicationRecord
   validates :name, uniqueness: true
   accepts_nested_attributes_for :seller_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
 
-  has_one_attached :cover
-  has_many_attached :images
+  has_one_attached :cover, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :lockable, :timeoutable, :trackable, :validatable#, :confirmable
 

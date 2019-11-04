@@ -15,7 +15,8 @@ class ProductsController < ApplicationController
   end
 
   def index_cat
-    @products = Product.where(category: params['id'])
+    # @products = Product.where(category: params['id'])
+    @products = set_products(category: params['id'])
     render "index"
   end
 
@@ -118,8 +119,9 @@ class ProductsController < ApplicationController
       @product = Product.friendly.find(params[:id])
     end
 
-    def set_products
+    def set_products(category=:category, location=:location, tag=:tag)
       sql = params['locale'] == helpers.default_locale ? helpers.select_all_default_locale : helpers.select_translations
+      sql += " LIMIT 8"
       @products = Product.find_by_sql(sql)
     end
       

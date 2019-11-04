@@ -28,6 +28,7 @@ end
 I18n.available_locales = [:en, :fr]
 I18n.default_locale = :en
 Rails.application.config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+Rails.application.config.i18n.fallbacks = [I18n.default_locale]
 
 # Active Admin
 ActiveAdmin.setup do |config|
