@@ -3,6 +3,9 @@ Dotenv.load Rails.root.join('.env') unless Rails.env.production?
 
 # Assets
 
+# Lib folder
+# Rails.application.config.autoload_paths += %W(#{config.root}/lib)
+
 # Image Processing
 Rails.application.config.active_storage.variant_processor = :vips
 

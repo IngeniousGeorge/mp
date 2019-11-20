@@ -3,6 +3,21 @@ require "helpers/product_helper"
 
 RSpec.describe "Catalogue path - ", type: :feature do
 
+  context "all" do
+
+    before do
+      create_valid_product
+    end
+
+    it "retrieves all products in default locale" do
+      visit catalogue_path("en")
+
+      expect(page).to have_text("Product Name")
+    end
+
+  end
+
+
   # context "locales - " do
 
   #   before do
@@ -38,37 +53,37 @@ RSpec.describe "Catalogue path - ", type: :feature do
   # end
 
 
-  context "pagination & ordering - " do
+  # context "pagination & ordering - " do
 
-    before do
-      seller = create(:seller)
-      20.times do |i|
-        create_valid_product({name: "Product Name #{i}", price: (i * 1000)}, seller)
-      end
-    end
+  #   before do
+  #     seller = create(:seller)
+  #     20.times do |i|
+  #       create_valid_product({name: "Product Name #{i}", price: (i * 1000)}, seller)
+  #     end
+  #   end
 
-    it "shows 8 products per page" do
-      visit catalogue_path("en")
-      save_and_open_page
+  #   it "shows 8 products per page" do
+  #     visit catalogue_path("en")
+  #     # save_and_open_page
 
-      expect(page).to have_text("Product Name 0")
-      expect(page).to have_text("Product Name 7")
-      expect(page).to have_content("Product Name", count: 16) #should be 8
-    end
+  #     expect(page).to have_text("Product Name 0")
+  #     expect(page).to have_text("Product Name 7")
+  #     expect(page).to have_content("Product Name", count: 16) #should be 8
+  #   end
 
-    it "can retrieve 8 more products on page 2" do
-      visit catalogue_path("en", 2)
-    end
+  #   it "can retrieve 8 more products on page 2" do
+  #     visit catalogue_path("en", 2)
+  #   end
 
-    xit "can order products by price"
+  #   xit "can order products by price"
 
-    xit "can order products by distance to the seller"
+  #   xit "can order products by distance to the seller"
 
-  end
+  # end
 
-  context "search - " do
+  # context "search - " do
 
 
-  end
+  # end
 
 end
