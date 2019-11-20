@@ -1,18 +1,10 @@
 <%= link_to product do %>
   <h3><%= product.name %></h3>
+  <div><%= product.description %></div>
   <% if product.cover.attached? %>
     <%= image_tag(url_for(product.cover), size: size_small) %>
   <% else %>
     <%= image_tag("placeholders/product-cover.png", size: size_small) %>
-  <% end %>
-<% end %>
-
-<% if false %>
-  <%= form_with model: BasketLine.new, url: basket_lines_path do |f| %>
-    <%= f.hidden_field :product_id, value: product.id %>
-    <%= f.hidden_field :basket_id, value: basket_id %>
-    <%= f.hidden_field :quantity, value: 1 %>
-    <%= f.submit "Add to basket" %>
   <% end %>
 <% end %>
 
@@ -23,5 +15,3 @@
   <%= f.number_field :quantity, value: 1 %>
   <%= f.submit "to basket" %>
 <% end %>
-
-<%= "end of card" %>

@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
-    @products = ProductSql.get_products
+    @products = ProductSql.get_products(params)
   end
 
   def index_seller

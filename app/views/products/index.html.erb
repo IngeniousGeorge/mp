@@ -1,9 +1,7 @@
 <%= render 'nav/top' %>
 
-<%= @products.each do |product| %>
+<% @products.each do |product| %>
   <%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
 <% end %>
-
-<%= "after partial" %>
 
 <%= render 'nav/footer' %>
