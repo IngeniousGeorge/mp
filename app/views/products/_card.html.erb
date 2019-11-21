@@ -1,6 +1,7 @@
 <%= link_to product do %>
   <h3><%= product.name %></h3>
   <div><%= product.description %></div>
+  <div><%= product.price %>€</div>
   <% if product.cover.attached? %>
     <%= image_tag(url_for(product.cover), size: size_small) %>
   <% else %>

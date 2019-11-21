@@ -16,72 +16,107 @@ RSpec.describe "Catalogue path - ", type: :feature do
     end
   end
 
-  context "locales - " do
+  # context "locales - " do
 
-    before do
-      with_translation = create_valid_product({description: "With translation", translations: "en|fr"})
-      add_translation_to_product(product: with_translation, description: "Description en français")
-      create_valid_product({description: "Without translation", translations: "en"}, with_translation.seller)
-    end
+  #   before do
+  #     with_translation = create_valid_product({description: "With translation", translations: "en|fr"})
+  #     add_translation_to_product(product: with_translation, description: "Description en français")
+  #     create_valid_product({description: "Without translation", translations: "en"}, with_translation.seller)
+  #   end
 
-    context "the client made no selection - " do
+  #   context "the client made no selection - " do
 
-      it "retrieves all products in default locale" do
-        visit catalogue_path("en")
+  #     it "retrieves all products in default locale" do
+  #       visit catalogue_path("en")
 
-        expect(page).not_to have_text("Description en français")
-        expect(page).to have_text("With translation")
-        expect(page).to have_text("Without translation")
-      end
+  #       expect(page).not_to have_text("Description en français")
+  #       expect(page).to have_text("With translation")
+  #       expect(page).to have_text("Without translation")
+  #     end
+  #   end
 
-    end
+  #   context "the client selected a language - " do
 
-    context "the client selected a language - " do
+  #     it "only retrieves products with translations" do
+  #       visit catalogue_path("fr")
 
-      it "only retrieves products with translations" do
-        visit catalogue_path("fr")
+  #       expect(page).to have_text("Description en français")
+  #       expect(page).not_to have_text("With translation")
+  #       expect(page).not_to have_text("Without translation")
+  #     end
+  #   end
+  # end
 
-        expect(page).to have_text("Description en français")
-        expect(page).not_to have_text("With translation")
-        expect(page).not_to have_text("Without translation")
-      end
+  # context "pagination & ordering - " do
 
-    end
+  #   before do
+  #     seller = create(:seller)
+  #     20.times do |i|
+  #       create_valid_product({name: "Product Name #{i}", price: (i * 1000)}, seller)
+  #     end
+  #   end
 
-  end
+  #   it "shows 8 products per page" do
+  #     visit "en/catalogue"
+  #     # save_and_open_page
 
-  context "pagination & ordering - " do
+  #     expect(page).to have_text("Product Name 0")
+  #     expect(page).to have_text("Product Name 7")
+  #     expect(page).to have_content("Product Name", count: 8)
+  #   end
 
-    before do
-      seller = create(:seller)
-      20.times do |i|
-        create_valid_product({name: "Product Name #{i}", price: (i * 1000)}, seller)
-      end
-    end
+  #   it "can retrieve 8 more products on page 2" do
+  #     visit "en/catalogue?page=2"
 
-    it "shows 8 products per page" do
-      visit catalogue_path("en")
-      # save_and_open_page
+  #     expect(page).to have_text("Product Name 8")
+  #     expect(page).to have_text("Product Name 15")
+  #     expect(page).to have_content("Product Name", count: 8)
+  #   end
 
-      expect(page).to have_text("Product Name 1")
-      expect(page).to have_text("Product Name 8")
-      expect(page).to have_content("Product Name", count: 8)
-    end
+  #   it "can order products by price" do
+  #     visit "en/catalogue?sort=price"
 
-    it "can retrieve 8 more products on page 2" do
-      visit catalogue_path("en", 2)
-    end
+  #     expect(page).to have_text("Product Name 0")
+  #     expect(page).not_to have_text("Product Name 15")
+  #   end
 
-    xit "can order products by price"
-
-    xit "can order products by distance to the seller"
-
-  end
-
-
-  # context "search - " do
-
+  #   xit "can order products by distance to the seller"
 
   # end
 
+  # context "category - " do
+
+  #   before do
+  #     seller = create(:seller)
+  #     create_valid_product({name: "Retail product", category: 1}, seller)
+  #     create_valid_product({name: "Food product", category: 2}, seller)
+  #   end
+
+  #   it "can retrieve products of a given category" do
+  #     visit "en/catalogue?category=1"
+
+  #     expect(page).to have_text("Retail product")
+  #     expect(page).not_to have_text("Food product")
+  #   end
+
+  # end
+
+  context "seller - " do
+
+    before do
+      seller = create(:seller, name: "Expected", slug: "expected")
+      other_seller = create(:seller, name: "Other", email: "other@email.com")
+      create_valid_product({name: "Expected product"}, seller)
+      create_valid_product({name: "Other product"}, other_seller)
+    end
+
+    it "can retrieve products of a given seller" do
+      visit "en/catalogue?seller=expected"
+
+      expect(page).to have_text("Expected product")
+      expect(page).not_to have_text("Other product")
+    end
+
+  end
 end
+
