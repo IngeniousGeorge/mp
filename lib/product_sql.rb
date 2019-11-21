@@ -28,6 +28,8 @@ module ProductSql
       offset = ((params['page'].to_i - 1) * limit.to_i).to_s
     end
 
+    seller_id = Seller.find_by_slug(params['seller']).id if params['seller']
+
     ###
 
     sql = params['locale'] == default_locale ? 
@@ -38,7 +40,9 @@ module ProductSql
     LEFT JOIN product_translations pt ON p.id = pt.product_id
     WHERE (p.translations LIKE '%" + params['locale'] + "%')"
 
-    sql += " AND p.category LIKE '" + params['category'] + "'" if params['category'] 
+    sql += " AND p.category LIKE '" + params['category'] + "'" if params['category']
+
+    sql += " AND p.seller_id = '" + seller_id + "'" if seller_id
 
     # if tag sql += " AND p.tag LIKE '" + tag + "'"
 

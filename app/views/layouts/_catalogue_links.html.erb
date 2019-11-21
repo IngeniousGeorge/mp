@@ -1,0 +1,15 @@
+<%= @categories.inspect %>
+<div><% @categories.each do |cat| %>
+  <%= link_to cat, catalogue_path(category: cat) %>
+<%end%></div>
+<div><% @sellers.each do |sel| %>
+  <%= link_to sel.name, catalogue_path(seller: sel.slug) %>
+<%end%></div>
+<div><% @tags.each do |tag| %>
+  <%= link_to tag, catalogue_path(tag: tag) %>
+<%end%></div>
+<div><%= form_with(url: "/catalogue", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %></div>
