@@ -24,6 +24,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_storage_silent_logs (0.1.1)
+      rails
     activeadmin (2.4.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
@@ -423,6 +425,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_storage_silent_logs
   activeadmin (~> 2.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1, >= 4.1.3)

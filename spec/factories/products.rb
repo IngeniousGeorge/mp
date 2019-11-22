@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :product do
     seller
     name { "Product Name" }
-    category { "Category" }
+    category { 1 }
     description { "Product description" }
     price { 1000 }
     price_excl_vat { 800 }

@@ -8,27 +8,6 @@ class ProductsController < ApplicationController
     @products = ProductSql.get_products(params)
   end
 
-  # def index_seller
-  #   @seller = Seller.friendly.find(params['id'])
-  #   @products = @seller.products
-  #   render "index"
-  # end
-
-  # def index_cat
-  #   # @products = Product.where(category: params['id'])
-  #   @products = set_products(category: params['id'])
-  #   render "index"
-  # end
-
-  # def index_loc
-  #   render "index"
-  # end
-
-  # def index_tag
-  #   @products = Product.find_by_tag(params['id'])
-  #   render "index"
-  # end
-
   def show
     @seller = @product.seller
   end
@@ -117,12 +96,6 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.friendly.find(params[:id])
-    end
-
-    def set_products(category=:category, location=:location, tag=:tag)
-      sql = params['locale'] == helpers.default_locale ? helpers.select_all_default_locale : helpers.select_translations
-      sql += " LIMIT 8"
-      @products = Product.find_by_sql(sql)
     end
       
     def product_params

@@ -34,6 +34,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'active_storage_silent_logs'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'listen', '>= 3.0.5', '< 3.2'
