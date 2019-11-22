@@ -5,18 +5,18 @@ module ProductSql
     if I18n.available_locales.include? params['locale'].to_sym
       #replace description with translation if locale not default
       sql = params['locale'].to_sym == I18n.default_locale ? 
-      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, p.description AS description 
+      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, p.description
         FROM products p 
         WHERE (p.translations LIKE ?)", "%#{params['locale']}%"]
       :
-      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, pt.description AS description
+      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, pt.description
         FROM products p
         LEFT JOIN product_translations pt ON p.id = pt.product_id
         WHERE (p.translations LIKE ?)", "%#{params['locale']}%"]
 
-      #check for cat/sel/tag/q and add AND statement
+      #check for cat/sel/tag/q and add AND statements
       if params['category']
-        sql[0] += " AND p.category LIKE ?"
+        sql[0] += " AND p.category = ?"
         sql << params['category']
       end
 
@@ -27,15 +27,20 @@ module ProductSql
       end
 
       if params['tag']
-        sql[0] += " AND p.id IN (SELECT product_id FROM product_tags WHERE tag = ?)"
+        sql[0] += " AND p.id IN (SELECT product_id FROM product_tags t WHERE t.tag = ? AND t.lang = ?)"
         sql << params['tag']
+        sql << params['locale']
       end
 
       if params['q']
+        # check locale if the product or the product_translation table is to be searched
+        locale_table = I18n.default_locale == params['locale'].to_sym ? "p" : "pt"
         sql[0] += " AND p.name LIKE ? 
-          OR description LIKE ? 
-          OR p.category = (SELECT id FROM categories c WHERE c.name LIKE ?)"
-        3.times { sql << "%#{params['q']}%" }
+          OR #{locale_table}.description LIKE ? 
+          OR p.category = (SELECT id FROM categories c WHERE c.name LIKE ?)
+          OR p.id IN (SELECT product_id FROM product_tags t WHERE t.tag LIKE ? AND t.lang = ?)"
+        4.times { sql << "%#{params['q']}%" }
+        sql << params['locale']
       end
 
       #add limit/page/sort/order
@@ -71,7 +76,6 @@ module ProductSql
       sql[0] += " OFFSET ?"
       sql << offset
 
-      p sql
       Product.find_by_sql(sql)
     end
   end
