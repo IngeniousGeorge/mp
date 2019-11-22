@@ -72,12 +72,16 @@ RSpec.describe "Catalogue path - ", type: :feature do
       expect(page).to have_content("Product Name", count: 8)
     end
 
+    xit "can show more products per page"
+
     it "can order products by price" do
       visit "en/catalogue?sort=price"
 
       expect(page).to have_text("Product Name 0")
       expect(page).not_to have_text("Product Name 15")
     end
+
+    xit "can order products by price descending"
 
     xit "can order products by distance to the seller"
 
@@ -97,7 +101,6 @@ RSpec.describe "Catalogue path - ", type: :feature do
       expect(page).to have_text("Retail product")
       expect(page).not_to have_text("Food product")
     end
-
   end
 
   context "seller - " do

@@ -29,22 +29,22 @@ if Rails.env.development?
   p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p1.save
-  ProductTag.create(tag: "yummy", product_id: p1.id)
-  ProductTag.create(tag: "delicious", product_id: p1.id)
+  ProductTag.create(tag: "yummy", lang: "en", product_id: p1.id)
+  ProductTag.create(tag: "delicious", lang: "en", product_id: p1.id)
   ProductTranslation.create(lang: "fr", name: "Chocolat", description: "Super chocolat!!!", product_id: p1.id)
-  ProductTag.create(tag: "trop bon", product_id: p1.id)
-  ProductTag.create(tag: "delicieux", product_id: p1.id)
+  ProductTag.create(tag: "trop bon", lang: "fr", product_id: p1.id)
+  ProductTag.create(tag: "delicieux", lang: "fr", product_id: p1.id)
 
   p2 = Product.new(name: "Marmite", category: 1, description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, translations:"en|fr", seller_id: s1.id)
   p2.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p2.save
-  ProductTag.create(tag: "awful", product_id: p2.id)
-  ProductTag.create(tag: "just bad", product_id: p2.id)
+  ProductTag.create(tag: "awful", lang: "en", product_id: p2.id)
+  ProductTag.create(tag: "just bad", lang: "en", product_id: p2.id)
   ProductTranslation.create(lang: "fr", name: "Marmite", description: "C'est incroyable à quel point c'est mauvais", product_id: p2.id)
-  ProductTag.create(tag: "atroce", product_id: p2.id)
-  ProductTag.create(tag: "juste afreux", product_id: p2.id)
+  ProductTag.create(tag: "atroce", lang: "fr", product_id: p2.id)
+  ProductTag.create(tag: "juste afreux", lang: "fr", product_id: p2.id)
 
   20.times do |i|
     i += 1
@@ -53,11 +53,11 @@ if Rails.env.development?
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.save
-    ProductTag.create(tag: "one", product_id: pi.id)
-    ProductTag.create(tag: "two", product_id: pi.id)
+    ProductTag.create(tag: "one", lang: "en", product_id: pi.id)
+    ProductTag.create(tag: "two", lang: "en", product_id: pi.id)
     ProductTranslation.create(lang: "fr", name: "Produit alimentaire " + i.to_s, description: "Description produit: " + lorem, product_id: pi.id)
-    ProductTag.create(tag: "un", product_id: pi.id)
-    ProductTag.create(tag: "deux", product_id: pi.id)
+    ProductTag.create(tag: "un", lang: "fr", product_id: pi.id)
+    ProductTag.create(tag: "deux", lang: "fr", product_id: pi.id)
   end
 
   s2 = Seller.create(name: "Jack Jack", slug: "jack-jack", email: "jack@sel.com", password: "password", password_confirmation: "password", description: "All you possibly need in Berlin", translations:"en|fr", confirmed_at: DateTime.now)
@@ -69,22 +69,22 @@ if Rails.env.development?
   p3.images.attach(io: File.open('/home/ig/Code/mp/spec/files/seller.png'), filename: 'seller.png')
   p3.images.attach(io: File.open('/home/ig/Code/mp/spec/files/seller.png'), filename: 'seller.png')
   p3.save
-  ProductTag.create(tag: "useful", product_id: p3.id)
-  ProductTag.create(tag: "foot wear", product_id: p3.id)
+  ProductTag.create(tag: "useful", lang: "en", product_id: p3.id)
+  ProductTag.create(tag: "foot wear", lang: "en", product_id: p3.id)
   ProductTranslation.create(lang: "fr", name: "Chausse pied", description: "Vous ne ferez plus jamais vos lacets!", product_id: p3.id)
-  ProductTag.create(tag: "pratique", product_id: p3.id)
-  ProductTag.create(tag: "pour vos pieds", product_id: p3.id)
+  ProductTag.create(tag: "pratique", lang: "fr", product_id: p3.id)
+  ProductTag.create(tag: "pour vos pieds", lang: "fr", product_id: p3.id)
 
   p4 = Product.new(name: "Rake", category: 2, description: "Autumn's best friend", price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s2.id)
   p4.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p4.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p4.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p4.save
-  ProductTag.create(tag: "useful", product_id: p4.id)
-  ProductTag.create(tag: "tool", product_id: p4.id)
+  ProductTag.create(tag: "useful", lang: "en", product_id: p4.id)
+  ProductTag.create(tag: "tool", lang: "en", product_id: p4.id)
   ProductTranslation.create(lang: "fr", name: "Chausse pied", description: "Vous ne ferez plus jamais vos lacets!", product_id: p4.id)
-  ProductTag.create(tag: "pratique", product_id: p4.id)
-  ProductTag.create(tag: "outil", product_id: p4.id)
+  ProductTag.create(tag: "pratique", lang: "fr", product_id: p4.id)
+  ProductTag.create(tag: "outil", lang: "fr", product_id: p4.id)
 
   20.times do |i|
     i += 1
@@ -93,11 +93,11 @@ if Rails.env.development?
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.save
-    ProductTag.create(tag: "one", product_id: pi.id)
-    ProductTag.create(tag: "two", product_id: pi.id)
+    ProductTag.create(tag: "one", lang: "en", product_id: pi.id)
+    ProductTag.create(tag: "two", lang: "en", product_id: pi.id)
     ProductTranslation.create(lang: "fr", name: "Produit de detail " + i.to_s, description: "Description produit de detail: " + lorem, product_id: pi.id)
-    ProductTag.create(tag: "un", product_id: pi.id)
-    ProductTag.create(tag: "deux", product_id: pi.id)
+    ProductTag.create(tag: "un", lang: "fr", product_id: pi.id)
+    ProductTag.create(tag: "deux", lang: "fr", product_id: pi.id)
   end
 
   puts "seeding complete"
