@@ -70,14 +70,13 @@ RSpec.describe "Object translate - ", type: :feature do
     end
 
     it "makes a hash available with all categories for each language" do
-      expect(Category.all_as_hash["en"][0][1]).to eq("Category one")
-      expect(Category.all_as_hash["en"][1][1]).to eq("Category two")
-      expect(Category.all_as_hash["fr"][0][1]).to eq("Catégorie une")
-      expect(Category.all_as_hash["fr"][1][1]).to eq("Catégorie deux")
+      expect(Category.all_as_hash["en"][0][0]).to eq("Category one")
+      expect(Category.all_as_hash["en"][1][0]).to eq("Category two")
+      expect(Category.all_as_hash["fr"][0][0]).to eq("Catégorie une")
+      expect(Category.all_as_hash["fr"][1][0]).to eq("Catégorie deux")
       #testing for correct ids
-      expect(Category.all_as_hash["fr"][0][0]).to eq(Category.all_as_hash["en"][0][0])
-      expect(Category.all_as_hash["fr"][1][0]).to eq(Category.all_as_hash["en"][1][0])
+      expect(Category.all_as_hash["fr"][0][1]).to eq(Category.all_as_hash["en"][0][1])
+      expect(Category.all_as_hash["fr"][1][1]).to eq(Category.all_as_hash["en"][1][1])
     end
   end
 end
-

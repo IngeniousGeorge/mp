@@ -35,7 +35,9 @@
 
   <%= f.fields_for :product_tags do |tags| %>
     <%= tags.label :tag %>
-    <%= tags.text_field :tag %><br/>
+    <%= tags.text_field :tag %>
+    <%= tags.label :lang %>
+    <%= tags.text_field :lang %><br/>
   <% end %>
 
   <%= f.label :cover, "Cover picture" %>

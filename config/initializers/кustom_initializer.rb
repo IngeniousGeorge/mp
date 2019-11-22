@@ -48,4 +48,4 @@ end
 
 # Categories
 require 'categorize'
-Categorize.define_all_as_hash
+Categorize.define_all_as_hash if defined?(Category)

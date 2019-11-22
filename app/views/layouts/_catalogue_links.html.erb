@@ -1,5 +1,5 @@
 <div><% @categories.each do |cat| %>
-  <%= link_to cat[1], catalogue_path(category: cat[0]) %>
+  <%= link_to cat[0], catalogue_path(category: cat[1]) %>
 <%end%></div>
 <div><% @sellers.each do |sel| %>
   <%= link_to sel.name, catalogue_path(seller: sel.slug) %>

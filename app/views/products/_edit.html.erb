@@ -38,6 +38,8 @@
       <%= f.fields_for :product_tags do |tf| %>
         <%= tf.label :tag %>
         <%= tf.text_field :tag %>
+        <%= tf.label :lang %>
+        <%= tf.text_field :lang %>
         <%= tf.label "Remove:" %>
         <%= tf.check_box :_destroy %><br/>
       <% end %>

@@ -126,7 +126,7 @@ class ProductsController < ApplicationController
     end
       
     def product_params
-      params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :translations, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy], product_translations_attributes: [:id, :lang, :description, :product_id])
+      params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :translations, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :lang, :product_id, :_destroy], product_translations_attributes: [:id, :lang, :description, :product_id])
     end
 
     def set_redirect_path
