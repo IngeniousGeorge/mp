@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t(:categories) %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to t(:all_cat), catalogue_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <% @categories.each do |cat| %>
+            <%= link_to cat[0], catalogue_path(category: cat[1]), class: "dropdown-item" %>
+          <%end%>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t(:sellers) %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to t(:all_sel), catalogue_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <% @seller.each do |sel| %>
+            <%= link_to sel.name, seller_show_path(sel), class: "dropdown-item" %>
+          <%end%>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t(:tags) %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to t(:all_tag), catalogue_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <% @tags.each do |tag| %>
+            <%= link_to tag, catalogue_path(tag: tag), class: "dropdown-item" %>
+          <%end%>
+        </div>
+      </li>
+    </ul>
+    <%= form_with(url: catalogue_path, method: "get", local: true, class: "form-inline my-2 my-lg-0") do %>
+      <%= text_field_tag(:q, nil, class: "form-control mr-sm-2") %>
+      <%= submit_tag(t(:search), class: "btn btn-outline-primary my-2 my-sm-0") %>
+    <% end %>
+  </div>
+</nav>

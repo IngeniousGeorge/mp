@@ -1,14 +1,21 @@
-<div><% @categories.each do |cat| %>
-  <%= link_to cat[0], catalogue_path(category: cat[1]) %>
-<%end%></div>
-<div><% @sellers.each do |sel| %>
-  <%= link_to sel.name, catalogue_path(seller: sel.slug) %>
-<%end%></div>
-<div><% @tags.each do |tag| %>
-  <%= link_to tag, catalogue_path(tag: tag) %>
-<%end%></div>
-<div><%= form_with(url: catalogue_path, method: "get", local: true) do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
-<% end %></div>
+<div>
+  <% @categories.each do |cat| %>
+    <%= link_to cat[0], catalogue_path(category: cat[1]) %>
+  <%end%>
+</div>
+<div>
+  <% @sellers.each do |sel| %>
+    <%= link_to sel.name, catalogue_path(seller: sel.slug) %>
+  <%end%>
+</div>
+<div>
+  <% @tags.each do |tag| %>
+    <%= link_to tag, catalogue_path(tag: tag) %>
+  <%end%>
+</div>
+<div>
+  <%= form_with(url: catalogue_path, method: "get", local: true) do %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>

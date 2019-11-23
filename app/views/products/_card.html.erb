@@ -1,18 +1,15 @@
-<%= link_to product do %>
-  <h3><%= product.name %></h3>
-  <div><%= product.description %></div>
-  <div><%= product.price %>€</div>
-  <% if product.cover.attached? %>
-    <%= image_tag(url_for(product.cover), size: size_small) %>
-  <% else %>
-    <%= image_tag("placeholders/product-cover.png", size: size_small) %>
-  <% end %>
-<% end %>
-
-<%= form_with model: BasketLine.new, url: basket_lines_path do |f| %>
-  <%= f.hidden_field :product_id, value: product.id %>
-  <%= f.hidden_field :basket_id, value: basket_id %>
-  <%= f.label :add %>
-  <%= f.number_field :quantity, value: 1 %>
-  <%= f.submit "to basket" %>
-<% end %>
+<div class="card" style="width: 18rem;">
+  <%= image_tag(url_for(product.cover), class: "card-img-top") %>
+  <div class="card-body">
+    <h5 class="card-title"><%= product.name %></h5>
+    <h6 class="card-subtitle"><%= product.price %>€</h6>
+    <p class="card-text"><%= truncate(product.description, length: 60) %></p>
+    <%= form_with model: BasketLine.new, url: basket_lines_path, class: "add-form" do |f| %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.hidden_field :basket_id, value: basket_id %>
+      <%= f.submit t(:add), class: "add-submit" %>
+      <%= f.number_field :quantity, value: 1, class: "add-number" %>
+      <%= f.submit t(:to_basket), class: "add-submit" %>
+    <% end %>
+  </div>
+</div>

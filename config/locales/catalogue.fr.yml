@@ -1,3 +1,11 @@
 ---
 fr:
-
+  add: "ajouter"
+  to_basket: "au panier"
+  categories: "catégories"
+  sellers: "partenaires"
+  tags: "hashtags"
+  all_cat: "toutes"
+  all_sel: "tous"
+  all_tag: "tous"
+  search: "rechercher"

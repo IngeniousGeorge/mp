@@ -5,6 +5,13 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
+    # toolbar data !!! duplicate with home controller !!!
+    @categories = Category.all_as_hash[params['locale']]
+    @seller = Seller.where('translations LIKE ?', "%" + params['locale'] + "%").limit(8)
+    @tags = ProductTag.where(lang: params['locale']).distinct.pluck(:tag)
+    # pagination data
+    @page = params['page']
+    # main content data
     @products = ProductSql.get_products(params)
   end
 

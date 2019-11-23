@@ -1,3 +1,46 @@
 .nav-item {
   margin: 2px;
 }
+
+.card {
+  display: inline-flex;
+  margin: 1rem;
+}
+
+.card-body {
+  height: 12rem;
+}
+
+.card-text {
+  height: 3em;
+}
+
+.card-subtitle {
+  text-align: right;
+}
+
+.add-form {
+  padding: 10px;
+  margin-left: 22px;
+  border-radius: 10px;
+  background-color: $primary;
+  display: inline;
+  width: 120px;
+}
+
+.add-label {
+  padding: 6px;
+}
+
+.add-number {
+  background-color: $primary;
+  width: 45px;
+  border: none;
+  text-align: right;
+  outline: none;
+}
+
+.add-submit {
+  border: none;
+  background-color: $primary;
+}

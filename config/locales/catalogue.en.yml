@@ -1,2 +1,11 @@
 ---
 en:
+  add: "add"
+  to_basket: "to basket"
+  categories: "categories"
+  sellers: "sellers"
+  tags: "tags"
+  all_cat: "all"
+  all_sel: "all"
+  all_tag: "all"
+  search: "search"
