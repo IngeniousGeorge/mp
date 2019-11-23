@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     create_table :products, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       t.string :name, null: false
       t.string :slug, null: false
-      t.string :category, null: false
+      t.integer :category, null: false
       t.text :description
       t.integer :price, null: false
       t.integer :price_excl_vat, null: false

@@ -5,28 +5,7 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
-    @products = set_products
-  end
-
-  def index_seller
-    @seller = Seller.friendly.find(params['id'])
-    @products = @seller.products
-    render "index"
-  end
-
-  def index_cat
-    # @products = Product.where(category: params['id'])
-    @products = set_products(category: params['id'])
-    render "index"
-  end
-
-  def index_loc
-    render "index"
-  end
-
-  def index_tag
-    @products = Product.find_by_tag(params['id'])
-    render "index"
+    @products = ProductSql.get_products(params)
   end
 
   def show
@@ -118,15 +97,9 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.friendly.find(params[:id])
     end
-
-    def set_products(category=:category, location=:location, tag=:tag)
-      sql = params['locale'] == helpers.default_locale ? helpers.select_all_default_locale : helpers.select_translations
-      sql += " LIMIT 8"
-      @products = Product.find_by_sql(sql)
-    end
       
     def product_params
-      params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :translations, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :product_id, :_destroy], product_translations_attributes: [:id, :lang, :description, :product_id])
+      params.require(:product).permit(:id, :name, :slug, :category, :description, :price, :price_excl_vat, :price_discount, :price_discount_excl_vat, :translations, :seller_id, :cover, images: [], product_tags_attributes: [:id, :tag, :lang, :product_id, :_destroy], product_translations_attributes: [:id, :lang, :description, :product_id])
     end
 
     def set_redirect_path

@@ -1,22 +1,7 @@
 <nav><%= render 'nav/top' %></nav>
 <br/>
 <h1><%= t(:main_title, :default => 'Ooops!') %></h1>
-<div>All:
-  <%= link_to 'See Catalogue', catalogue_path %>
-</div>
-<div><%= t(:sellers) %>:
-  <%= link_to 'All', sellers_path %>
-  <%= link_to 'Jane Choco', seller_show_path('jane-choco') %>
-  <%= link_to 'Jack Jack', seller_show_path('jack-jack') %>
-</div>
-<div>Categories:
-  <%= link_to 'food', c_category_path('food') %>
-  <%= link_to 'retail', c_category_path('retail') %>
-</div>
-<div>Tags:
-  <%= link_to 'yummy', c_tag_path('yummy') %>
-  <%= link_to 'useful', c_tag_path('useful') %>
-</div>
+<div><%= render 'layouts/catalogue_links'%></div>
 <br/>
 <nav><%= render 'nav/footer' %></nav>
 <br/>

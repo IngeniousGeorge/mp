@@ -7,22 +7,20 @@ RSpec.describe "Category - ", type: :feature do
 
     before do
       create(:category_translation) #creates category
-      require 'categorize'
       Categorize.define_all_as_hash
     end
 
     it "the method is available at init" do
-      expect(Category.all_as_hash['en']).to eq(['Category one'])
-      expect(Category.all_as_hash['fr']).to eq(['Catégorie une'])
+      expect(Category.all_as_hash['en'][0][0]).to eq('Category one')
+      expect(Category.all_as_hash['fr'][0][0]).to eq('Catégorie une')
     end
 
     it "creates the helper method after save" do
       cat = create(:category, name: "Category two")
-      create(:category_translation, lang: "fr", name: "Catégorie deux", category_id: cat.id)
+      create(:category_translation, name: "Catégorie deux", category: cat)
       
-      expect(Category.all_as_hash['en'][1]).to eq('Category two')
-      expect(Category.all_as_hash['fr'][1]).to eq('Catégorie deux')
+      expect(Category.all_as_hash['en'][1][0]).to eq('Category two')
+      expect(Category.all_as_hash['fr'][1][0]).to eq('Catégorie deux')
     end
-
   end
 end

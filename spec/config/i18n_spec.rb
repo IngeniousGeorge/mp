@@ -12,7 +12,7 @@ RSpec.describe "I18n", type: :feature do
   it "can translate strings with t(:something) method" do
     visit "/fr"
 
-    expect(page).to have_text("Partenaires")
+    expect(page).to have_text("Se connecter")
   end
 
   xit "doesn't have any missing translations"
