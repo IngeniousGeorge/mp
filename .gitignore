@@ -33,7 +33,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore test coverage
-/coverage
+/coverage/*
 
 # Ignore dot env files
 .env
