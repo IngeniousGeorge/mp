@@ -43,6 +43,9 @@ module ProductSql
         sql << params['locale']
       end
 
+      #get number of records for the query
+      max_size = Product.find_by_sql(sql).size 
+
       #add limit/page/sort/order
       if params['sort'] == nil
         sort = "p.created_at"
@@ -76,7 +79,9 @@ module ProductSql
       sql[0] += " OFFSET ?"
       sql << offset
 
-      Product.find_by_sql(sql)
+      result_set = Product.find_by_sql(sql)
+
+      return { max_size: max_size, set: result_set }
     end
   end
 end

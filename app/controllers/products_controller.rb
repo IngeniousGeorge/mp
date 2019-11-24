@@ -5,14 +5,15 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
-    # toolbar data !!! duplicate with home controller !!!
-    @categories = Category.all_as_hash[params['locale']]
-    @seller = Seller.where('translations LIKE ?', "%" + params['locale'] + "%").limit(8)
-    @tags = ProductTag.where(lang: params['locale']).distinct.pluck(:tag)
-    # pagination data
-    @pages_urls = get_pages_urls(params['locale'], params['page'].to_i, request.query_parameters.to_query)
+    # toolbar data
+    @categories = get_locale_categories
+    @seller = get_locale_sellers #.limit(8)
+    @tags = get_locale_tags
     # main content data
-    @products = ProductSql.get_products(params)
+    result_hash = ProductSql.get_products(params)
+    @products = result_hash[:set]
+    # pagination data
+    @pages_urls = get_pages_urls(params['locale'], "catalogue", request.query_parameters.to_query, params['page'].to_i, result_hash[:max_size])
   end
 
   def show
@@ -115,20 +116,6 @@ class ProductsController < ApplicationController
 
     def translate_product
       @product = @product.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
-    end
-
-    def get_pages_urls(locale, page, query)
-      if page < 5
-        first, second, third, fourth, fifth = 1, 2, 3, 4, 5
-      else
-        first, second, third, fourth, fifth = page - 2, page - 1, page, page + 1, page + 2
-      end
-      pages_urls = { first => "/#{locale}/catalogue/#{first}?" + query,
-      second => "/#{locale}/catalogue/#{second}?" + query,
-      third => "/#{locale}/catalogue/#{third}?" + query,
-      fourth => "/#{locale}/catalogue/#{fourth}?" + query,
-      fifth => "/#{locale}/catalogue/#{fifth}?" + query }
-      return pages_urls
     end
 
     def current_ability
