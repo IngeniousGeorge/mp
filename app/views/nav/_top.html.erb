@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light d-flex align-items-baseline">
   <%= link_to t(:home), root_path, class: "navbar-brand" %>
-  <div class="subtitle"><%= t(:subtitle) %></div>
+  <span class="card-subtitle"><%= t(:subtitle) %></span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,14 +23,15 @@
         </li>
       <% end %>
       <% if I18n.locale == :en %>
-        <li class="nav-item btn btn-outline-secondary btn-sm">
-          <%= link_to "fr", { locale: 'fr' } %>
+        <li class="nav-item btn btn-outline-danger btn-sm">
+          <%= link_to image_tag("icons/fr.png", size: "20x14"), { locale: 'fr' } %>
         </li>
       <% else %>
-        <li class="nav-item btn btn-outline-secondary btn-sm">
-          <%= link_to "en", { locale: 'en' } %>
+        <li class="nav-item btn btn-outline-danger btn-sm">
+          <%= link_to image_tag("icons/en.png", size: "20x16"), { locale: 'en' } %>
         </li>
       <%end%>
     </ul>
   </div>
 </nav>
+<%= render partial: 'layouts/alerts' %>

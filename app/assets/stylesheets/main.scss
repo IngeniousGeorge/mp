@@ -1,5 +1,31 @@
+.alert {
+  margin-bottom: 0;
+}
+
 .nav-item {
   margin: 2px;
+}
+
+.navbar-brand {
+  font-size: 1.75rem;
+}
+
+.welcome {
+  // max-width: 80%;
+  background-image: url(mall1.jpg);
+  background-size: cover;
+  color: $secondary;
+}
+
+.hue {
+  max-width: 750px;
+  padding: 1rem;
+  background-color: hsla(180, 70%, 37%, 0.75);
+}
+
+.card-subtitle {
+  font-size: 0.8rem;
+  color: $danger;
 }
 
 .card {

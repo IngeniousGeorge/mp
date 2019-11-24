@@ -1,16 +1,22 @@
 <nav class="navbar navbar-light bg-light">
-  <span><%= t(:seller) %>:</span>
-  <% if seller_signed_in? %>
-    <%= link_to t(:log_out), destroy_seller_session_path, method: :delete %>
-    <%= link_to t(:account), seller_dashboard_path(current_seller) %>
-  <% else %>
-    <%= link_to t(:sign_in), new_seller_session_path %>
-  <% end%>
+  <span>
+    <%= t(:seller) %>:
+    <% if seller_signed_in? %>
+      <%= link_to t(:log_out), destroy_seller_session_path, method: :delete %>
+      |
+      <%= link_to t(:account), seller_dashboard_path(current_seller) %>
+    <% else %>
+      <%= link_to t(:sign_in), new_seller_session_path %>
+    <% end%>
+  </span>
 
   <% if admin_user_signed_in? %>
-    <%= link_to t(:log_out), destroy_admin_user_session_path, method: :delete %>
-  <% end%>
-  <br/>
-  <%= link_to t(:about) %>
-  <%= link_to t(:contact) %>
+    <%= link_to t(:admin_log_out), destroy_admin_user_session_path, method: :delete %>
+  <% end %>
+
+  <span style="color:#2ab7ca;">
+  <%= link_to t(:about), about_path %>
+  |
+  <%= link_to t(:contact), contact_path %>
+  </span>
 </nav>

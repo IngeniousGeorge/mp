@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
-    root to: "home#index"
+    root to: 'home#index'
+
+    #miscelanious
+    get '/about', to: 'home#about', as: 'about'
+    get '/contact', to: 'home#contact', as: 'contact'
 
     #DEVISE:
     devise_for :admin_users, ActiveAdmin::Devise.config
