@@ -36,17 +36,28 @@ class ApplicationController < ActionController::Base
     end
 
     def get_pages_urls(locale, namespace, query, page, max_size)
-      if page < 5
-        first, second, third, fourth, fifth = 1, 2, 3, 4, 5
+      pages_urls = []
+      num_pages = max_size / 8
+      num_pages = num_pages + 1 if (max_size % 8) > 0
+      if num_pages > 1
+        query = "?" + query unless query == ""
+        page = 1 if page == 0
+        previous = page - 1
+        next_page = page + 1
+        # first
+        pages_urls << { text: "«", link: "/#{locale}/#{namespace}/1" + query } if page > 2
+        # previous
+        pages_urls << { text: previous, link: "/#{locale}/#{namespace}/#{previous}" + query } if page > 1
+        # active
+        pages_urls << { text: page, link: "/#{locale}/#{namespace}/#{page}" + query, class: "page-active" } 
+        # next
+        pages_urls << { text: next_page, link: "/#{locale}/#{namespace}/#{next_page}" + query } if num_pages > page
+        # last
+        pages_urls << { text: "»", link: "/#{locale}/#{namespace}/#{num_pages}" + query } if num_pages > (page + 1)
+        return pages_urls
       else
-        first, second, third, fourth, fifth = page - 2, page - 1, page, page + 1, page + 2
+        return pages_urls
       end
-      pages_urls = { first => "/#{locale}/#{namespace}/#{first}?" + query,
-      second => "/#{locale}/#{namespace}/#{second}?" + query,
-      third => "/#{locale}/#{namespace}/#{third}?" + query,
-      fourth => "/#{locale}/#{namespace}/#{fourth}?" + query,
-      fifth => "/#{locale}/#{namespace}/#{fifth}?" + query }
-      return pages_urls
     end
 
     def set_current_basket
