@@ -24,7 +24,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to t(:all_sel), catalogue_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
-          <% @seller.each do |seller| %>
+          <% @sellers.each do |seller| %>
             <%= link_to seller.name, c_seller_path(seller.slug), class: "dropdown-item" %>
           <%end%>
         </div>

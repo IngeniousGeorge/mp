@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
     params['seller'] = params['id']
     @namespace = "s/" + params['seller']
     #check if seller exists
+    @seller = Seller.find_by_slug(params['seller'])
     get_index_data
     render "index"
   end
@@ -134,7 +135,7 @@ class ProductsController < ApplicationController
     def get_index_data
       # toolbar data
       @categories = get_locale_categories
-      @seller = get_locale_sellers #.limit(8)
+      @sellers = get_locale_sellers #.limit(8)
       @tags = get_locale_tags
       # main content data
       result_hash = ProductSql.get_products(params)

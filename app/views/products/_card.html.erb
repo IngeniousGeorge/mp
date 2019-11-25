@@ -2,7 +2,7 @@
   <%= link_to product_path(product) do %>
     <%= image_tag(url_for(product.cover), class: "card-img-top") %>
     <% product.tags.each_with_index do |tag, i|%>
-      <%= link_to tag, catalogue_path(tag: tag), class: "card-bottom-#{i}" %>
+      <%= link_to "#" + tag, catalogue_path(tag: tag), class: "card-bottom-#{i}" %>
     <% end %>
   <% end %>
   <div class="card-body">

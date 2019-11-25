@@ -30,6 +30,17 @@
   margin: 0.5rem;
 }
 
+.presenter {
+  background-size: cover;
+  background-position: bottom;
+}
+
+.presenter-text {
+  background-color: hsla(2, 100%, 71%, 0.75);
+  // margin-left: -15rem;
+  // margin-right: -15rem;
+}
+
 .card-subtitle {
   font-size: 0.8rem;
   color: $danger;
