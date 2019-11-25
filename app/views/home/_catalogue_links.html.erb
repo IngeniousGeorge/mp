@@ -1,0 +1,36 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h2 class="d-flex justify-content-center">
+      <span class="border-bottom border-primary">
+        <%= t(:all_categories).titleize %>
+      </span>
+    </h2>
+    <p class="lead d-flex justify-content-center flex-wrap">
+      <% @categories.each do |category| %>
+        <%= link_to category[0], catalogue_path(category: category[1]), class: "home-links" %>
+      <% end %>
+    </p>
+    <hr class="my-4">
+    <h2 class="d-flex justify-content-center">
+      <span class="border-bottom border-primary">
+        <%= t(:featured_sellers).titleize %>
+      </span>
+    </h2>
+    <p class="lead d-flex justify-content-center flex-wrap">
+      <% @sellers.each do |seller| %>
+        <%= link_to seller.name, catalogue_path(seller: seller.slug), class: "home-links" %>
+      <% end %>
+    </p>
+    <hr class="my-4">
+    <h2 class="d-flex justify-content-center">
+      <span class="border-bottom border-primary">
+        <%= t(:popular_tags).titleize %>
+      </span>
+    </h2>
+    <p class="lead d-flex justify-content-center flex-wrap">
+      <% @tags.each do |tag| %>
+        <%= link_to tag, catalogue_path(tag: tag), class: "home-links" %>
+      <% end %>
+    </p>
+  </div>
+</div>
