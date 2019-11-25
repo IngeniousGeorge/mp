@@ -4,6 +4,8 @@ class Category < ApplicationRecord
 
   after_save :save_categories_in_hash
 
+  has_one_attached :cover, dependent: :destroy
+
   def save_categories_in_hash
     require 'categorize'
     Categorize.define_all_as_hash

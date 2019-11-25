@@ -53,6 +53,56 @@
   text-decoration: inherit;
 }
 
+.card-bottom-0 {
+  color: $secondary;
+  position: absolute;
+  background-color: hsla(180, 70%, 37%, 0.75);
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  bottom: 13rem;
+  left: 1rem;
+}
+
+.card-bottom-1 {
+  color: $secondary;
+  position: absolute;
+  background-color: hsla(180, 70%, 37%, 0.75);
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  bottom: 13rem;
+  right: 1rem;
+}
+
+.card-bottom-2 {
+  color: $secondary;
+  position: absolute;
+  background-color: hsla(180, 70%, 37%, 0.75);
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  bottom: 15rem;
+  left: 1rem;
+}
+
+.card-bottom-3 {
+  color: $secondary;
+  position: absolute;
+  background-color: hsla(180, 70%, 37%, 0.75);
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  bottom: 15rem;
+  right: 1rem;
+}
+
+.card-bottom-4 {
+  color: $secondary;
+  position: absolute;
+  background-color: hsla(180, 70%, 37%, 0.75);
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  bottom: 17rem;
+  left: 1rem;
+}
+
 .card-subtitle {
   text-align: right;
 }

@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
         # previous
         pages_urls << { text: previous, link: "/#{locale}/#{namespace}/#{previous}" + query } if page > 1
         # active
-        pages_urls << { text: page, link: "/#{locale}/#{namespace}/#{page}" + query, class: "page-active" } 
+        pages_urls << { text: page, link: "/#{locale}/#{namespace}/#{page}" + query, class: "active" } 
         # next
         pages_urls << { text: next_page, link: "/#{locale}/#{namespace}/#{next_page}" + query } if num_pages > page
         # last

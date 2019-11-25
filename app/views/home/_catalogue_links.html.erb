@@ -7,7 +7,7 @@
     </h2>
     <p class="lead d-flex justify-content-center flex-wrap">
       <% @categories.each do |category| %>
-        <%= link_to category[0], catalogue_path(category: category[1]), class: "home-links" %>
+        <%= link_to category[0], c_category_path(category[0]), class: "home-links" %>
       <% end %>
     </p>
     <hr class="my-4">
@@ -18,7 +18,7 @@
     </h2>
     <p class="lead d-flex justify-content-center flex-wrap">
       <% @sellers.each do |seller| %>
-        <%= link_to seller.name, catalogue_path(seller: seller.slug), class: "home-links" %>
+        <%= link_to seller.name, c_seller_path(seller.slug), class: "home-links" %>
       <% end %>
     </p>
     <hr class="my-4">

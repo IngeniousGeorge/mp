@@ -12,7 +12,7 @@ ActiveAdmin.register Category do
 
   form do |f|
     panel 'Warning' do
-      "Set a transaltion for all languages!"
+      "Set a transaltion for all languages! => #{I18n.available_locales.join("|")}"
     end
     f.inputs do
       f.input :name

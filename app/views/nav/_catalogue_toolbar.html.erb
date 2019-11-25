@@ -12,8 +12,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to t(:all_cat), catalogue_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
-          <% @categories.each do |cat| %>
-            <%= link_to cat[0], catalogue_path(category: cat[1]), class: "dropdown-item" %>
+          <% @categories.each do |category| %>
+            <%= link_to category[0], c_category_path(category[0]), class: "dropdown-item" %>
           <%end%>
         </div>
       </li>
@@ -24,8 +24,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to t(:all_sel), catalogue_path, class: "dropdown-item" %>
           <div class="dropdown-divider"></div>
-          <% @seller.each do |sel| %>
-            <%= link_to sel.name, seller_show_path(sel), class: "dropdown-item" %>
+          <% @seller.each do |seller| %>
+            <%= link_to seller.name, c_seller_path(seller.slug), class: "dropdown-item" %>
           <%end%>
         </div>
       </li>

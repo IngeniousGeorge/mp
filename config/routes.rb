@@ -43,8 +43,8 @@ Rails.application.routes.draw do
 
     get '/catalogue(/:page)', to: 'products#index', as: 'catalogue'
     get '/seller/:id', to: 'sellers#show', as: 'seller_show'
-    # get '/seller/:id/p(/:page)', to: 'products#index_seller', as: 'c_seller'
-    # get '/cat/:id(/:page)', to: 'products#index_cat', as: 'c_category'
+    get '/s/:id(/:page)', to: 'products#index_seller', as: 'c_seller'
+    get '/c/:id(/:page)', to: 'products#index_category', as: 'c_category'
     # get '/loc/:id(/:page)', to: 'products#index_loc', as: 'c_location'
     # get '/tag/:id(/:page)', to: 'products#index_tag', as: 'c_tag'
 
