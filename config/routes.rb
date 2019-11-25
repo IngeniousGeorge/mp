@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
-    root to: "home#index"
+    root to: 'home#index'
+
+    #miscelanious
+    get '/about', to: 'home#about', as: 'about'
+    get '/contact', to: 'home#contact', as: 'contact'
 
     #DEVISE:
     devise_for :admin_users, ActiveAdmin::Devise.config
@@ -37,10 +41,10 @@ Rails.application.routes.draw do
     resources :sellers, only: :index
     resources :products, only: :show
 
-    get '/catalogue', to: 'products#index', as: 'catalogue'
+    get '/catalogue(/:page)', to: 'products#index', as: 'catalogue'
     get '/seller/:id', to: 'sellers#show', as: 'seller_show'
-    # get '/seller/:id/p(/:page)', to: 'products#index_seller', as: 'c_seller'
-    # get '/cat/:id(/:page)', to: 'products#index_cat', as: 'c_category'
+    get '/s/:id(/:page)', to: 'products#index_seller', as: 'c_seller'
+    get '/c/:id(/:page)', to: 'products#index_category', as: 'c_category'
     # get '/loc/:id(/:page)', to: 'products#index_loc', as: 'c_location'
     # get '/tag/:id(/:page)', to: 'products#index_tag', as: 'c_tag'
 

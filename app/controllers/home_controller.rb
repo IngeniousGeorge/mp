@@ -5,17 +5,9 @@ class HomeController < ApplicationController
     @tags = get_locale_tags
   end
 
-  private
+  def about
+  end
 
-    def get_locale_categories
-      Category.all_as_hash[params['locale']]
-    end
-
-    def get_locale_sellers
-      Seller.where('translations LIKE ?', "%" + params['locale'] + "%")
-    end
-
-    def get_locale_tags
-      ProductTag.where(lang: params['locale']).distinct.pluck(:tag)
-    end
+  def contact
+  end
 end

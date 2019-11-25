@@ -1,0 +1,9 @@
+<nav aria-label="Page navigation example" class="d-flex justify-content-center">
+  <ul class="pagination">
+    <% @pages_urls.each do |page| %>
+      <li class="page-item <%= page[:class] %>">
+        <%= link_to page[:text], page[:link], class: "page-link" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

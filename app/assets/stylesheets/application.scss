@@ -11,5 +11,15 @@
  * It is generally better to create a new file per style scope.
  *
  */
+ // #fe4a49 • #2ab7ca • #fed766 • #e6e6ea • #f4f4f8
+ // #96ceb4 • #ffeead • #ff6f69 • #ffcc5c • #88d8b0
+ $primary: #2ab7ca;
+ $secondary: #ffeead;
+ $danger: #ff6f69;
+ $success: #88d8b0;
+ $warning: #ffcc5c;
+ $info: #96ceb4;
+ $light: #e6e6ea;
+
 @import 'bootstrap';
 @import 'main';

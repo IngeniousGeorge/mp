@@ -1,4 +1,16 @@
 ---
 fr:
+  home: "Market Place"
+  subtitle: "demo"
   main_title: "La Market Place"
-  sellers: "Partenaires"
+  welcome: "bienvenus!"
+  welcome_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  welcome_subtext: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  all_categories: "toutes catégories"
+  featured_sellers: "partenaires à l'affiche"
+  popular_tags: "hashtags du moment"
+  seller: "partenaire"
+  sellers: "partenaires"
+  about: "à propos"
+  contact: "contactez nous"
+  admin_log_out: "déconnection administrateur"

@@ -5,11 +5,11 @@ module ProductSql
     if I18n.available_locales.include? params['locale'].to_sym
       #replace description with translation if locale not default
       sql = params['locale'].to_sym == I18n.default_locale ? 
-      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, p.description
+      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.tags, p.created_at, p.description
         FROM products p 
         WHERE (p.translations LIKE ?)", "%#{params['locale']}%"]
       :
-      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.created_at, pt.description
+      ["SELECT p.id, p.name, p.slug, p.category, p.seller_id, p.price, p.price_excl_vat, p.tags, p.created_at, pt.description
         FROM products p
         LEFT JOIN product_translations pt ON p.id = pt.product_id
         WHERE (p.translations LIKE ?)", "%#{params['locale']}%"]
@@ -42,6 +42,9 @@ module ProductSql
         4.times { sql << "%#{params['q']}%" }
         sql << params['locale']
       end
+
+      #get number of records for the query
+      max_size = Product.find_by_sql(sql).size 
 
       #add limit/page/sort/order
       if params['sort'] == nil
@@ -76,7 +79,15 @@ module ProductSql
       sql[0] += " OFFSET ?"
       sql << offset
 
-      Product.find_by_sql(sql)
+      result_set = Product.find_by_sql(sql)
+
+      #add tags
+      result_set.each do |product| 
+        tags = ProductTag.where(["product_id = ? and lang = ?", product.id, params['locale']])
+        tags.each { |t| product.tags << t.tag }
+      end
+
+      return { max_size: max_size, set: result_set }
     end
   end
 end

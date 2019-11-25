@@ -1,7 +1,13 @@
 <%= render 'nav/top' %>
 
+<%= render 'nav/catalogue_toolbar', locals: { categories: @categories } %>
+
+<%= render partial: 'layouts/presenter', locals: { presentee: @seller } if params['action'] == "index_seller" %>
+
 <% @products.each do |product| %>
-  <%= render partial: "products/card", locals: { product: product, basket_id: @current_basket.id } %>
+  <%= render partial: 'products/card', locals: { product: product, basket_id: @current_basket.id } %>
 <% end %>
+
+<%= render 'nav/catalogue_pagination' %>
 
 <%= render 'nav/footer' %>

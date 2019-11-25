@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :slug, null: false
       t.integer :category, null: false
       t.text :description
+      t.text :tags, array: true, default: []
       t.integer :price, null: false
       t.integer :price_excl_vat, null: false
       t.integer :price_discount

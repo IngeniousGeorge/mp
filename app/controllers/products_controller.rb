@@ -5,7 +5,25 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
 
   def index
-    @products = ProductSql.get_products(params)
+    @namespace = "catalogue"
+    get_index_data
+  end
+
+  def index_category
+    @namespace = "c/" + params['id']
+    params['category'] = get_category_string
+    redirect_to root_path(params['locale']), alert: "Category not found." and return if params['category'] == "no match"
+    get_index_data
+    render "index"
+  end
+
+  def index_seller
+    params['seller'] = params['id']
+    @namespace = "s/" + params['seller']
+    #check if seller exists
+    @seller = Seller.find_by_slug(params['seller'])
+    get_index_data
+    render "index"
   end
 
   def show
@@ -112,5 +130,27 @@ class ProductsController < ApplicationController
 
     def current_ability
       @current_ability ||= ::Ability.new(current_seller)
+    end
+
+    def get_index_data
+      # toolbar data
+      @categories = get_locale_categories
+      @sellers = get_locale_sellers #.limit(8)
+      @tags = get_locale_tags
+      # main content data
+      result_hash = ProductSql.get_products(params)
+      @products = result_hash[:set]
+      # pagination data
+      @pages_urls = get_pages_urls(params['locale'], @namespace, request.query_parameters.to_query, params['page'].to_i, result_hash[:max_size])
+    end
+
+    def get_category_string
+      # all_as_hash returns {"en"=>[["Category", 1]...], "fr"=>[["Catégorie", 1]...]}
+      match = Category.all_as_hash[params['locale']].select { |cat| cat[0] == params['id'].capitalize }
+      if match != []
+        match[0][1]
+      else
+        "no match"
+      end
     end
 end
