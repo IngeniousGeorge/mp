@@ -1,5 +1,6 @@
 require "rails_helper"
 require "helpers/product_helper"
+require "helpers/category_helper"
 
 RSpec.describe "Catalogue path - ", type: :feature do
 
@@ -101,13 +102,14 @@ RSpec.describe "Catalogue path - ", type: :feature do
 
     before do
       @category = create(:category, name: "Retail", description: "something")
-      p @category
+      attach_cover_to_categories
       seller = create(:seller)
       create_valid_product({name: "Retail product", category: @category.id}, seller)
       create_valid_product({name: "Food product", category: "eedd3dcd-f40d-4225-a617-34eb2b734c73"}, seller)
     end
 
     it "can retrieve products of a given category through url" do
+      p Category.all
       visit "en/c/Retail"
 
       expect(page).to have_text("Retail product")
@@ -195,8 +197,8 @@ RSpec.describe "Catalogue path - ", type: :feature do
     end
 
     it "can retrieve a product with matching category" do
-      create(:category, name: "Three", id: 3)
-      create_valid_product({name: "Third", category: "3"}, @seller)
+      category = create(:category, name: "Three")
+      create_valid_product({name: "Third", category: category.id}, @seller)
       visit "en/catalogue?q=Three"
 
       expect(page).to have_text("Third")
