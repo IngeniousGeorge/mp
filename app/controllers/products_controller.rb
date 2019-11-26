@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   def index
     @namespace = "catalogue"
     get_index_data
+    placeholder_images
   end
 
   def index_category
@@ -15,6 +16,7 @@ class ProductsController < ApplicationController
     redirect_to root_path(params['locale']), alert: "Category not found." and return if params['category'] == "no match"
     @presentee = Category.find(params['category'])
     get_index_data
+    placeholder_images
     render "index"
   end
 
@@ -24,6 +26,7 @@ class ProductsController < ApplicationController
     #check if seller exists
     @presentee = Seller.find_by_slug(params['seller'])
     get_index_data
+    placeholder_images
     render "index"
   end
 
@@ -127,6 +130,13 @@ class ProductsController < ApplicationController
 
     def translate_product
       @product = @product.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+    end
+
+    def placeholder_images
+      @products.each do |product|
+        product.set_cover_placeholder unless product.cover.attached?
+        product.set_images_placeholder unless product.images.attached?    
+      end
     end
 
     def current_ability

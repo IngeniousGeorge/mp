@@ -16,5 +16,4 @@ RSpec.describe "Product - ", type: :feature do
 
     expect(page).to have_text(@product.name)
   end
-
 end
