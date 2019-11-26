@@ -36,7 +36,7 @@ if Rails.env.development?
   p1.save
   ProductTag.create(tag: "yummy", lang: "en", product_id: p1.id)
   ProductTag.create(tag: "delicious", lang: "en", product_id: p1.id)
-  ProductTranslation.create(lang: "fr", name: "Chocolat", description: "Super chocolat!!!", product_id: p1.id)
+  ProductTranslation.create(lang: "fr", description: "Super chocolat!!!", product_id: p1.id)
   ProductTag.create(tag: "trop bon", lang: "fr", product_id: p1.id)
   ProductTag.create(tag: "delicieux", lang: "fr", product_id: p1.id)
 
@@ -47,7 +47,7 @@ if Rails.env.development?
   p2.save
   ProductTag.create(tag: "awful", lang: "en", product_id: p2.id)
   ProductTag.create(tag: "just bad", lang: "en", product_id: p2.id)
-  ProductTranslation.create(lang: "fr", name: "Marmite", description: "C'est incroyable à quel point c'est mauvais", product_id: p2.id)
+  ProductTranslation.create(lang: "fr", description: "C'est incroyable à quel point c'est mauvais", product_id: p2.id)
   ProductTag.create(tag: "atroce", lang: "fr", product_id: p2.id)
   ProductTag.create(tag: "juste afreux", lang: "fr", product_id: p2.id)
 
@@ -60,7 +60,7 @@ if Rails.env.development?
     pi.save
     ProductTag.create(tag: "one", lang: "en", product_id: pi.id)
     ProductTag.create(tag: "two", lang: "en", product_id: pi.id)
-    ProductTranslation.create(lang: "fr", name: "Produit alimentaire " + i.to_s, description: "Description produit: " + lorem, product_id: pi.id)
+    ProductTranslation.create(lang: "fr", description: "Description produit: " + lorem, product_id: pi.id)
     ProductTag.create(tag: "un", lang: "fr", product_id: pi.id)
     ProductTag.create(tag: "deux", lang: "fr", product_id: pi.id)
   end
@@ -77,7 +77,7 @@ if Rails.env.development?
   p3.save
   ProductTag.create(tag: "useful", lang: "en", product_id: p3.id)
   ProductTag.create(tag: "foot wear", lang: "en", product_id: p3.id)
-  ProductTranslation.create(lang: "fr", name: "Chausse pied", description: "Vous ne ferez plus jamais vos lacets!", product_id: p3.id)
+  ProductTranslation.create(lang: "fr", description: "Vous ne ferez plus jamais vos lacets!", product_id: p3.id)
   ProductTag.create(tag: "pratique", lang: "fr", product_id: p3.id)
   ProductTag.create(tag: "pour vos pieds", lang: "fr", product_id: p3.id)
 
@@ -88,7 +88,7 @@ if Rails.env.development?
   p4.save
   ProductTag.create(tag: "useful", lang: "en", product_id: p4.id)
   ProductTag.create(tag: "tool", lang: "en", product_id: p4.id)
-  ProductTranslation.create(lang: "fr", name: "Chausse pied", description: "Vous ne ferez plus jamais vos lacets!", product_id: p4.id)
+  ProductTranslation.create(lang: "fr", description: "Le meilleur ami de l'automne", product_id: p4.id)
   ProductTag.create(tag: "pratique", lang: "fr", product_id: p4.id)
   ProductTag.create(tag: "outil", lang: "fr", product_id: p4.id)
 
@@ -101,7 +101,7 @@ if Rails.env.development?
     pi.save
     ProductTag.create(tag: "one", lang: "en", product_id: pi.id)
     ProductTag.create(tag: "two", lang: "en", product_id: pi.id)
-    ProductTranslation.create(lang: "fr", name: "Produit de detail " + i.to_s, description: "Description produit de detail: " + lorem, product_id: pi.id)
+    ProductTranslation.create(lang: "fr", description: "Description produit de detail: " + lorem, product_id: pi.id)
     ProductTag.create(tag: "un", lang: "fr", product_id: pi.id)
     ProductTag.create(tag: "deux", lang: "fr", product_id: pi.id)
   end

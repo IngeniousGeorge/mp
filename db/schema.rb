@@ -178,8 +178,6 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
 
   create_table "product_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "lang"
-    t.string "name"
-    t.string "slug"
     t.text "description"
     t.uuid "product_id"
     t.datetime "created_at", null: false
@@ -207,8 +205,6 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
 
   create_table "seller_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "lang"
-    t.string "name"
-    t.string "slug"
     t.text "description"
     t.uuid "seller_id"
     t.datetime "created_at", null: false

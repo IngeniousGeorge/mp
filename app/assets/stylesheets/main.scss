@@ -124,7 +124,7 @@
   border-radius: 10px;
   background-color: $primary;
   display: inline;
-  width: 120px;
+  // width: 120px;
 }
 
 .add-label {
@@ -142,4 +142,48 @@
 .add-submit {
   border: none;
   background-color: $primary;
+}
+
+.product-full {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.product-full-body {
+  flex: 1;
+}
+
+.product-full-title {
+  padding-left: 10%;
+  background-color: hsla(180, 70%, 37%, 0.75);
+}
+
+.product-carousel {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.product-image {
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+.product-full-price {
+  font-size: 1.5rem;
+}
+
+.product-full-add {
+  margin-left: 10%;
+}
+
+.carousel-control-prev-icon {
+  background-image: url(icons/carousel-prev-b.png)
+}
+
+.carousel-control-next-icon {
+  background-image: url(icons/carousel-next-b.png)
 }

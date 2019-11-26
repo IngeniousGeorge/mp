@@ -1,0 +1,44 @@
+<% if false %>
+<br/>
+<%= @product.description %>
+
+<% if @product.images.attached? %>
+  <% @product.images.attachments.each do |i| %>
+    <%= image_tag(i) %>
+  <% end %>
+<% end %>
+<% end %>
+<div class="card product-full bg-light">
+  <div class="card-body product-full-body">
+    <h2 class="card-title product-full-title rounded"><%= @product.name %></h2>
+    <div id="product-carousel" class=" product-carousel carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+        <% @product.images.each_with_index do |image, i| %>
+          <% active = "active" if i == 0 %>
+          <div class="carousel-item <%= active %>">
+            <%= image_tag(url_for(image), class: "d-block product-image") %>
+          </div>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#product-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#product-carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <h2 class="card-subtitle product-full-price"><%= product.price %>€</h2>
+    <hr/>
+    <span><%= product.description %></span>
+    <hr/>
+    <%= form_with model: BasketLine.new, url: basket_lines_path, class: "add-form product-full-add" do |f| %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.hidden_field :basket_id, value: basket_id %>
+      <%= f.submit t(:add), class: "add-submit" %>
+      <%= f.number_field :quantity, value: 1, class: "add-number" %>
+      <%= f.submit t(:to_basket), class: "add-submit" %>
+    <% end %>
+  </div>
+</div>

@@ -36,9 +36,9 @@ RSpec.describe "Object translate - ", type: :feature do
     context "when available - " do
 
       before do
-        seller = create(:seller)
+        seller = create(:seller, translations: "en|fr")
         add_translation_to_seller(seller: seller, description: "Description en français")
-        visit seller_show_path("fr", seller)
+        visit c_seller_path("fr", seller)
       end
 
       it "translates from the DB" do
@@ -50,7 +50,7 @@ RSpec.describe "Object translate - ", type: :feature do
 
       before do
         seller = create(:seller)
-        visit seller_show_path("fr", seller)
+        visit c_seller_path("en", seller)
       end
 
       it "returns the default language" do

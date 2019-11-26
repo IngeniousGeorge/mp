@@ -7,7 +7,6 @@ class ProductsController < ApplicationController
   def index
     @namespace = "catalogue"
     get_index_data
-    placeholder_images
   end
 
   def index_category
@@ -16,7 +15,8 @@ class ProductsController < ApplicationController
     redirect_to root_path(params['locale']), alert: "Category not found." and return if params['category'] == "no match"
     @presentee = Category.find(params['category'])
     get_index_data
-    placeholder_images
+    presentee_translate
+    presentee_placeholder_cover
     render "index"
   end
 
@@ -26,11 +26,15 @@ class ProductsController < ApplicationController
     #check if seller exists
     @presentee = Seller.find_by_slug(params['seller'])
     get_index_data
-    placeholder_images
+    presentee_translate
+    presentee_placeholder_cover
     render "index"
   end
 
   def show
+    @categories = get_locale_categories
+    @sellers = get_locale_sellers #.limit(8)
+    @tags = get_locale_tags
     @seller = @product.seller
   end
 
@@ -139,6 +143,14 @@ class ProductsController < ApplicationController
       end
     end
 
+    def presentee_placeholder_cover
+      @presentee.set_cover_placeholder unless @presentee.cover.attached?   
+    end
+
+    def presentee_translate
+      @presentee = @presentee.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+    end
+
     def current_ability
       @current_ability ||= ::Ability.new(current_seller)
     end
@@ -153,6 +165,7 @@ class ProductsController < ApplicationController
       @products = result_hash[:set]
       # pagination data
       @pages_urls = get_pages_urls(params['locale'], @namespace, request.query_parameters.to_query, params['page'].to_i, result_hash[:max_size])
+      placeholder_images
     end
 
     def get_category_id

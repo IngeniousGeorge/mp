@@ -1,8 +1,9 @@
-<%= @product.name %><br/>
-<%= @product.description %>
+<%= render 'nav/top' %>
 
-<% if @product.images.attached? %>
-  <% @product.images.attachments.each do |i| %>
-    <%= image_tag(i) %>
-  <% end %>
-<% end %>
+<%= render 'nav/catalogue_toolbar', locals: { categories: @categories } %>
+
+<%= render partial: 'layouts/presenter', locals: { presentee: @seller } %>
+
+<%= render partial: 'products/full', locals: { product: @product, basket_id: @current_basket.id } %>
+
+<%= render 'nav/footer' %>
