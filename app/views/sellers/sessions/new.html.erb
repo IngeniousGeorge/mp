@@ -1,30 +1,34 @@
 <%= render 'nav/top' %>
 
-<h2><%= t(:sign_in) %></h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label t(:email) %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-devise d-flex flex-column align-items-center bg-success rounded-lg" }) do |f| %>
+  <div class="">
 
-  <div class="field">
-    <%= f.label t(:pswd) %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.label t(:remember_me) %>
-      <%= f.check_box :remember_me %>
+    <div class="form-group form-devise-field">
+      <%= f.label t(:email) %>
+      <%= f.email_field :email, autofocus: true, placeholder: "email", autocomplete: "email", class: "form-control" %>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit t(:sign_in) %>
+    <div class="form-group form-devise-field">
+      <%= f.label t(:pswd) %>
+      <%= f.password_field :password, placeholder: "password", autocomplete: "current-password", class: "form-control" %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="form-group form-devise-field">
+        <%= f.check_box :remember_me, class: "" %>
+        <%= f.label t(:remember_me), class: "" %>
+      </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.submit t(:sign_in), class: "btn btn-dark" %>
+    </div>
   </div>
 <% end %>
 
-<%= render "sellers/shared/links" %>
+<div class="form-devise form-devise-links d-flex justify-content-center bg-success rounded-lg">
+  <%= render "clients/shared/links" %>
+</div>
 
 <%= render "nav/footer" %>

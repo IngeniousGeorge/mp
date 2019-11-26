@@ -1,65 +1,67 @@
-<span>Edit Seller</span>
+<div id="account" class="collapse show" data-parent="#content">
+  <span>Edit Seller</span>
 
-<%= form_with model: @seller, url: seller_path, id: "seller_edit" do |f| %>
+  <%= form_with model: @seller, url: seller_path, id: "seller_edit" do |f| %>
 
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %><br/>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %><br/>
 
-  <%= f.label :slug, "Slug" %>
-  <%= f.text_field :slug %><br/>
+    <%= f.label :slug, "Slug" %>
+    <%= f.text_field :slug %><br/>
 
-  <%= check_box_tag(:en) %>
-  <%= label_tag("Make available in English") %><br/>
+    <%= check_box_tag(:en) %>
+    <%= label_tag("Make available in English") %><br/>
 
-  <%= f.label :description, "Description" %>
-  <%= f.text_field :description %><br/>
+    <%= f.label :description, "Description" %>
+    <%= f.text_field :description %><br/>
 
-  <% I18n.non_default_locales_hash.each do |sym, string| %>
-    <%= check_box_tag(sym) %>
-    <%= label_tag("Make available in " + string) %><br/>
+    <% I18n.non_default_locales_hash.each do |sym, string| %>
+      <%= check_box_tag(sym) %>
+      <%= label_tag("Make available in " + string) %><br/>
 
-    <%= f.fields_for :seller_translations do |trans| %>
-      <%= trans.label "Description" %>
-      <%= trans.text_field :description %>
-      <%= trans.hidden_field :lang, value: sym %>
-    <% end %><br/>
+      <%= f.fields_for :seller_translations do |trans| %>
+        <%= trans.label "Description" %>
+        <%= trans.text_field :description %>
+        <%= trans.hidden_field :lang, value: sym %>
+      <% end %><br/>
+    <% end %>
+
+    <%= f.text_field :translations %>#hidden + javascript<br/>
+
+  <% if false %>
+    <%= f.hidden_field :seller_id, value: @seller.id %>
   <% end %>
 
-  <%= f.text_field :translations %>#hidden + javascript<br/>
-
-<% if false %>
-  <%= f.hidden_field :seller_id, value: @seller.id %>
-<% end %>
-
-  <%= f.submit "Edit" %>
-<% end %>
-
-<% if @seller.cover.attached? %>
-  <%= image_tag(url_for(@seller.cover), size: size_small) %>
-  <%= form_with model: @seller, url: update_cover_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug do |af| %>
-    <%= af.label :cover %>
-    <%= af.file_field :cover %>
-    <%= af.submit "Submit"%>
+    <%= f.submit "Edit" %>
   <% end %>
-<% else %>
-    <div>You don't have a cover image, please concact an administrator.</div>
-<% end %>
 
-<%= form_with model: @seller, url: attach_image_seller_path(@seller.slug), id: "new_image_" + @seller.slug do |af| %>
-      <%= af.label :image %>
-      <%= af.file_field :image, multiple: true %>
+  <% if @seller.cover.attached? %>
+    <%= image_tag(url_for(@seller.cover), size: size_small) %>
+    <%= form_with model: @seller, url: update_cover_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug do |af| %>
+      <%= af.label :cover %>
+      <%= af.file_field :cover %>
       <%= af.submit "Submit"%>
     <% end %>
-
-<% if @seller.images.attached? %>
-  <% @seller.images.each do |i| %>
-    <%= image_tag(i, size: size_small) %>
-    <%= form_with model: @seller, url: delete_image_seller_path(@seller.slug), id: i.id, class: "del_img" do |af| %>
-      <%= af.label :image %>
-      <%= af.hidden_field :image_id, value: i.id %>
-      <%= af.submit "Delete"%>
-    <% end %>
+  <% else %>
+      <div>You don't have a cover image, please concact an administrator.</div>
   <% end %>
-<% else %>
-  <div>You don't have images attached, please add some.</div>
-<% end %>
+
+  <%= form_with model: @seller, url: attach_image_seller_path(@seller.slug), id: "new_image_" + @seller.slug do |af| %>
+        <%= af.label :image %>
+        <%= af.file_field :image, multiple: true %>
+        <%= af.submit "Submit"%>
+      <% end %>
+
+  <% if @seller.images.attached? %>
+    <% @seller.images.each do |i| %>
+      <%= image_tag(i, size: size_small) %>
+      <%= form_with model: @seller, url: delete_image_seller_path(@seller.slug), id: i.id, class: "del_img" do |af| %>
+        <%= af.label :image %>
+        <%= af.hidden_field :image_id, value: i.id %>
+        <%= af.submit "Delete"%>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div>You don't have images attached, please add some.</div>
+  <% end %>
+</div>

@@ -1,6 +1,5 @@
-<span>Edit Address</span>
-
-<% locations.each do |location| %>
+<div id="<%= location.name %>-col" class="collapse" data-parent="#content">
+  <span>Edit Address</span>
   <% if location.slug %>
     <%= form_with model: location, url: polymorphic_path([owner, location]), id: location.slug do |f| %>
       <%= f.label :name, "Name" %>
@@ -31,4 +30,4 @@
       <%= f.submit "Delete" %>
     <% end %>
   <% end %>
-<% end %>
+</div>

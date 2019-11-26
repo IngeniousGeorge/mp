@@ -1,0 +1,37 @@
+<div class="sidebar-header">
+  <h3>Dashboard</h3>
+</div>
+<ul class="list-unstyled components">
+  <li>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#account" role="button" aria-expanded="false" aria-controls="account"><%= t(:account) %></button>
+  </li>
+  <li>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#newAddress" role="button" aria-expanded="false" aria-controls="newAddress"><%= t(:new_address) %></button>
+  </li>
+  <li>
+    <a href="#addressList" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= t(:adresses) %></a>
+    <ul class="collapse list-unstyled" id="addressList">
+      <% locations.each do |location| %>
+        <li>
+          <a href="#" data-toggle="collapse" data-target="#<%= location.name %>-col" role="button" aria-expanded="false" aria-controls="<%= location.name %>-col"><%= location.name %></a>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+  <li>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#sales" role="button" aria-expanded="false" aria-controls="sales"><%= t(:sales) %></button>
+  </li>
+  <li>
+    <button class="btn btn-primary" data-toggle="collapse" data-target="#newProduct" role="button" aria-expanded="false" aria-controls="newProduct"><%= t(:new_product) %></button>
+  </li>
+  <li>
+    <a href="#productList" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><%= t(:products) %></a>
+    <ul class="collapse list-unstyled" id="productList">
+      <% products.each do |product| %>
+        <li>
+          <a href="#" data-toggle="collapse" data-target="#<%= product.slug %>-col" aria-expanded="false" aria-controls="<%= product.slug %>-col"><%= product.name %></a>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+</ul>

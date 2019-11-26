@@ -1,3 +1,13 @@
+// html {
+//   min-height: 100vh;
+// }
+
+.collapsing {
+  -webkit-transition: none;
+  transition: none;
+  display: none;
+}
+
 .alert {
   margin-bottom: 0;
 }
@@ -11,7 +21,6 @@
 }
 
 .welcome {
-  // max-width: 80%;
   background-image: url(mall1.jpg);
   background-size: cover;
   background-position: bottom;
@@ -144,6 +153,33 @@
   background-color: $primary;
 }
 
+.form-devise {
+  width: 50%;
+  max-width: 520px;
+  min-width: 240px;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.form-devise-field {
+  margin-top: 2rem;
+}
+
+.form-devise-title {
+  margin-left: 1rem;
+}
+
+.form-devise-links {
+  a {
+    margin: 0.3rem;
+    color: $dark;
+  }
+}
+
 .product-full {
   display: flex;
   flex-direction: column;
@@ -186,4 +222,26 @@
 
 .carousel-control-next-icon {
   background-image: url(icons/carousel-next-b.png)
+}
+
+
+// dashboard
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#content {
+  min-height: 70vh;
 }

@@ -1,12 +1,12 @@
-<span>Edit Products</span>
+<div id="<%= product.slug %>-col" class="collapse" data-parent="#content">
+  <span>Edit Products</span>
 
-<% @products.each do |product| %>
   <% if product.slug && product.prepare_empty_tags %>
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug do |f| %>
 
       <%= f.label :category, "Category" %>
       <%= f.select(:category, options_for_select(Category.all_as_hash[params['locale']])) %><br/> 
-     
+    
       <%= f.label :name, "Name" %>
       <%= f.text_field :name %><br/>
 
@@ -79,5 +79,4 @@
     <%= link_to 'Remove product', seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%>
 
   <% end %>
-  <br/>
-<% end %>
+</div>

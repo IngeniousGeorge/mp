@@ -1,25 +1,27 @@
-<span>New Address</span>
+<div id="newAddress" class="collapse" data-parent="#content">
+  <span>New Address</span>
 
-<%= form_with model: location, url: url, id: "new_address" do |f| %>
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
-  <%= f.label :recipient, "recipient" %>
-  <%= f.text_field :recipient %>
-  <%= f.label :street, "Street" %>
-  <%= f.text_field :street %>
-  <%= f.label :city, "City" %>
-  <%= f.text_field :city %>
-  <%= f.label :state, "State" %>
-  <%= f.text_field :state %>
-  <%= f.label :country, "Country" %>
-  <%= f.text_field :country %>
-  <%= f.label :postal_code, "Postal Code" %>
-  <%= f.text_field :postal_code %>
-  <%= f.label :delivery, "Delivery" %>
-  <%= f.check_box :delivery %>
-  <%= f.label :billing, "Billing" %>
-  <%= f.check_box :billing %>
-  <%= f.hidden_field :owner_type, value: owner_type %>
-  <%= f.hidden_field :owner_id, value: owner_id %>
-  <%= f.submit "Create" %>
-<% end %>
+  <%= form_with model: location, url: url, id: "new_address" do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+    <%= f.label :recipient, "recipient" %>
+    <%= f.text_field :recipient %>
+    <%= f.label :street, "Street" %>
+    <%= f.text_field :street %>
+    <%= f.label :city, "City" %>
+    <%= f.text_field :city %>
+    <%= f.label :state, "State" %>
+    <%= f.text_field :state %>
+    <%= f.label :country, "Country" %>
+    <%= f.text_field :country %>
+    <%= f.label :postal_code, "Postal Code" %>
+    <%= f.text_field :postal_code %>
+    <%= f.label :delivery, "Delivery" %>
+    <%= f.check_box :delivery %>
+    <%= f.label :billing, "Billing" %>
+    <%= f.check_box :billing %>
+    <%= f.hidden_field :owner_type, value: owner_type %>
+    <%= f.hidden_field :owner_id, value: owner_id %>
+    <%= f.submit "Create" %>
+  <% end %>
+</div>

@@ -1,7 +1,51 @@
-<nav><%= render 'nav/top' %></nav>
-<br/>
+<%= render 'nav/top' %>
 
-<%= render partial: "sellers/edit" %>
+<div class="wrapper">
+
+  <nav id="sidebar">
+    <%= render partial: 'dashboard_sellers/panel', locals: {
+      locations: @locations,
+      products: @products
+    } %>
+  </nav>
+
+  <div id="content">
+
+    <%= render partial: 'dashboard_sellers/nav' %>
+
+    <%= render partial: "sellers/edit" %>
+
+    <%= render partial: "locations/new", locals: { 
+      location: @seller.locations.new, 
+      owner_type: "Seller", 
+      owner_id: @seller.id, 
+      url: seller_locations_path(@seller) }
+    %>
+
+    <% unless @locations.empty? %>
+      <% @locations.each do |location| %>
+        <%= render partial: "locations/edit", locals: { 
+          location: location, 
+          owner: @seller, 
+          owner_type: "Seller", 
+          owner_id: @seller.id, 
+          owner_slug: @seller.slug } %>
+      <% end %>
+    <% end %>
+
+    <%= render partial: "products/new", locals: { seller: @seller, product: @new_product } %>
+
+    <% unless @products.empty? %>
+      <% @products.each do |product| %>
+        <%= render partial: "products/edit", locals: { 
+          seller: @seller, 
+          product: product } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% if false %>
 
 <%= render partial: "products/new", locals: { 
   seller: @seller, 
@@ -28,10 +72,14 @@
     owner_slug: @seller.slug } %>
 <% end %>
 
-<nav><%= render 'nav/footer' %></nav>
-<br/>
-<%= current_seller.inspect %>
-<br/>
-<%= @seller.inspect %>
-<br/>
-<%= @seller.products.inspect %>
+<% end %>
+
+<%= render 'nav/footer' %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
