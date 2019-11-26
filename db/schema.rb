@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
@@ -99,7 +99,8 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
 
   create_table "category_translations", force: :cascade do |t|
     t.string "lang"
-    t.text "name"
+    t.string "name"
+    t.text "description"
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -188,7 +189,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
-    t.integer "category", null: false
+    t.uuid "category", null: false
     t.text "description"
     t.text "tags", default: [], array: true
     t.integer "price", null: false

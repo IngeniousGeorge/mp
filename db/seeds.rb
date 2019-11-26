@@ -12,8 +12,13 @@ if Rails.env.development?
   Basket.create(client_id: c2.id)
   Location.create(name: "JC", slug: "jc", recipient: "JC Baroulet", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", delivery: true, billing: true, owner_type: "Client", owner_id: c2.id)
   
-  Category.create([{name: "Food"},{name: "Retail"}, {name: "Other"}])
-  CategoryTranslation.create([{lang: "fr", name: "Alimentation", category_id: 1}, {lang: "fr", name: "Détail", category_id: 2}, {lang: "fr", name: "Autre", category_id: 3}])
+  c1 = Category.create(name: "Food", description: "It's so ymmy!")
+  c2 = Category.create(name: "Retail", description: "It's so useful!")
+  c3 = Category.create(name: "Other", description: "It's everything else!")
+  CategoryTranslation.create([{lang: "fr", name: "Alimentation", description: "C'est tellement bon!", category_id: c1.id}, {lang: "fr", name: "Détail", description: "C'est tellement utile!", category_id: c2.id}, {lang: "fr", name: "Autre", description: "C'est tout le reste", category_id: c3.id}])
+  c1.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
+  c2.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
+  c3.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   
   s1 = Seller.new(name: "Jane Choco", slug: "jane-choco", email: "jane@sel.com", password: "password", password_confirmation: "password", description: "Best chocolates in Berlin", translations:"en|fr", confirmed_at: DateTime.now)
   s1.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
@@ -24,7 +29,7 @@ if Rails.env.development?
 
   Location.create(name: "Office", slug: "office", recipient: "Jane Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Seller", owner_id: s1.id)
 
-  p1 = Product.new(name: "Chocolate", category: 1, description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, translations:"en|fr", seller_id: s1.id)
+  p1 = Product.new(name: "Chocolate", category: c1.id, description: "Amazing chocolate!!!", price: 100000, price_excl_vat: 80000, translations:"en|fr", seller_id: s1.id)
   p1.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p1.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
@@ -35,7 +40,7 @@ if Rails.env.development?
   ProductTag.create(tag: "trop bon", lang: "fr", product_id: p1.id)
   ProductTag.create(tag: "delicieux", lang: "fr", product_id: p1.id)
 
-  p2 = Product.new(name: "Marmite", category: 1, description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, translations:"en|fr", seller_id: s1.id)
+  p2 = Product.new(name: "Marmite", category: c1.id, description: "You won't believe how bad it tastes", price: 2959, price_excl_vat: 2367, translations:"en|fr", seller_id: s1.id)
   p2.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p2.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
@@ -48,7 +53,7 @@ if Rails.env.development?
 
   20.times do |i|
     i += 1
-    pi = Product.new(name: "Food product " + i.to_s, category: 1, description: "Food product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
+    pi = Product.new(name: "Food product " + i.to_s, category: c1.id, description: "Food product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
     pi.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
@@ -63,8 +68,9 @@ if Rails.env.development?
   s2 = Seller.create(name: "Jack Jack", slug: "jack-jack", email: "jack@sel.com", password: "password", password_confirmation: "password", description: "All you possibly need in Berlin", translations:"en|fr", confirmed_at: DateTime.now)
   Location.create(name: "Warehouse", slug: "warehaouse", recipient: "Mr. Jack Nicholson", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", delivery: true, billing: true, owner_type: "Seller", owner_id: s2.id)
   SellerTranslation.create(lang: "fr", description: "Tout ce qu'il vous faut à Berlin", seller_id: s2.id)
+  s2.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
 
-  p3 = Product.new(name: "Shoe horn", category: 2 , description: "You'll never tie your shoes again", price: 1299, price_excl_vat: 1039, translations:"en|fr", seller_id: s2.id)
+  p3 = Product.new(name: "Shoe horn", category: c2.id , description: "You'll never tie your shoes again", price: 1299, price_excl_vat: 1039, translations:"en|fr", seller_id: s2.id)
   p3.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p3.images.attach(io: File.open('/home/ig/Code/mp/spec/files/seller.png'), filename: 'seller.png')
   p3.images.attach(io: File.open('/home/ig/Code/mp/spec/files/seller.png'), filename: 'seller.png')
@@ -75,7 +81,7 @@ if Rails.env.development?
   ProductTag.create(tag: "pratique", lang: "fr", product_id: p3.id)
   ProductTag.create(tag: "pour vos pieds", lang: "fr", product_id: p3.id)
 
-  p4 = Product.new(name: "Rake", category: 2, description: "Autumn's best friend", price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s2.id)
+  p4 = Product.new(name: "Rake", category: c2.id, description: "Autumn's best friend", price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s2.id)
   p4.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
   p4.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
   p4.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
@@ -88,7 +94,7 @@ if Rails.env.development?
 
   20.times do |i|
     i += 1
-    pi = Product.new(name: "Retail product " + i.to_s, category: 2, description: "Retail product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
+    pi = Product.new(name: "Retail product " + i.to_s, category: c2.id, description: "Retail product description: " + lorem, price: 10000, price_excl_vat: 8000, translations:"en|fr", seller_id: s1.id)
     pi.cover.attach(io: File.open('/home/ig/Code/mp/spec/files/cover.png'), filename: 'cover.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')
     pi.images.attach(io: File.open('/home/ig/Code/mp/spec/files/product.png'), filename: 'product.png')

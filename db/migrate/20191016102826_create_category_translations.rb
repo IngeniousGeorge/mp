@@ -2,7 +2,8 @@ class CreateCategoryTranslations < ActiveRecord::Migration[5.2]
   def change
     create_table :category_translations do |t|
       t.string :lang
-      t.text :name
+      t.string :name
+      t.text :description
       t.integer :category_id
 
       t.timestamps

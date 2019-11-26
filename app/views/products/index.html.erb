@@ -2,7 +2,7 @@
 
 <%= render 'nav/catalogue_toolbar', locals: { categories: @categories } %>
 
-<%= render partial: 'layouts/presenter', locals: { presentee: @seller } if params['action'] == "index_seller" %>
+<%= render partial: 'layouts/presenter', locals: { presentee: @presentee } if params['action'] == "index_seller" || params['action'] == "index_category" %>
 
 <% @products.each do |product| %>
   <%= render partial: 'products/card', locals: { product: product, basket_id: @current_basket.id } %>
