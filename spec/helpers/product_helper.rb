@@ -9,6 +9,7 @@ require "helpers/seller_helper" #sign_in_seller
   end
 
   def set_product_edit_context
+    create(:category)
     product = build(:product)
     product_attach_images(product)
     product.save

@@ -4,7 +4,7 @@ class CreateCategoryTranslations < ActiveRecord::Migration[5.2]
       t.string :lang
       t.string :name
       t.text :description
-      t.integer :category_id
+      t.uuid :category_id
 
       t.timestamps
     end

@@ -100,21 +100,22 @@ RSpec.describe "Catalogue path - ", type: :feature do
   context "category - " do
 
     before do
-      @category = create(:category, name: "Retail")
+      @category = create(:category, name: "Retail", description: "something")
+      p @category
       seller = create(:seller)
       create_valid_product({name: "Retail product", category: @category.id}, seller)
-      create_valid_product({name: "Food product", category: (@category.id + 1)}, seller)
+      create_valid_product({name: "Food product", category: "eedd3dcd-f40d-4225-a617-34eb2b734c73"}, seller)
     end
 
     it "can retrieve products of a given category through url" do
-      visit "en/c/retail"
+      visit "en/c/Retail"
 
       expect(page).to have_text("Retail product")
       expect(page).not_to have_text("Food product")
     end
 
     it "can retrieve products of a given category through query" do
-      visit "en/catalogue?category=#{@category.id}"
+      visit "en/catalogue?category=#{@category.name}"
 
       expect(page).to have_text("Retail product")
       expect(page).not_to have_text("Food product")
@@ -125,6 +126,7 @@ RSpec.describe "Catalogue path - ", type: :feature do
 
     before do
       seller = create(:seller, name: "Expected", slug: "expected")
+      seller_attach_images(seller)
       other_seller = create(:seller, name: "Other", email: "other@email.com")
       create_valid_product({name: "Expected product"}, seller)
       create_valid_product({name: "Other product"}, other_seller)

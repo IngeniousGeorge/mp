@@ -12,7 +12,6 @@ class ProductsController < ApplicationController
   def index_category
     @namespace = "c/" + params['id']
     params['category'] = get_category_id
-    p params['category']
     redirect_to root_path(params['locale']), alert: "Category not found." and return if params['category'] == "no match"
     @presentee = Category.find(params['category'])
     get_index_data

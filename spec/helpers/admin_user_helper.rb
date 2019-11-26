@@ -37,7 +37,7 @@ end
   end
 
   def edit_category_with_translation(name: name="Category", lang: lang="fr", translation: translation="Catégorie")
-    within("#edit_category") do
+    within("#main_content") do
       fill_in "category_name", with: name
       fill_in "category[category_translations_attributes][0][lang]", with: lang
       fill_in "category[category_translations_attributes][0][name]", with: translation

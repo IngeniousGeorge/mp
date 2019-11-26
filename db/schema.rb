@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
     t.string "lang"
     t.string "name"
     t.text "description"
-    t.integer "category_id"
+    t.uuid "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
