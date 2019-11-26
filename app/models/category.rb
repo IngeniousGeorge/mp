@@ -2,7 +2,7 @@ class Category < ApplicationRecord
   has_many :category_translations, dependent: :destroy
   accepts_nested_attributes_for :category_translations, allow_destroy: true
 
-  after_save :save_categories_in_hash
+  # after_save :save_categories_in_hash
 
   has_one_attached :cover, dependent: :destroy
 

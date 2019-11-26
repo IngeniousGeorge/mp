@@ -16,6 +16,8 @@ module ProductSql
 
       #check for cat/sel/tag/q and add AND statements
       if params['category']
+        #transform string in uuid if not uuid
+        params['category'] = Category.find_by_name(params['category']).id unless /[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/.match?(params['category'])
         sql[0] += " AND p.category = ?"
         sql << params['category']
       end

@@ -1,0 +1,16 @@
+<%= semantic_form_for [:admin, @seller], builder: ActiveAdmin::FormBuilder do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :slug %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :description %>
+    <%= f.input :translations %>
+    <%= f.input :cover, as: :file %>
+    <% f.has_many :seller_translations, allow_destroy: true do |a| %>
+      <% a.input :lang %>
+      <% a.input :description %>
+    <% end %>
+    <%= f.actions %>
+  <% end %>
+<% end %>

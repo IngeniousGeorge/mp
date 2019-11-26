@@ -1,5 +1,5 @@
 ActiveAdmin.register Seller do
-  permit_params :name, :slug, :email, :password, :description, :translations
+  permit_params :name, :slug, :email, :password, :description, :translations, :cover, seller_translations_attributes: [:id, :lang, :description, :seller_id, :_destroy]
 
   index do
     selectable_column
@@ -15,16 +15,5 @@ ActiveAdmin.register Seller do
 
   filter :name
 
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :slug
-      f.input :email
-      f.input :password
-      f.input :description
-      f.input :translations
-    end
-    f.actions
-  end
-
+  form partial: 'seller'
 end

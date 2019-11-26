@@ -16,6 +16,16 @@ class Product < ApplicationRecord
     "#{name}-#{self.seller.slug}"
   end
 
+  def set_cover_placeholder
+    path = Rails.root.join('app', 'assets', 'images', 'placeholders', 'seller-cover.png').to_s
+    self.cover.attach(io: File.open(path), filename: 'seller-cover.png')
+  end
+
+  def set_images_placeholder
+    path = Rails.root.join('app', 'assets', 'images', 'placeholders', 'seller-image.png').to_s
+    self.images.attach(io: File.open(path), filename: 'seller-image.png')
+  end
+
   def prepare_empty_tags
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
   end

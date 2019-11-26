@@ -24,7 +24,7 @@ RSpec.describe "ActiveAdmin - ", type: :feature do
 
     it "can edit seller from dashboard" do
       visit edit_admin_seller_path("en", @seller.slug)
-      within("#edit_seller") do
+      within("#main_content") do
         fill_in_seller(name: "Updated Seller", button_text: "Update Seller")
       end
 

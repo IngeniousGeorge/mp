@@ -1,0 +1,11 @@
+<%= semantic_form_for [:admin, @category], builder: ActiveAdmin::FormBuilder do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :cover, as: :file %>
+    <% f.has_many :category_translations, allow_destroy: true do |a| %>
+      <% a.input :lang %>
+      <% a.input :name %>
+    <% end %>
+    <%= f.actions %>
+  <% end %>
+<% end %>
