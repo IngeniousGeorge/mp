@@ -3,3 +3,13 @@ en:
   name: "Name"
   delete: "Delete"
   create: "Create"
+  client_dashboard: "Client dashboard"
+  seller_dashboard: "Seller dashboard"
+  account: "Account"
+  new_address: "New address"
+  addresses: "Addresses"
+  sales: "Sales"
+  new_product: "New product"
+  products: "Products"
+  search_products: "Search products"
+

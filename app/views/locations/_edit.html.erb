@@ -1,6 +1,6 @@
 <div id="<%= location.name %>-col" class="collapse" data-parent="#content">
   <% if location.slug %>
-    <%= form_with model: location, url: polymorphic_path([owner, location]), id: location.slug, html: { class: "form-dashboard d-flex flex-column align-items-center bg-light rounded-lg" } do |f| %>
+    <%= form_with model: location, url: polymorphic_path([owner, location]), id: location.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |f| %>
     <div class="form-group form-dashboard-field">
       <%= f.label t(:name), "Name" %>
       <%= f.text_field :name, class: "form-control" %>
