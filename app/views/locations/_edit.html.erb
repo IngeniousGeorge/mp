@@ -2,51 +2,51 @@
   <% if location.slug %>
     <%= form_with model: location, url: polymorphic_path([owner, location]), id: location.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |f| %>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:name), "Name" %>
+      <%= f.label :name, t(:name), class: "label-dashboard" %>
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:recipient), "recipient" %>
+      <%= f.label :recipient, t(:recipient), class: "label-dashboard" %>
       <%= f.text_field :recipient, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:street), "Street" %>
+      <%= f.label :street, t(:street), class: "label-dashboard" %>
       <%= f.text_field :street, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:city), "City" %>
+      <%= f.label :city, t(:city), class: "label-dashboard" %>
       <%= f.text_field :city, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:state), "State" %>
+      <%= f.label :state, t(:state), class: "label-dashboard" %>
       <%= f.text_field :state, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:country), "Country" %>
+      <%= f.label :country, t(:country), class: "label-dashboard" %>
       <%= f.text_field :country, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:postal_code), "Postal Code" %>
+      <%= f.label :postal_code, t(:postal_code), class: "label-dashboard" %>
       <%= f.text_field :postal_code, class: "form-control" %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:delivery), "Delivery" %>
+      <%= f.label :delivery, t(:delivery), class: "label-dashboard" %>
       <%= f.check_box :delivery %>
     </div>
     <div class="form-group form-dashboard-field">
-      <%= f.label t(:billing), "Billing" %>
+      <%= f.label :billing, t(:billing), class: "label-dashboard" %>
       <%= f.check_box :billing %>
     </div>
       <%= f.hidden_field :owner_type, value: owner_type %>
       <%= f.hidden_field :owner_id, value: owner_id %>
-    <div class="action">
+    <div class="action submit-dahsboard">
       <%= f.submit t(:edit), class: "btn btn-dark" %>
     </div>
       <%= form_with model: location, url: polymorphic_path([owner, location]), method: :delete do |f| %>
         <%= f.hidden_field :owner_type, value: owner_type %>
         <%= f.hidden_field :owner_id, value: owner_id %>
-        <div class="action" style="margin-top:1rem;">
-          <%= f.submit t(:delete), class: "btn btn-dark" %>
+        <div class="action submit-dahsboard" style="margin-top:1rem;">
+          <%= f.submit t(:delete), class: "btn btn-danger" %>
         </div>
       <% end %>
     <% end %>

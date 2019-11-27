@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
     t.string "name", null: false
     t.string "slug", null: false
     t.text "description"
-    t.string "translations", default: "en"
+    t.string "translations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_sellers_on_confirmation_token", unique: true

@@ -5,6 +5,7 @@ class DashboardSellersController < ApplicationController
 
   def show
     @seller = current_seller
+    @lang = @seller.available_translations
     @products = @seller.products
     @locations = @seller.locations
     @new_product = @seller.products.new
@@ -18,6 +19,10 @@ class DashboardSellersController < ApplicationController
     if params[:id] != current_seller.slug
       redirect_to root_path, notice: "Invalid URL" 
     end
+  end
+
+  def method_name
+    
   end
   
   def current_ability

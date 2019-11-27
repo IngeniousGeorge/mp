@@ -17,6 +17,14 @@ class Seller < ApplicationRecord
     Category.for_seller(self.id)
   end
 
+  def available_translations
+    result = {}
+    I18n.available_locales.each do |lang|
+      result[lang] = self.translations.include? lang.to_s
+    end
+    return result
+  end
+
   def set_cover_placeholder
     path = Rails.root.join('app', 'assets', 'images', 'placeholders', 'seller-cover.png').to_s
     self.cover.attach(io: File.open(path), filename: 'seller-cover.png')

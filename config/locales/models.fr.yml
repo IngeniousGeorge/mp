@@ -1,3 +1,10 @@
 ---
 fr:
   recipient: "Destinataire"
+  street: "Rue"
+  city: "Ville"
+  state: "Region"
+  country: "Pays"
+  postal_code: "Code postal"
+  delivery: "Livraison"
+  billing: "Facturation"

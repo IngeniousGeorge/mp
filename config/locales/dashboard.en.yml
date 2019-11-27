@@ -3,6 +3,7 @@ en:
   name: "Name"
   delete: "Delete"
   create: "Create"
+  submit: "Submit"
   client_dashboard: "Client dashboard"
   seller_dashboard: "Seller dashboard"
   account: "Account"
@@ -12,4 +13,8 @@ en:
   new_product: "New product"
   products: "Products"
   search_products: "Search products"
-
+  available_en: "Make available in English"
+  available: "Make available in "
+  french: "French"
+  description_en: "Description English"
+  description: "Description"

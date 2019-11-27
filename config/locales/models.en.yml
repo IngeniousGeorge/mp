@@ -1,3 +1,10 @@
 ---
 en:
   recipient: "Destinataire"
+  street: "Street"
+  city: "City"
+  state: "State"
+  country: "Country"
+  postal_code: "Postal code"
+  delivery: "Delivery"
+  billing: "Billing"

@@ -36,7 +36,7 @@ class DeviseCreateSellers < ActiveRecord::Migration[5.2]
       t.string :slug, null: false
       t.text :description
       # t.text :categories, default: [], array: true
-      t.string :translations, default: "en"
+      t.string :translations
 
       t.timestamps null: false
     end
