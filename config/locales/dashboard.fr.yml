@@ -1,2 +1,5 @@
 ---
 fr:
+  name: "Nom"
+  delete: "Supprimer"
+  create: "Créer"

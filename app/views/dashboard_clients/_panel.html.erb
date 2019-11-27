@@ -1,5 +1,5 @@
 <div class="list-group">
-  <h5 class="dashboard-header"><%= t(:seller_dashboard) %></h5>
+  <h5 class="dashboard-header"><%= t(:client_dashboard) %></h5>
 
   <button class="list-group-item list-group-item-action rounded" data-toggle="collapse" data-target="#account" role="button" aria-expanded="false" aria-controls="account"><%= t(:account) %></button>
 
@@ -15,17 +15,5 @@
     <% end %>
   </ul>
 
-  <button class="list-group-item list-group-item-action rounded" data-toggle="collapse" data-target="#sales" role="button" aria-expanded="false" aria-controls="sales"><%= t(:sales) %></button>
-
-  <button class="list-group-item list-group-item-action rounded" data-toggle="collapse" data-target="#newProduct" role="button" aria-expanded="false" aria-controls="newProduct"><%= t(:new_product) %></button>
-
-  <a class="list-group-item list-group-item-action rounded dropdown-toggle" href="#productList" data-toggle="collapse" aria-expanded="false"><%= t(:products) %></a>
-
-  <ul class="collapse list-unstyled" id="productList">
-    <% products.each do |product| %>
-      <li>
-        <a class="list-group-item list-group-item-dark" href="#" data-toggle="collapse" data-target="#<%= product.slug %>-col" aria-expanded="false" aria-controls="<%= product.slug %>-col"><%= product.name %></a>
-      </li>
-    <% end %>
-  </ul>
+  <button class="list-group-item list-group-item-action rounded" data-toggle="collapse" data-target="#orders" role="button" aria-expanded="false" aria-controls="orders"><%= t(:orders) %></button>
 </div>

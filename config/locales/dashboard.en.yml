@@ -1,2 +1,5 @@
 ---
 en:
+  name: "Name"
+  delete: "Delete"
+  create: "Create"

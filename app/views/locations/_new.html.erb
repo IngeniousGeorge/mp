@@ -1,27 +1,46 @@
 <div id="newAddress" class="collapse" data-parent="#content">
-  <span>New Address</span>
 
-  <%= form_with model: location, url: url, id: "new_address" do |f| %>
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %>
-    <%= f.label :recipient, "recipient" %>
-    <%= f.text_field :recipient %>
-    <%= f.label :street, "Street" %>
-    <%= f.text_field :street %>
-    <%= f.label :city, "City" %>
-    <%= f.text_field :city %>
-    <%= f.label :state, "State" %>
-    <%= f.text_field :state %>
-    <%= f.label :country, "Country" %>
-    <%= f.text_field :country %>
-    <%= f.label :postal_code, "Postal Code" %>
-    <%= f.text_field :postal_code %>
-    <%= f.label :delivery, "Delivery" %>
-    <%= f.check_box :delivery %>
-    <%= f.label :billing, "Billing" %>
-    <%= f.check_box :billing %>
+  <%= form_with model: location, url: url, id: "new_address", html: { class: "form-dashboard d-flex flex-column align-items-center bg-light rounded-lg" } do |f| %>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:name), "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:recipient), "recipient" %>
+      <%= f.text_field :recipient, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:street), "Street" %>
+      <%= f.text_field :street, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:city), "City" %>
+      <%= f.text_field :city, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:state), "State" %>
+      <%= f.text_field :state, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:country), "Country" %>
+      <%= f.text_field :country, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:postal_code), "Postal Code" %>
+      <%= f.text_field :postal_code, class: "form-control" %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:delivery), "Delivery" %>
+      <%= f.check_box :delivery %>
+    </div>
+    <div class="form-group form-dashboard-field">
+      <%= f.label t(:billing), "Billing" %>
+      <%= f.check_box :billing %>
+    </div>
     <%= f.hidden_field :owner_type, value: owner_type %>
     <%= f.hidden_field :owner_id, value: owner_id %>
-    <%= f.submit "Create" %>
+    <div class="action">
+      <%= f.submit t(:create), class: "btn btn-dark" %>
+    </div>
   <% end %>
 </div>

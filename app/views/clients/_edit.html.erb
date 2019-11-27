@@ -1,11 +1,18 @@
-<%= form_with model: @client, url: client_path(@client.slug), id: "update_client" do |f| %>
+<div id="account" class="collapse show" data-parent="#content">
 
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %><br/>
+  <%= form_with model: @client, url: client_path(@client.slug), id: "update_client", html: { class: "form-devise d-flex flex-column align-items-center bg-light rounded-lg" } do |f| %>
 
-    <%= f.label :email, "Email" %>
-    <%= f.text_field :email %><br/>
+    <div class="form-group">
+      <%= f.label t(:name), "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
 
-    <%= f.submit "Edit" %>
+    <div class="form-group">
+      <%= f.label t(:email), "Email" %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
 
-<% end %>
+      <%= f.submit t(:edit), class: "btn btn-dark" %>
+
+  <% end %>
+</div>

@@ -1,19 +1,45 @@
 <%= render 'nav/top' %>
 
-<%= render partial: "clients/edit" %>
+<div class="wrapper">
 
-<%= render partial: "baskets/edit" %>
+  <nav id="sidebar">
+    <%= render partial: 'dashboard_clients/panel', locals: {
+      locations: @locations
+    } %>
+  </nav>
 
-<%= render partial: "locations/new", locals: { location: @client.locations.new, owner_type: "Client", owner_id: @client.id, url: client_locations_path(@client) } %>
+  <div id="content">
 
-<% unless @locations.empty? %>
-  <%= render partial: "locations/edit", locals: { locations: @client.locations, owner: @client, owner_type: "Client", owner_id: @client.id, owner_slug: @client.slug } %>
-<% end %>
+    <%= render partial: 'dashboard_clients/nav' %>
+
+    <%= render partial: "clients/edit" %>
+
+    <%= render partial: "locations/new", locals: { 
+      location: @client.locations.new, 
+      owner_type: "Client", 
+      owner_id: @client.id, 
+      url: client_locations_path(@client) }
+    %>
+
+    <% unless @locations.empty? %>
+      <% @locations.each do |location| %>
+        <%= render partial: "locations/edit", locals: { 
+          location: location, 
+          owner: @client, 
+          owner_type: "Client", 
+          owner_id: @client.id, 
+          owner_slug: @client.slug } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 <%= render 'nav/footer' %>
 
-<%= current_client.inspect %>
-<br/>
-<%= @client.locations.inspect %>
-<br/>
-<%= @client.basket.inspect %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
