@@ -12,4 +12,4 @@ RSpec.describe "Client -", type: :feature do
     expect(Client.all)to eq(1)
     # expect(current_path).not_to eq("/en/clients/sign_in")
   end
-  
+end
