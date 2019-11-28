@@ -109,7 +109,7 @@ RSpec.describe "Catalogue path - ", type: :feature do
     end
 
     it "can retrieve products of a given category through url" do
-      p Category.all
+      Categorize.define_all_as_hash
       visit "en/c/Retail"
 
       expect(page).to have_text("Retail product")

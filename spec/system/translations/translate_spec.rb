@@ -10,6 +10,7 @@ RSpec.describe "Object translate - ", type: :feature do
       before do
         product = create_valid_product
         add_translation_to_product(product: product, description: "Description en français")
+        seller_attach_images(product.seller)
         visit product_path("fr", product)
       end
 
@@ -22,6 +23,7 @@ RSpec.describe "Object translate - ", type: :feature do
 
       before do
         product = create_valid_product
+        seller_attach_images(product.seller)
         visit product_path("fr", product)
       end
 

@@ -11,6 +11,7 @@ RSpec.describe "Object translation in forms - ", type: :feature do
 
         before do
           set_create_context
+          click_button "New product"
           fill_in_create_form
           attach_required_images
           fill_in_translation_form
@@ -35,6 +36,7 @@ RSpec.describe "Object translation in forms - ", type: :feature do
 
         before do
           set_create_context
+          click_button "New product"
           fill_in_create_form
           fill_in_translation_form_en_only
           attach_required_images
@@ -65,11 +67,11 @@ RSpec.describe "Object translation in forms - ", type: :feature do
           edit_translation
         end
         
-        it "renders the dashboard with an alert success" do
+        it "renders the dashboard with an alert success", js: true do
           expect(page).to have_selector(".alert-success")
         end
         
-        it "updates the edited translation object on edit" do
+        it "updates the edited translation object on edit", js: true do
           translation = last_edited_translation
 
           expect(translation.description).to eq("edited description en français")

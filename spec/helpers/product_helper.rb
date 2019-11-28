@@ -5,7 +5,7 @@ require "helpers/seller_helper" #sign_in_seller
     create(:category)
     seller = create(:seller)
     sign_in_seller
-    visit seller_dashboard_path("en", seller.slug)
+    # visit seller_dashboard_path("en", seller.slug)
   end
 
   def set_product_edit_context
@@ -15,7 +15,7 @@ require "helpers/seller_helper" #sign_in_seller
     product.save
     add_translation_to_product(product: product, description: "description en français")
     sign_in_seller
-    visit seller_dashboard_path("en", product.seller.slug)
+    # visit seller_dashboard_path("en", product.seller.slug)
   end
 
   def return_product_with_purged_image
@@ -50,7 +50,7 @@ require "helpers/seller_helper" #sign_in_seller
 
 # form methods
   def fill_in_create_form
-    click_button "New product"
+    # click_button "New product"
     fill_in "product_name", with: "Product Name"
     fill_in "product_description", with: "Product description"
     fill_in "product_price", with: 1000
@@ -84,6 +84,8 @@ require "helpers/seller_helper" #sign_in_seller
     end
 
     def edit_translation
+      click_link "Products"
+      click_link "Product Name"
       within("#product-name-seller-name") do
         find("#product_name_seller_name_fr").set(true)
         fill_in "product_product_translations_attributes_0_description", with: "edited description en français"

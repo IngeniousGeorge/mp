@@ -3,8 +3,10 @@ require "helpers/product_helper"
 
 RSpec.describe "Product - ", type: :feature do
 
-  it "gets an associated tag on create" do
+  it "gets an associated tag on create", js: true do
     set_create_context
+    click_button "New product"
+    find("#new_product_en").set(true)
     create_with_two_tags
 
     expect(page).to have_text("Product was successfully created")

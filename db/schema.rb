@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "category_translations", force: :cascade do |t|
+  create_table "category_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "lang"
     t.string "name"
     t.text "description"

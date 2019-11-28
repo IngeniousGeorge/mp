@@ -12,6 +12,7 @@ RSpec.describe "Product - ", type: :feature do
   end
 
   it "displays the product show page without images" do
+    seller_attach_images(@product.seller)
     visit product_path("en", @product.slug)
 
     expect(page).to have_text(@product.name)
