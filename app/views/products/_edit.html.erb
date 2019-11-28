@@ -1,82 +1,185 @@
 <div id="<%= product.slug %>-col" class="collapse" data-parent="#content">
-  <span>Edit Products</span>
 
   <% if product.slug && product.prepare_empty_tags %>
-    <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug do |f| %>
+    <% product_html_id = product.slug.gsub(/-/, "_") %>
+    <% display_en = @prod_lang[product.slug][:en] ? "display:inline-flex;" : "display:none;" %>
+    <% display_fr = @prod_lang[product.slug][:fr] ? "display:inline-flex;" : "display:none;" %>
+    <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |f| %>
 
-      <%= f.label :category, "Category" %>
-      <%= f.select(:category, options_for_select(Category.all_as_hash[params['locale']])) %><br/> 
+      <div class="form-group form-dashboard-field">
+        <%= f.label :category, t(:category), class: "label-dashboard" %>
+        <%= f.select(:category, options_for_select(Category.all_as_hash[params['locale']]), {}, { class: "form-control input-dashboard" }) %>
+      </div>
     
-      <%= f.label :name, "Name" %>
-      <%= f.text_field :name %><br/>
+      <div class="form-group form-dashboard-field">
+        <%= f.label :name, t(:name), class: "label-dashboard" %>
+        <%= f.text_field :name, class: "form-control input-dashboard" %>
+      </div>
 
-      <%= check_box_tag(:en) %>
-      <%= label_tag("Make available in English") %><br/>
+      <div class="form-group form-dashboard-field">
+        <%= label_tag :en, t(:available_en), class: "label-dashboard" %>
+        <%= check_box_tag product_html_id + "_en", :en, @prod_lang[product.slug][:en], class: "check-dashboard" %>
+      </div>
 
-      <%= f.label :description, "Description" %>
-      <%= f.text_field :description %><br/>
+      <div class="form-group form-dashboard-field">
+        <%= f.label :description, t(:description_en), class: "label-dashboard" %>
+        <%= f.text_field :description, class: "form-control input-dashboard" %>
+      </div>
 
       <% I18n.non_default_locales_hash.each do |sym, string| %>
-        <%= check_box_tag(sym) %>
-        <%= label_tag("Make available in " + string) %><br/>
+        <div class="form-group form-dashboard-field">
+          <%= label_tag sym, t(:available) + t(string), class: "label-dashboard" %>
+          <%= check_box_tag product_html_id + "_" + sym.to_s, sym, @prod_lang[product.slug][sym], class: "check-dashboard" %>
+        </div>
 
         <%= f.fields_for :product_translations do |trans| %>
-          <%= trans.label "Description" %>
-          <%= trans.text_field :description %>
-          <%= trans.hidden_field :lang, value: sym %>
-        <% end %><br/>
+          <div class="form-group form-dashboard-field">
+            <%= trans.label :description, t(:description) + " " + t(string), class: "label-dashboard" %>
+            <%= trans.text_field :description, class: "form-control input-dashboard" %>
+            <%= trans.hidden_field :lang, value: sym %>
+          </div>
+        <% end %>
       <% end %>
 
-      <%= f.text_field :translations %>#hidden + javascript<br/>
+      <%= f.hidden_field :translations, class: "#{product_html_id}_translations" %>
 
-      <%= f.label :price, "Price" %>
-      <%= f.text_field :price %><br/>
+      <div class="form-group form-dashboard-field">
+        <%= f.label :price, t(:price), class: "label-dashboard" %>
+        <%= f.text_field :price, class: "form-control input-dashboard" %>
+      </div>
 
-      <%= f.label :price_excl_vat, "Price excl vat" %>
-      <%= f.text_field :price_excl_vat %><br/>
+      <div class="form-group form-dashboard-field">
+        <%= f.label :price_excl_vat, t(:price_excl_vat), class: "label-dashboard" %>
+        <%= f.text_field :price_excl_vat, class: "form-control input-dashboard" %>
+      </div>
 
-      <%= f.fields_for :product_tags do |tf| %>
-        <%= tf.label :tag %>
-        <%= tf.text_field :tag %>
-        <%= tf.label :lang %>
-        <%= tf.text_field :lang %>
-        <%= tf.label "Remove:" %>
-        <%= tf.check_box :_destroy %><br/>
+      <div id="<%= product_html_id %>_tags_english" style="<%= display_en %>">
+        <div class="form-group d-flex flex-column form-dashboard-field">
+          <%= f.fields_for :product_tags do |tags| %>
+            <div class="d-flex">
+              <%= tags.label :tag, t(:tag) + " " + t(:english), class: "label-dashboard" %>
+              <%= tags.text_field :tag, class: "form-control input-dashboard tag-dashboard" %>
+              <%= tags.hidden_field :lang, value: "en" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    
+      <% I18n.non_default_locales_hash.each do |sym, string| %>
+        <div id="<%= product_html_id %>_tags_<%= string %>" style="<%= display_fr %>">
+          <div class="form-group d-flex flex-column form-dashboard-field">
+            <%= f.fields_for :product_tags do |tags| %>
+              <div class="d-flex">
+                <%= tags.label :tag, t(:tag) + " " + t(string), class: "label-dashboard" %>
+                <%= tags.text_field :tag, class: "form-control input-dashboard tag-dashboard" %>
+                <%= tags.hidden_field :lang, value: sym.to_s %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <% end %>
 
       <%= f.hidden_field :seller_id, value: @seller.id %>
 
-      <%= f.submit "Edit" %>
-
+      <div class="action submit-dahsboard">
+        <%= f.submit "Edit" %>
+      </div>
     <% end %>
 
     <% if product.cover.attached? %>
-      <%= image_tag(url_for(product.cover), size: size_small) %>
-      <%= form_with model: product, url: update_cover_seller_product_path(@seller.slug, product.slug), id: "product_cover_" + product.slug do |af| %>
-        <%= af.label :cover %>
-        <%= af.file_field :cover %>
-        <%= af.submit "Submit"%>
+      <%= form_with model: product, url: update_cover_seller_product_path(@seller.slug, product.slug), id: "product_cover_" + product.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |af| %>
+          
+        <div class="form-group form-dashboard-field file-dashboard">
+          <%= af.label :cover, t(:cover), class: "label-dashboard" %>
+        </div>
+
+        <div class="image-dashboard">
+          <%= image_tag(url_for(product.cover), size: "700x300") %>
+        </div>
+
+        <div class="form-group form-dashboard-field file-dashboard">
+          <%= af.label :cover, t(:replace_with), class: "label-dashboard" %>
+          <%= af.file_field :cover %>
+        </div>
+
+        <div class="action submit-dahsboard">
+          <%= af.submit t(:submit), class: "btn btn-dark" %>
+        </div>
       <% end %>
     <% end %>
-
-    <%= form_with model: product, url: attach_image_seller_product_path(@seller.slug, product.slug), id: "new_image_" + product.slug do |af| %>
-          <%= af.label :image %>
-          <%= af.file_field :image, multiple: true %>
-          <%= af.submit "Submit"%>
-        <% end %>
 
     <% if product.images.attached? %>
-      <% product.images.each do |i| %>
-        <%= image_tag(i, size: size_small) %>
-        <%= form_with model: product, url: delete_image_seller_product_path(@seller.slug, product.slug), id: i.id, class: "del_img" do |af| %>
-          <%= af.label :image %>
-          <%= af.hidden_field :image_id, value: i.id %>
-          <%= af.submit "Delete"%>
-        <% end %> 
-      <% end %>
+      <div class="form-dashboard d-flex flex-row align-items-start bg-light rounded-lg ">
+        <% product.images.each do |i| %>
+          <%= form_with model: product, url: delete_image_seller_product_path(@seller.slug, product.slug), id: i.id, class: "del_img" do |af| %>
+
+            <div class="form-group form-dashboard-field file-dashboard">
+              <%= af.label :image, t(:image), class: "label-dashboard" %>
+            </div>
+
+            <div class="image-dashboard">
+              <%= image_tag i, size: "300x200" %>
+            </div>
+
+            <%= af.hidden_field :image_id, value: i.id %>
+
+            <div class="action submit-dahsboard">
+              <%= af.submit t(:delete), class: "btn btn-danger" %>
+            </div>
+
+          <% end %> 
+        <% end %>
+      </div>
     <% end %>
 
-    <%= link_to 'Remove product', seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }%>
+    <%= form_with model: product, url: attach_image_seller_product_path(@seller.slug, product.slug), id: "new_image_" + product.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |af| %>
+
+      <div class="form-group form-dashboard-field file-dashboard">
+        <%= af.label :image, t(:add_image), class: "label-dashboard" %>
+      </div>
+
+      <div class="form-group form-dashboard-field file-dashboard">
+        <%= af.file_field :image, multiple: true %>
+      </div>
+
+      <div class="action submit-dahsboard">
+        <%= af.submit t(:submit), class: "btn btn-dark" %>
+      </div>
+    <% end %>
+
+    <div class="form-dashboard align-items-start bg-light rounded-lg">
+      <div class="action submit-dahsboard">
+        <%= link_to t(:remove_product), seller_product_path(@seller.slug, product.slug), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      </div>
+    </div>
 
   <% end %>
 </div>
+
+<script type='text/javascript'>
+  var <%= product_html_id %>_en = document.getElementById('<%= product_html_id %>_en'), 
+    <%= product_html_id %>_fr = document.getElementById('<%= product_html_id %>_fr'),
+    <%= product_html_id %>_hidden = document.getElementsByClassName('<%= product_html_id %>_translations'),
+    <%= product_html_id %>_tags_en = document.getElementById('<%= product_html_id %>_tags_english'),
+    <%= product_html_id %>_tags_fr = document.getElementById('<%= product_html_id %>_tags_french');
+
+  <%= product_html_id %>_en.addEventListener('change', function() {
+    if(this.checked) {
+        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|en"
+        <%= product_html_id %>_tags_en.style.display = 'inline-flex'
+    } else {
+        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("en", "")
+        <%= product_html_id %>_tags_en.style.display = 'none'
+    }
+  }, false);
+
+  <%= product_html_id %>_fr.addEventListener('change', function() {
+    if(this.checked) {
+        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|fr"
+        <%= product_html_id %>_tags_fr.style.display = 'inline-flex'
+    } else {
+        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("fr", "")
+        <%= product_html_id %>_tags_fr.style.display = 'none'
+    }
+  }, false);
+</script>

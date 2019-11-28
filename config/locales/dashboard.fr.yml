@@ -16,5 +16,10 @@ fr:
   available_en: "Disponible en anglais"
   available: "Disponible en "
   french: "français"
+  english: "anglais"
   description_en: "Description anglais"
   description: "Description"
+  replace_with: "Replacer par:"
+  add_image: "Ajouter des images"
+  remove_product: "Supprimer le produit"
+  

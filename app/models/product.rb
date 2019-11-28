@@ -26,6 +26,14 @@ class Product < ApplicationRecord
     self.images.attach(io: File.open(path), filename: 'seller-image.png')
   end
 
+  def available_translations
+    result = {}
+    I18n.available_locales.each do |lang|
+      result[lang] = self.translations.include? lang.to_s
+    end
+    return result
+  end
+
   def prepare_empty_tags
     (ProductTag.max_num_of_tags_per_product - self.product_tags.count).times { self.product_tags.build }
   end

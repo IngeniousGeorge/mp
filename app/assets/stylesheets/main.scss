@@ -189,28 +189,29 @@
 }
 
 #sidebar {
-min-width: 200px;
-max-width: 250px;
+  min-width: 200px;
+  max-width: 250px;
+  // margin-left: 1rem;
 }
 
 #sidebar.active {
-margin-left: -250px;
+  margin-left: -250px;
 }
 
 #content {
-width: 100%;
-min-height: 70vh;
+  width: 100%;
+  min-height: 70vh;
 }
 
 .dashboard-header {
-padding-left: 16px;
-background-color: $light;
-min-height: 4rem;
+  padding-left: 16px;
+  background-color: $light;
+  min-height: 4rem;
 }
 
 .dashboard-nav {
-width: 100%;
-min-height: 4rem;
+  width: 100%;
+  min-height: 4rem;
 }
 
 .form-dashboard {
@@ -225,6 +226,10 @@ min-height: 4rem;
   padding-bottom: 2rem;
 }
 
+.tag-dashboard {
+  max-width: 250px;
+}
+
 .form-dashboard-field {
   width: 80%;
   margin-top: 0.2rem;
@@ -233,7 +238,7 @@ min-height: 4rem;
 }
 
 .label-dashboard {
-  min-width: 100px;
+  min-width: 130px;
   color: $dark;
 }
 
@@ -253,10 +258,11 @@ min-height: 4rem;
 
 .image-dashboard {
   margin-left: 2rem;
+  margin-bottom: 1rem;
 }
 
 .file-dashboard {
-
+  margin-left: 2rem;
 }
 
 .product-full {

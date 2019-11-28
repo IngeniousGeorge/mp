@@ -7,6 +7,8 @@ class DashboardSellersController < ApplicationController
     @seller = current_seller
     @lang = @seller.available_translations
     @products = @seller.products
+    @prod_lang = {}
+    @products.each { |product| @prod_lang[product.slug] = product.available_translations }
     @locations = @seller.locations
     @new_product = @seller.products.new
     @new_product.prepare_empty_tags
@@ -19,10 +21,6 @@ class DashboardSellersController < ApplicationController
     if params[:id] != current_seller.slug
       redirect_to root_path, notice: "Invalid URL" 
     end
-  end
-
-  def method_name
-    
   end
   
   def current_ability
