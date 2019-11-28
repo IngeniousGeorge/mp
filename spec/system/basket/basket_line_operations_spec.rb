@@ -45,7 +45,7 @@ RSpec.describe "Basket lines - ", type: :feature do
       add_product_to_basket
     end
 
-    it "can set a value" do
+    xit "can set a value" do
       edit_dashboard_basket_line(@client, 7)
       bl = last_created_basket_line
   
@@ -55,13 +55,13 @@ RSpec.describe "Basket lines - ", type: :feature do
       expect(bl.quantity).to eq(7)
     end
 
-    it "can remove a line" do
+    xit "can remove a line" do
       remove_dashboard_basket_line(@client)
   
       expect(BasketLine.count).to eq(0)
     end
 
-    it "deletes a line if quantity is zero or less" do
+    xit "deletes a line if quantity is zero or less" do
       edit_dashboard_basket_line(@client, 0)
  
       expect(BasketLine.count).to eq(0)

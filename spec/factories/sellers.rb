@@ -4,5 +4,6 @@ FactoryBot.define do
     email { "seller@email.com" }
     password { "password" }
     description { "Seller description" }
+    translations { "en|fr" }
   end
 end

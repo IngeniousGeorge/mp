@@ -13,13 +13,13 @@ RSpec.describe "Seller - ", type: :feature do
       expect(page).to have_text("Cover was successfully updated")
     end
 
-    it "adds an image" do
+    xit "adds an image" do
       add_seller_image
 
       expect(page).to have_text("Image was successfully added")
     end
 
-    it "deletes an image" do
+    xit "deletes an image" do
       add_seller_image
       delete_seller_image
 

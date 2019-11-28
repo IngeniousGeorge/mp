@@ -10,6 +10,7 @@ fr:
   new_address: "Nouvelle adresse"
   addresses: "Adresses"
   sales: "Ventes"
+  orders: "Commandes"
   new_product: "Nouveau produit"
   products: "Produits"
   search_products: "Rechecher un produit"

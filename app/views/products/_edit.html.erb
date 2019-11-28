@@ -1,9 +1,12 @@
-<div id="<%= product.slug %>-col" class="collapse" data-parent="#content">
+<% if product.slug && product.prepare_empty_tags %>
 
-  <% if product.slug && product.prepare_empty_tags %>
+  <div id="<%= product.slug %>-col" class="collapse" data-parent="#content">
+
+  
     <% product_html_id = product.slug.gsub(/-/, "_") %>
     <% display_en = @prod_lang[product.slug][:en] ? "display:inline-flex;" : "display:none;" %>
     <% display_fr = @prod_lang[product.slug][:fr] ? "display:inline-flex;" : "display:none;" %>
+
     <%= form_with model: product, url: seller_product_path(@seller.slug, product.slug), id: product.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |f| %>
 
       <div class="form-group form-dashboard-field">
@@ -153,33 +156,34 @@
       </div>
     </div>
 
-  <% end %>
-</div>
+  </div>
 
-<script type='text/javascript'>
-  var <%= product_html_id %>_en = document.getElementById('<%= product_html_id %>_en'), 
-    <%= product_html_id %>_fr = document.getElementById('<%= product_html_id %>_fr'),
-    <%= product_html_id %>_hidden = document.getElementsByClassName('<%= product_html_id %>_translations'),
-    <%= product_html_id %>_tags_en = document.getElementById('<%= product_html_id %>_tags_english'),
-    <%= product_html_id %>_tags_fr = document.getElementById('<%= product_html_id %>_tags_french');
+  <script type='text/javascript'>
+    var <%= product_html_id %>_en = document.getElementById('<%= product_html_id %>_en'), 
+      <%= product_html_id %>_fr = document.getElementById('<%= product_html_id %>_fr'),
+      <%= product_html_id %>_hidden = document.getElementsByClassName('<%= product_html_id %>_translations'),
+      <%= product_html_id %>_tags_en = document.getElementById('<%= product_html_id %>_tags_english'),
+      <%= product_html_id %>_tags_fr = document.getElementById('<%= product_html_id %>_tags_french');
 
-  <%= product_html_id %>_en.addEventListener('change', function() {
-    if(this.checked) {
-        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|en"
-        <%= product_html_id %>_tags_en.style.display = 'inline-flex'
-    } else {
-        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("en", "")
-        <%= product_html_id %>_tags_en.style.display = 'none'
-    }
-  }, false);
+    <%= product_html_id %>_en.addEventListener('change', function() {
+      if(this.checked) {
+          <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|en"
+          <%= product_html_id %>_tags_en.style.display = 'inline-flex'
+      } else {
+          <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("en", "")
+          <%= product_html_id %>_tags_en.style.display = 'none'
+      }
+    }, false);
 
-  <%= product_html_id %>_fr.addEventListener('change', function() {
-    if(this.checked) {
-        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|fr"
-        <%= product_html_id %>_tags_fr.style.display = 'inline-flex'
-    } else {
-        <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("fr", "")
-        <%= product_html_id %>_tags_fr.style.display = 'none'
-    }
-  }, false);
-</script>
+    <%= product_html_id %>_fr.addEventListener('change', function() {
+      if(this.checked) {
+          <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value += "|fr"
+          <%= product_html_id %>_tags_fr.style.display = 'inline-flex'
+      } else {
+          <%= product_html_id %>_hidden[0].value = <%= product_html_id %>_hidden[0].value.replace("fr", "")
+          <%= product_html_id %>_tags_fr.style.display = 'none'
+      }
+    }, false);
+  </script>
+<% end %>
+

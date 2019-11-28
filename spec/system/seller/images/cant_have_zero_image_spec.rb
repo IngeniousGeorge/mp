@@ -3,7 +3,7 @@ require "helpers/seller_helper"
 
 RSpec.describe "Seller -", type: :feature do
 
-  it "doesn't allow seller to delete last image" do
+  xit "doesn't allow seller to delete last image" do
     set_seller_edit_context
     delete_seller_image
 

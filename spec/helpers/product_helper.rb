@@ -50,6 +50,7 @@ require "helpers/seller_helper" #sign_in_seller
 
 # form methods
   def fill_in_create_form
+    click_button "New product"
     fill_in "product_name", with: "Product Name"
     fill_in "product_description", with: "Product description"
     fill_in "product_price", with: 1000
@@ -61,6 +62,7 @@ require "helpers/seller_helper" #sign_in_seller
       within("#new_product") do 
         fill_in_create_form
         attach_required_images
+        find("#new_product_en").set(true)
         fill_in "product_product_tags_attributes_1_tag", with: "Tag 1"
         fill_in "product_product_tags_attributes_2_tag", with: "Tag 2"
         click_button "Create"
@@ -69,20 +71,31 @@ require "helpers/seller_helper" #sign_in_seller
 
   # translations
     def fill_in_translation_form
+      find("#new_product_fr").set(true)
+      find("#new_product_en").set(true)
       fill_in "product_product_translations_attributes_0_description", with: "description en français"
-      fill_in "product_translations", with: "en|fr"
+      fill_in "product_description", with: "english description"
+    end
+
+    def fill_in_translation_form_en_only
+      # click_button "New product"
+      find("#new_product_en").set(true)
+      fill_in "product_description", with: "english description"
     end
 
     def edit_translation
       within("#product-name-seller-name") do
+        find("#product_name_seller_name_fr").set(true)
         fill_in "product_product_translations_attributes_0_description", with: "edited description en français"
         click_button "Edit"
       end
     end
 
     def remove_translation
+      click_link "Products"
+      click_link "Product Name"
       within("#product-name-seller-name") do
-        find("#fr").set(false)
+        find("#product_name_seller_name_fr").set(false)
         click_button "Edit"
       end
     end

@@ -7,7 +7,7 @@ RSpec.describe "Devise for seller", type: :feature do
     create(:seller)
     sign_in_seller
 
-    expect(current_path).to eq("/en")
+    expect(current_path).to eq("/en/s/seller-name/dashboard")
     expect(page).to have_selector(".alert-success")
   end
 

@@ -82,8 +82,3 @@ RSpec.describe "ActiveAdmin - ", type: :feature do
   end
 
 end
-
-
-
-
-
