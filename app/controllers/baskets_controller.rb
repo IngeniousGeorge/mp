@@ -1,10 +1,10 @@
 class BasketsController < ApplicationController
   # before_action :authenticate_client!
-  before_action :set_basket, only: :edit
+  before_action :set_basket, only: :show
 
-  # def edit
-  #   @lines = @basket.basket_lines
-  # end
+  def show
+    @lines = @basket.basket_lines
+  end
 
   private
 

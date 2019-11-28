@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     # get '/tag/:id(/:page)', to: 'products#index_tag', as: 'c_tag'
 
     #CHECKOUT
-    resource :basket, only: :edit, path: "checkout"
+    resources :baskets, only: :show
     resources :basket_lines, only: [:create, :update]
 
     # concern :manageable do

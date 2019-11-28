@@ -1,0 +1,9 @@
+<%= render 'nav/top' %>
+
+<% @lines.each do |line| %>
+  <%= render partial: 'baskets/edit' %>
+<% end %>
+
+<%= link_to "Place Order" %>
+
+<%= render 'nav/footer' %>
