@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_102826) do
+ActiveRecord::Schema.define(version: 2019_11_28_173317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -165,6 +165,25 @@ ActiveRecord::Schema.define(version: 2019_10_16_102826) do
     t.datetime "updated_at", null: false
     t.index ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
     t.index ["owner_type", "owner_id"], name: "index_locations_on_owner"
+  end
+
+  create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id"
+    t.integer "quantity"
+    t.integer "amount"
+    t.uuid "order_sale_id"
+    t.uuid "order_id"
+  end
+
+  create_table "order_sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "seller_id"
+    t.integer "amount"
+    t.uuid "order_id"
+  end
+
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "client_id"
+    t.integer "amount"
   end
 
   create_table "product_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

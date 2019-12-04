@@ -49,7 +49,7 @@
     <%= form_with model: @seller, url: update_cover_seller_path(@seller.slug), id: "seller_cover_" + @seller.slug, html: { class: "form-dashboard d-flex flex-column align-items-start bg-light rounded-lg" } do |af| %>
 
       <div class="image-dashboard">
-        <%= image_tag(url_for(@seller.cover), size: "700x300") %>
+        <%= image_tag(url_for(@seller.cover), size: "1000x133") %>
       </div>
 
       <div class="form-group form-dashboard-field file-dashboard">

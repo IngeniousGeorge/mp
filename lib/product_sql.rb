@@ -50,7 +50,7 @@ module ProductSql
 
       #add limit/page/sort/order
       if params['sort'] == nil
-        sort = "p.created_at"
+        sort = "p.name"
       elsif params['sort'] == "price"
         sort = "p.price"
       end

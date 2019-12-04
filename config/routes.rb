@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     #miscelanious
     get '/about', to: 'home#about', as: 'about'
     get '/contact', to: 'home#contact', as: 'contact'
+    get '/photos', to: 'home#photos', as: 'photos'
 
     #DEVISE:
     devise_for :admin_users, ActiveAdmin::Devise.config
@@ -51,6 +52,8 @@ Rails.application.routes.draw do
     #CHECKOUT
     resources :baskets, only: :show
     resources :basket_lines, only: [:create, :update]
+
+    resources :orders, only: [:create]
 
     # concern :manageable do
     #   resources :conversations, :orders...

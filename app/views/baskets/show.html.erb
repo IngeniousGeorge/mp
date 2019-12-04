@@ -1,9 +1,11 @@
 <%= render 'nav/top' %>
 
-<% @lines.each do |line| %>
-  <%= render partial: 'baskets/edit' %>
-<% end %>
+Basket
+# make it a partial
+<% @order = Order.new %>
 
-<%= link_to "Place Order" %>
+<%= render partial: 'baskets/edit' %>
+
+<%= link_to t(:place_order), orders_path, order: @order, method: :post %>
 
 <%= render 'nav/footer' %>
