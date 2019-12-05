@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get '/about', to: 'home#about', as: 'about'
     get '/contact', to: 'home#contact', as: 'contact'
     get '/photos', to: 'home#photos', as: 'photos'
+    get '/resume', to: 'home#resume', as: 'resume'
 
     #DEVISE:
     devise_for :admin_users, ActiveAdmin::Devise.config
