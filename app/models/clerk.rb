@@ -1,6 +1,10 @@
 class Clerk
 
   def self.proceed_order(client, basket)
+    #create order from basket
+    #create order_lines from basket_lines
+    #create sales from order_lines
+
     Clerk.transaction do
       order = Order.new(client_id: client.id, amount: basket.prepare_amount).save
       order_lines = []

@@ -167,22 +167,19 @@ ActiveRecord::Schema.define(version: 2019_11_28_173317) do
     t.index ["owner_type", "owner_id"], name: "index_locations_on_owner"
   end
 
-  create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "order_lines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "order_id"
+    t.uuid "sale_id"
+    t.uuid "client_id"
+    t.uuid "seller_id"
     t.uuid "product_id"
     t.integer "quantity"
     t.integer "amount"
-    t.uuid "order_sale_id"
-    t.uuid "order_id"
-  end
-
-  create_table "order_sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "seller_id"
-    t.integer "amount"
-    t.uuid "order_id"
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
+    t.text "order_lines", default: [], array: true
     t.integer "amount"
   end
 
@@ -220,6 +217,14 @@ ActiveRecord::Schema.define(version: 2019_11_28_173317) do
     t.index ["category"], name: "index_products_on_category"
     t.index ["seller_id"], name: "index_products_on_seller_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
+  end
+
+  create_table "sales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "seller_id"
+    t.uuid "client_id"
+    t.uuid "order_id"
+    t.text "order_lines", default: [], array: true
+    t.integer "amount"
   end
 
   create_table "seller_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
