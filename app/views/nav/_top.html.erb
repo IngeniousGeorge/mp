@@ -22,6 +22,9 @@
           <%= link_to t(:sign_in), new_client_session_path %>
         </li>
       <% end %>
+      <li class="nav-item btn btn-outline-primary btn-sm">
+        <%= link_to t(:basket), basket_path(@current_basket) %>
+      </li>
       <% if I18n.locale == :en %>
         <li class="nav-item btn btn-outline-danger btn-sm">
           <%= link_to image_tag("icons/fr.png", size: "20x14"), { locale: 'fr' } %>

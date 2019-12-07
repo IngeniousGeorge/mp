@@ -1,11 +1,15 @@
 <%= render 'nav/top' %>
 
-Basket
-# make it a partial
-<% @order = Order.new %>
-
 <%= render partial: 'baskets/edit' %>
 
-<%= link_to t(:place_order), orders_path, order: @order, method: :post %>
+<div id="total_price">
+  <%= @order.amount %>
+</div>
+
+<% if current_client %>
+  <%= link_to t(:place_order), orders_path, method: :post %>
+<% else %>
+  <%= link_to t(:place_order), new_client_registration_path(origin: "basket") %>
+<% end %>
 
 <%= render 'nav/footer' %>

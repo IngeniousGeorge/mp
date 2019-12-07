@@ -1,6 +1,7 @@
 class BasketLine < ApplicationRecord
   belongs_to :basket
   belongs_to :product
+  belongs_to :seller
   after_save :delete_if_null
 
   delegate :client, to: :basket
@@ -11,6 +12,14 @@ class BasketLine < ApplicationRecord
 
   def set_absolute_value(quantity)
     self.quantity = quantity
+  end
+
+  def product_price
+    self.product.price
+  end
+
+  def line_amount
+    self.product_price * self.quantity
   end
 
   private 

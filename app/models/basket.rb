@@ -18,4 +18,12 @@ class Basket < ApplicationRecord
         BasketLine.create(product_id: line.product_id, quantity: line.quantity, basket_id: self.id)
       end
     end
+
+    def prepare_amount
+      amount = 0
+      self.basket_lines.each do |line|
+        amount += (line.product_price * line.quantity)
+      end
+      return amount
+    end
 end

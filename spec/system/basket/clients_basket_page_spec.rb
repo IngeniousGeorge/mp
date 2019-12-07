@@ -8,22 +8,62 @@ RSpec.describe "Client -", type: :feature do
     before do
       @product = create_valid_product
       add_product_to_basket
-      basket = Basket.take
-      visit basket_path("en", basket)
+      @basket = Basket.take
       # save_and_open_page
     end
-
+    
     it "can access basket page" do
+      visit basket_path("en", @basket)
+      
       expect(page).to have_text("Basket") #make more accurate
       expect(page).to have_text(@product.name)
     end
 
-    it "get redirected to sign up when placing order" do
+    it "can link to basket page from home page" do
+      visit root_path
+      click_link "Basket"
+
+      expect(page).to have_text("Basket") #make more accurate
+      expect(page).to have_text(@product.name)
+    end
+
+    it "gets redirected to sign up when placing order" do
+      visit basket_path("en", @basket)
       click_link "Place Order"
 
-      expect(page).to have_text("")
+      expect(page).to have_text("Password confirmation")
+    end
+
+    it "gets redirected back to basket page after sign up" do
+      visit basket_path("en", @basket)
+      click_link "Place Order"
+      within("#new_client") do
+        fill_in "client_name", with: "client name"
+        fill_in "client_email", with: "client@email.com"
+        fill_in "client_password", with: "password"
+        fill_in "client_password_confirmation", with: "password"
+      end
+      click_button "Sign up"
+
+      expect(page).to have_text("Basket") #make more accurate
+      expect(page).to have_text(@product.name)
+    end
+
+    it "gets redirected back to basket page after sign in" do
+      sign_up_client
+      click_link "Log out"
+      visit basket_path("en", @basket)
+      click_link "Place Order"
+      find(:xpath, "//a[@href='/en/clients/sign_in?origin=basket']").click
+      fill_in "client_email", with: "client@email.com"
+      fill_in "client_password", with: "password"
+      click_button "Sign in"
+
+      expect(page).to have_text("Basket") #make more accurate
+      expect(page).to have_text(@product.name)
     end
   end
+  
 
   context "registered - " do
 

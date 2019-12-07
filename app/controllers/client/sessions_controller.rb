@@ -32,4 +32,12 @@ class Client::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def after_sign_in_path_for(resource) 
+    if request.referrer.include? "origin=basket"
+      basket_path(resource.basket)
+    else
+      super(resource)
+    end
+  end
 end

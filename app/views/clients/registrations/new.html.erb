@@ -1,7 +1,5 @@
 <%= render 'nav/top' %>
 
-<h2><%= t(:sign_up) %></h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-devise d-flex flex-column align-items-center bg-success rounded-lg" }) do |f| %>
   <%= render partial: "devise/shared/error_messages" %>
   <div class="">
