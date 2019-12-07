@@ -5,7 +5,7 @@ class Clerk
     Order.transaction do
       
       #create order
-      order = Order.new(client_id: client.id, amount: basket.prepare_amount)
+      order = Order.new(client_id: client.id, amount: basket.set_amount)
       order.save!
       order_lines = []
       sales = {}
@@ -27,18 +27,22 @@ class Clerk
 
         #add order line id to array in order
         order.order_lines << order_line
+        p order
         order.save!
 
         #create sales from order_lines
         if sales[seller_id]
           sales[seller_id].order_lines << order_line
+          sales[seller_id].amount = sales[seller_id].amount + order_line.amount
           sales[seller_id].save!
         else
           sales[seller_id] = Sale.new(
             seller_id: seller_id,
             client_id: client.id,
             order_id: order.id,
-            order_lines: [order_line])
+            amount: order_line.amount)
+          sales[seller_id].order_lines << order_line
+          p sales[seller_id]
           sales[seller_id].save!
         end
       end

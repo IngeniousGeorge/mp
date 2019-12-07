@@ -1,0 +1,13 @@
+<span>Date: <%= sale.created_at.strftime("%Y-%m-%d") %></span>
+-
+<span>Amount: <%= price(sale.amount) %></span>
+
+<ul>
+  <% sale.order_lines.each do |line| %>
+    <li>
+      <%= render partial: 'orders/order_line', locals: { order_line: line } %>
+    </li>
+  <% end %>
+</ul>
+
+<span>Client: <%= sale.client.name %></span>

@@ -175,12 +175,16 @@ ActiveRecord::Schema.define(version: 2019_11_28_173317) do
     t.uuid "product_id"
     t.integer "quantity"
     t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
     t.text "order_lines", default: [], array: true
     t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "product_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -225,6 +229,8 @@ ActiveRecord::Schema.define(version: 2019_11_28_173317) do
     t.uuid "order_id"
     t.text "order_lines", default: [], array: true
     t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "seller_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

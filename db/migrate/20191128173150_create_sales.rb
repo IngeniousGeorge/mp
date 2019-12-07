@@ -6,6 +6,8 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.uuid :order_id
       t.text :order_lines, array: true, default: []
       t.integer :amount
+
+      t.timestamps
     end
   end
 end

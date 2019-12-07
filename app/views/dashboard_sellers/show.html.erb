@@ -13,9 +13,9 @@
 
     <%= render partial: 'dashboard_sellers/nav' %>
 
-    <%= render partial: "sellers/edit" %>
+    <%= render partial: 'sellers/edit' %>
 
-    <%= render partial: "locations/new", locals: { 
+    <%= render partial: 'locations/new', locals: { 
       location: @seller.locations.new, 
       owner_type: "Seller", 
       owner_id: @seller.id, 
@@ -24,7 +24,7 @@
 
     <% unless @locations.empty? %>
       <% @locations.each do |location| %>
-        <%= render partial: "locations/edit", locals: { 
+        <%= render partial: 'locations/edit', locals: { 
           location: location, 
           owner: @seller, 
           owner_type: "Seller", 
@@ -33,11 +33,13 @@
       <% end %>
     <% end %>
 
-    <%= render partial: "products/new", locals: { seller: @seller, product: @new_product } %>
+    <%= render partial: 'sales/show' %>
+
+    <%= render partial: 'products/new', locals: { seller: @seller, product: @new_product } %>
 
     <% unless @products.empty? %>
       <% @products.each do |product| %>
-        <%= render partial: "products/edit", locals: { 
+        <%= render partial: 'products/edit', locals: { 
           seller: @seller, 
           product: product } %>
       <% end %>

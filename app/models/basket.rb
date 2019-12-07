@@ -19,7 +19,7 @@ class Basket < ApplicationRecord
       end
     end
 
-    def prepare_amount
+    def set_amount
       amount = 0
       self.basket_lines.each do |line|
         amount += (line.product_price * line.quantity)

@@ -8,6 +8,8 @@ class CreateOrderLines < ActiveRecord::Migration[5.2]
       t.uuid :product_id
       t.integer :quantity
       t.integer :amount
+
+      t.timestamps
     end
   end
 end

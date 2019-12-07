@@ -4,6 +4,8 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.uuid :client_id
       t.text :order_lines, array: true, default: []
       t.integer :amount
+
+      t.timestamps
     end
   end
 end

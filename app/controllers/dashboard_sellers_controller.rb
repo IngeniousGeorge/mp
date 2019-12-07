@@ -10,6 +10,7 @@ class DashboardSellersController < ApplicationController
     @prod_lang = {}
     @products.each { |product| @prod_lang[product.slug] = product.available_translations }
     @locations = @seller.locations
+    @sales = @seller.sales
     @new_product = @seller.products.new
     @new_product.prepare_empty_tags
     @new_product.prepare_empty_translations

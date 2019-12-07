@@ -1,3 +1,11 @@
-<%= order.inspect %>
+<span>Date: <%= order.created_at.strftime("%Y-%m-%d") %></span>
+-
+<span>Amount: <%= price(order.amount) %></span>
 
-hello
+<ul>
+  <% order.order_lines.each do |line| %>
+    <li>
+      <%= render partial: 'orders/order_line', locals: { order_line: line } %>
+    </li>
+  <% end %>
+</ul>

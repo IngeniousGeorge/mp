@@ -34,9 +34,9 @@ class BasketsController < ApplicationController
 
     def prepare_order
       if current_client
-        @order = Order.new(client_id: @basket.client.id, amount: @basket.prepare_amount)
+        @order = Order.new(client_id: @basket.client.id, amount: @basket.set_amount)
       else
-        @order = Order.new(amount: @basket.prepare_amount)
+        @order = Order.new(amount: @basket.set_amount)
       end
     end
 end

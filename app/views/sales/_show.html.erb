@@ -1,10 +1,9 @@
-<div id="orders" class="collapse" data-parent="#content">
-
+<div id="sales" class="collapse" data-parent="#content">
   <div class="d-flex flex-column align-items-center">
     <ul class="list-group">
-      <% @orders.each do |order| %>
+      <% @sales.each do |sale| %>
         <li class="list-group-item bg-light">
-          <%= render partial: 'orders/line', locals: { order: order } %>
+          <%= render partial: 'sales/line', locals: { sale: sale } %>
         </li>
       <% end %>
     </ul>
