@@ -2,10 +2,11 @@
   <div class="container">
     <h2 class="d-flex justify-content-center">
       <span class="border-bottom border-primary">
-        <%= t(:all_categories).titleize %>
+        <%= t(:categories).titleize %>
       </span>
     </h2>
     <p class="lead d-flex justify-content-center flex-wrap">
+      <%= link_to t(:all), catalogue_path, class: "home-links" %>
       <% @categories.each do |category| %>
         <%= link_to category[0], c_category_path(category[0]), class: "home-links" %>
       <% end %>

@@ -6,3 +6,5 @@ en:
   quantity: "Quantity: "
   remove: "Remove"
   total_amount: "Total amount"
+  place_order: "Place order"
+  all: "All"

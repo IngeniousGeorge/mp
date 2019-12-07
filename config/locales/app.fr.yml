@@ -6,3 +6,5 @@ fr:
   quantity: "Quantité: "
   remove: "Supprimer"
   total_amount: "Prix total"
+  place_order: "Passer commande"
+  all: "Toutes"
