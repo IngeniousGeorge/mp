@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :seller
   has_many :product_tags, dependent: :destroy
   has_many :product_translations, dependent: :destroy
+  has_many :order_lines
   accepts_nested_attributes_for :product_tags, allow_destroy: true, reject_if: proc { |attributes| attributes['tag'].blank? }
   accepts_nested_attributes_for :product_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
   

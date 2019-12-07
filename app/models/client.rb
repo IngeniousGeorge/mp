@@ -1,5 +1,8 @@
 class Client < ApplicationRecord
   has_many :locations, as: :owner
+  has_many :orders
+  has_many :order_lines
+  has_many :sales
   has_one :basket
   delegate :lines, :id, to: :basket, prefix: true
 

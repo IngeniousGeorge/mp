@@ -1,7 +1,6 @@
 class BasketLine < ApplicationRecord
   belongs_to :basket
   belongs_to :product
-  belongs_to :seller
   after_save :delete_if_null
 
   delegate :client, to: :basket

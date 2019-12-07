@@ -2,6 +2,8 @@ class Seller < ApplicationRecord
   has_many :locations, as: :owner, dependent: :destroy
   has_many :products, dependent: :destroy
   has_many :seller_translations, dependent: :destroy
+  has_many :sales
+  has_many :order_lines
   validates :name, uniqueness: true
   accepts_nested_attributes_for :seller_translations, allow_destroy: true, reject_if: proc { |attributes| attributes['description'].blank? }
 
