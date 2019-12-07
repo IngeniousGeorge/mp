@@ -24,13 +24,9 @@ if Rails.env.development?
 
   AdminUser.create!(email: "admin@example.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
   
-  c1 = Client.create!(name: "jim", email: "jim@ig.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
+  c1 = Client.create!(name: "Bob Martin", email: "unclebob@mp.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
   Basket.create(client_id: c1.id)
-  Location.create(name: "Home", slug: "home", recipient: "Jim Norton", street: "Sonnenalle 1", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Client", owner_id: c1.id)
-  
-  c2 = Client.create!(name: "jc", email: "jc@ig.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)
-  Basket.create(client_id: c2.id)
-  Location.create(name: "JC", slug: "jc", recipient: "JC Baroulet", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", delivery: true, billing: true, owner_type: "Client", owner_id: c2.id)
+  Location.create(name: "Home", slug: "home", recipient: "Robert C. Martin", street: "Sonnenalle 200", city: "Berlin", country: "Germany", postal_code: "12059", delivery: true, billing: true, owner_type: "Client", owner_id: c1.id)
   
   c1 = Category.create(name: "Food", description: "It's so ymmy!")
   c2 = Category.create(name: "Fashion", description: "It's so beautiful!")
