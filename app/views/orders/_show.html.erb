@@ -1,0 +1,15 @@
+<div id="orders" class="collapse" data-parent="#content">
+
+  <div class="d-flex flex-column align-items-center bg-light rounded-lg">
+
+    <ul>
+      <% @orders.each do |order| %>
+        <li>
+          <% render partial: 'orders/line', locals: { order: order } %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+
+</div>

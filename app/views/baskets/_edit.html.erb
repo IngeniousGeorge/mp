@@ -9,3 +9,6 @@
 <% else %>
   Basket unavailable.
 <% end %>
+<% if @current_basket.ordered_lines.empty? %>
+  <h5><%= t(:empty_basket) %></h5>
+<% end %>

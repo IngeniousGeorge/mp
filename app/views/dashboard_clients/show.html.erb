@@ -12,9 +12,9 @@
 
     <%= render partial: 'dashboard_clients/nav' %>
 
-    <%= render partial: "clients/edit" %>
+    <%= render partial: 'clients/edit' %>
 
-    <%= render partial: "locations/new", locals: { 
+    <%= render partial: 'locations/new', locals: { 
       location: @client.locations.new, 
       owner_type: "Client", 
       owner_id: @client.id, 
@@ -23,7 +23,7 @@
 
     <% unless @locations.empty? %>
       <% @locations.each do |location| %>
-        <%= render partial: "locations/edit", locals: { 
+        <%= render partial: 'locations/edit', locals: { 
           location: location, 
           owner: @client, 
           owner_type: "Client", 
@@ -31,6 +31,9 @@
           owner_slug: @client.slug } %>
       <% end %>
     <% end %>
+
+    <%= render partial: 'orders/show' %>
+
   </div>
 </div>
 

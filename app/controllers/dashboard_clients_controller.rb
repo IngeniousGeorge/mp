@@ -6,6 +6,8 @@ class DashboardClientsController < ApplicationController
   def show
     @client = current_client
     @locations = @client.locations
+    @orders = current_client.orders
+    p @orders
   end
 
   private
