@@ -19,7 +19,7 @@ RSpec.describe "Object translation in forms - ", type: :feature do
           @product = last_created_product
         end
 
-        it "renders the dashboard with an alert success" do
+        it "renders the dashboard with an alert success", js: true do
           expect(page).to have_selector(".alert-success")
         end
 
@@ -48,7 +48,7 @@ RSpec.describe "Object translation in forms - ", type: :feature do
           expect(page).to have_selector(".alert-success")
         end
 
-        it "doesn't save a ProductTranslation object on create" do
+        it "doesn't save a ProductTranslation object on create", js: true do
           expect(ProductTranslation.count).to eq(0)
         end
 

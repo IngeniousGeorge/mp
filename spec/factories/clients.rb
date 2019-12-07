@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "Client" }
     email { "client@email.com" }
     password { "password" }
+    basket
   end
 end

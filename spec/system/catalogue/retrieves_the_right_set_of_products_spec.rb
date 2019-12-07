@@ -53,22 +53,22 @@ RSpec.describe "Catalogue path - ", type: :feature do
     before do
       seller = create(:seller)
       20.times do |i|
-        create_valid_product({name: "Product Name #{i}", price: (i * 1000)}, seller)
+        create_valid_product({name: "Product Name #{'%02d' % i}", price: (i * 1000)}, seller)
       end
     end
 
     it "shows 8 products per page" do
       visit "en/catalogue"
 
-      expect(page).to have_text("Product Name 0")
-      expect(page).to have_text("Product Name 7")
+      expect(page).to have_text("Product Name 00")
+      expect(page).to have_text("Product Name 07")
       expect(page).to have_content("Product Name", count: 8)
     end
 
     it "can retrieve 8 more products on page 2" do
       visit "en/catalogue?page=2"
 
-      expect(page).to have_text("Product Name 8")
+      expect(page).to have_text("Product Name 08")
       expect(page).to have_text("Product Name 15")
       expect(page).to have_content("Product Name", count: 8)
     end
@@ -76,14 +76,14 @@ RSpec.describe "Catalogue path - ", type: :feature do
     it "can show more products per page" do
       visit "en/catalogue?limit=20"
 
-      expect(page).to have_text("Product Name 0")
+      expect(page).to have_text("Product Name 00")
       expect(page).to have_text("Product Name 19")
     end
 
     it "can order products by price" do
       visit "en/catalogue?sort=price"
 
-      expect(page).to have_text("Product Name 0")
+      expect(page).to have_text("Product Name 00")
       expect(page).not_to have_text("Product Name 15")
     end
 
@@ -91,7 +91,7 @@ RSpec.describe "Catalogue path - ", type: :feature do
       visit "en/catalogue?sort=price&order=desc"
 
       expect(page).to have_text("Product Name 15")
-      expect(page).not_to have_text("Product Name 0")
+      expect(page).not_to have_text("Product Name 00")
     end
 
     xit "can order products by distance to the seller"

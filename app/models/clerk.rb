@@ -27,7 +27,6 @@ class Clerk
 
         #add order line id to array in order
         order.order_lines << order_line
-        p order
         order.save!
 
         #create sales from order_lines
@@ -42,7 +41,6 @@ class Clerk
             order_id: order.id,
             amount: order_line.amount)
           sales[seller_id].order_lines << order_line
-          p sales[seller_id]
           sales[seller_id].save!
         end
       end

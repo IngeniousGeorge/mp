@@ -29,14 +29,14 @@ RSpec.describe "Client -", type: :feature do
 
     it "gets redirected to sign up when placing order" do
       visit basket_path("en", @basket)
-      click_link "Place Order"
+      click_link "Place order"
 
       expect(page).to have_text("Password confirmation")
     end
 
     it "gets redirected back to basket page after sign up" do
       visit basket_path("en", @basket)
-      click_link "Place Order"
+      click_link "Place order"
       within("#new_client") do
         fill_in "client_name", with: "client name"
         fill_in "client_email", with: "client@email.com"
@@ -53,7 +53,7 @@ RSpec.describe "Client -", type: :feature do
       sign_up_client
       click_link "Log out"
       visit basket_path("en", @basket)
-      click_link "Place Order"
+      click_link "Place order"
       find(:xpath, "//a[@href='/en/clients/sign_in?origin=basket']").click
       fill_in "client_email", with: "client@email.com"
       fill_in "client_password", with: "password"
@@ -80,7 +80,7 @@ RSpec.describe "Client -", type: :feature do
   #     basket = Basket.take
   #     visit basket_path("en", basket)
 
-  #     expect(page).to have_text("Place Order")  
+  #     expect(page).to have_text("Place order")  
   #   end
   # end
 end
