@@ -1,15 +1,5 @@
 <%= render 'nav/top' %>
 
-<%= render partial: 'baskets/edit' %>
-
-<div id="total_price">
-  <%= @order.amount %>
-</div>
-
-<% if current_client %>
-  <%= link_to t(:place_order), orders_path, method: :post %>
-<% else %>
-  <%= link_to t(:place_order), new_client_registration_path(origin: "basket") %>
-<% end %>
+<%= render partial: 'baskets/basket' %>
 
 <%= render 'nav/footer' %>

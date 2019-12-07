@@ -63,25 +63,24 @@ RSpec.describe "Client -", type: :feature do
       expect(page).to have_text(@product.name)
     end
   end
+
+  # context "registered - " do
+
+  #   before do
+
+  #   end
   
+  #   xit "can access basket page through dashboard" do
 
-  context "registered - " do
+  #   end
 
-    before do
+  #   it "can pay for all items in basket from basket page" do
+  #     product = create_valid_product
+  #     add_product_to_basket
+  #     basket = Basket.take
+  #     visit basket_path("en", basket)
 
-    end
-  
-    xit "can access basket page through dashboard" do
-
-    end
-
-    it "can pay for all items in basket from basket page" do
-      product = create_valid_product
-      add_product_to_basket
-      basket = Basket.take
-      visit basket_path("en", basket)
-
-      expect(page).to have_text("Place Order")  
-    end
-  end
+  #     expect(page).to have_text("Place Order")  
+  #   end
+  # end
 end

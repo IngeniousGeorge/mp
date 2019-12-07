@@ -1,13 +1,13 @@
-<%= product.name + " " + product.price.to_s %>
-<br/>
+<%= product.name + " - " + price(product.price) %>
+
 
 <%= form_with model: line, url: basket_line_path(line) do |f| %>
   <%= f.hidden_field :product_id, value: line.product_id %>
   <%= f.hidden_field :basket_id, value: line.basket_id %>
-  <%= f.label "Quantity: "%>
-  <%= f.number_field :quantity, value: line.quantity %>
-  <%= f.submit "Edit" %>
-  <%= f.submit "Remove" %>
+  <%= f.label t(:quantity) %>
+  <%= f.number_field :quantity, value: line.quantity, class: "edit-number rounded" %>
+  <%= f.submit t(:edit), class: "btn btn-secondary" %>
+  <%= f.submit t(:remove), class: "btn btn-danger" %>
 <% end %>
 total:
-<%= line.line_amount %><br/>
+<%= price(line.line_amount) %><br/>

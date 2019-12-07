@@ -1,7 +1,11 @@
 <% if @current_basket %>
-  <% @current_basket.ordered_lines.each do |line| %>
-    <%= render partial: "products/line", locals: { product: line.product, line: line } %>
-  <% end %>
+  <ul class="list-group">
+    <% @current_basket.ordered_lines.each do |line| %>
+      <li class="list-group-item">
+        <%= render partial: "products/line", locals: { product: line.product, line: line } %>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   Basket unavailable.
 <% end %>

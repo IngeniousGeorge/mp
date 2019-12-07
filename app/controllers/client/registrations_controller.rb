@@ -60,7 +60,7 @@ class Client::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   def after_sign_up_path_for(resource)
     if request.referrer.include? "origin=basket"
-      new_order_path
+      basket_path(resource.basket)
     else
       super(resource)
     end

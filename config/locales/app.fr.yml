@@ -3,3 +3,6 @@ fr:
   recipient: "Destinataire"
   basket: "Panier"
   please_register: "Merci de vous inscrire ou de vous connecter pour placer votre commande."
+  quantity: "Quantité: "
+  remove: "Supprimer"
+  total_amount: "Prix total"

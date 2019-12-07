@@ -10,10 +10,10 @@ RSpec.describe "Order -", type: :feature do
       sign_up_client
       # create sellers and products
       @seller_1 = create(:seller, name: "seller 1")
-      @prod_1 = create_valid_product({name: "product 1"}, @seller_1)
+      @prod_1 = create_valid_product({name: "product 1", price: 1}, @seller_1)
       @seller_2 = create(:seller, name: "seller 2", email: "seller2@email.com")
-      @prod_2 = create_valid_product({name: "product 2"}, @seller_2)
-      # add products to basket
+      @prod_2 = create_valid_product({name: "product 2", price: 10}, @seller_2)
+      # add 3 products to basket
       visit catalogue_path
       find(:xpath, "(//form[@action='/en/basket_lines'])[1]").find('input[value="add"]').click
       find(:xpath, "(//form[@action='/en/basket_lines'])[1]").find('input[value="add"]').click
@@ -24,30 +24,24 @@ RSpec.describe "Order -", type: :feature do
     end
 
     it "saves an order" do
-
+      expect(Order.all.size).to eq(1)
+      expect(Order.take.amount).to eq(12)
+      expect(Order.take.client_id).to eq(Client.take.id)
     end
 
-    # it "saves order lines" do
+    it "saves order lines" do
+      expect(Order.take.order_lines.size).to eq(2)
+      expect(OrderLine.all.size).to eq(2)
+    end
 
-    # end
+    it "saves sales" do
+      expect(Sale.all.size).to eq(2)
+      expect(Seller.take.sales.size).to eq(1)
+      expect(OrderLine.take.sale.client_id).to eq(Client.take.id)
+    end
 
-    # it "saves sales" do
-
-    # end
-
+    it "destroys basket lines" do
+      expect(BasketLine.all.size).to eq(0)
+    end
   end
-  # it "gets created when client places order" do
-  #   product = create_valid_product
-  #   add_product_to_basket
-  #   basket = Basket.take
-  #   visit basket_path("en", basket)
-  #   click_link("Place Order")
-
-  #   expect(page).to have_text("Order was successfully registered")
-  # end
-
-  # it "also creates sales object for every seller present in order" do
-
-  # end
-
 end
