@@ -20,7 +20,7 @@ RSpec.describe "Order -", type: :feature do
       find(:xpath, "(//form[@action='/en/basket_lines'])[2]").find('input[value="add"]').click
       # place order
       visit basket_path("en", Basket.take)
-      click_link "Place Order"
+      click_link "Place order"
     end
 
     it "saves an order" do

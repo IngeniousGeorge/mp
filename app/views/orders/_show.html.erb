@@ -5,7 +5,7 @@
     <ul>
       <% @orders.each do |order| %>
         <li>
-          <% render partial: 'orders/line', locals: { order: order } %>
+          <%= render partial: 'orders/line', locals: { order: order } %>
         </li>
       <% end %>
     </ul>

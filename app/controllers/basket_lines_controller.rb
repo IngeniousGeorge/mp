@@ -4,7 +4,7 @@ class BasketLinesController < ApplicationController
 
   # from account/checkout
   def update
-    if params['commit'] == "Edit"
+    if params['commit'] == "Change" || params['commit'] == "Modifier"
       respond_to do |format|
         @basket_line.set_absolute_value(@quantity)
         if @basket_line.save
@@ -16,7 +16,7 @@ class BasketLinesController < ApplicationController
         end
       end
 
-    elsif params['commit'] == "Remove"
+    elsif params['commit'] == "Remove" || params['commit'] == "Supprimer"
       @basket_line.destroy
       respond_to do |format|
         format.html { redirect_back fallback_location: root_path, notice: "Product was successfully removed." }
