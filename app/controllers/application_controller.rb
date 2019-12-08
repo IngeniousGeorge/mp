@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
 
     def get_pages_urls(locale, namespace, query, page, max_size)
       pages_urls = []
-      num_pages = max_size / 8
-      num_pages = num_pages + 1 if (max_size % 8) > 0
+      num_pages = max_size / 12
+      num_pages = num_pages + 1 if (max_size % 12) > 0
       if num_pages > 1
         query = "?" + query unless query == ""
         page = 1 if page == 0

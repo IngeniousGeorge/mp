@@ -66,7 +66,7 @@ module ProductSql
       sql[0] += " ORDER BY #{sort} #{order}"
 
       if params['limit'] == nil
-        limit = 8
+        limit = 12
       else
         limit = params['limit']
       end
