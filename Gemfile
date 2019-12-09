@@ -29,7 +29,7 @@ gem 'webpacker', '~> 3.5', '>= 3.5.5'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'database_cleaner', '~> 1.7'
-  gem 'dotenv', '~> 2.5'
+  # gem 'dotenv', '~> 2.5'
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
   gem 'rspec-rails', '~> 3.8'
 end

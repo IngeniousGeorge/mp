@@ -71,3 +71,29 @@ namespace :db do
     end
   end
 end
+
+namespace :db do
+  desc 'DB reset'
+  task :rollback_origin do
+    on primary :db do
+      within release_path do
+        with rails_env: fetch(:production) do
+          execute :rake, 'db:migrate:down VERSION=0001'
+        end
+      end
+    end
+  end
+end
+
+namespace :db do
+  desc 'DB seed'
+  task :seed do
+    on primary :db do
+      within release_path do
+        with rails_env: fetch(:production) do
+          execute :rake, 'db:seed'
+        end
+      end
+    end
+  end
+end
