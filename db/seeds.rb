@@ -20,7 +20,9 @@ def shifted_names_as_array(string)
   return array.uniq
 end
 
+DatabaseCleaner.allow_production = true
 DatabaseCleaner.clean_with :truncation
+DatabaseCleaner.allow_production = false
 
 if Rails.env.production?
 
