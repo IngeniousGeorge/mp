@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_redirect_path, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
   before_action :translate_product, only: [:show]
   load_and_authorize_resource :seller, find_by: :slug, only: [:create, :update, :update_cover, :attach_image, :delete_image, :destroy]
+  include ProductSql 
 
   def index
     @namespace = "catalogue"
