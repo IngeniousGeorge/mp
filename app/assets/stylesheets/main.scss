@@ -27,7 +27,7 @@ body {
 }
 
 .welcome {
-  background-image: url(mall.jpg);
+  background-image: image-url('mall.jpg');
   background-size: cover;
   background-position: bottom;
   color: $secondary;

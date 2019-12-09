@@ -1,0 +1,1 @@
+# scp /home/ig/Code/mp/keyfile.json deploy@157.230.109.26:/home/deploy/mp/releases/20191209115059/keyfile.json
