@@ -59,6 +59,13 @@ server "157.230.109.26", user: "deploy", roles: %w{app db web}
 #     # password: "please use keys"
 #   }
 
+after "deploy:finished", :copy_files
+
+desc "Copy gitignored files"
+task :copy_files do
+  run_locally "scp /home/ig/Code/mp/keyfile.json deploy@157.230.109.26:#{current_path}/keyfile.json"
+end
+
 namespace :db do
   desc 'DB drop'
   task :drop do
