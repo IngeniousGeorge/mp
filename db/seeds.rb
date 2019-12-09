@@ -20,6 +20,8 @@ def shifted_names_as_array(string)
   return array.uniq
 end
 
+DatabaseCleaner.clean_with :truncation
+
 if Rails.env.production?
 
   AdminUser.create!(email: "admin@example.com", password: "password", password_confirmation: "password", confirmed_at: DateTime.now)

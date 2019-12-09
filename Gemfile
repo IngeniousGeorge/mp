@@ -16,6 +16,7 @@ gem 'capistrano', '~> 3.11'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+gem 'database_cleaner', '~> 1.7' #used for seeding temporary production data
 gem 'devise', '~> 4.5'
 gem 'faraday', '~> 0.15.3'
 gem 'friendly_id', '~> 5.2', '>= 5.2.4'
@@ -28,8 +29,6 @@ gem 'ransack', '~> 2.0', '>= 2.0.1'
 gem 'webpacker', '~> 3.5', '>= 3.5.5'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'database_cleaner', '~> 1.7'
-  # gem 'dotenv', '~> 2.5'
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
   gem 'rspec-rails', '~> 3.8'
 end
