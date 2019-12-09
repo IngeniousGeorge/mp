@@ -65,7 +65,20 @@ namespace :db do
     on primary :db do
       within release_path do
         with rails_env: fetch(:stage) do
-          execute :rake, 'db:drop'
+          execute :rake, 'db:drop DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+        end
+      end
+    end
+  end
+end
+
+namespace :db do
+  desc 'DB migrate'
+  task :migrate do
+    on primary :db do
+      within release_path do
+        with rails_env: fetch(:stage) do
+          execute :rake, 'db:migrate'
         end
       end
     end
