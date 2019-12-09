@@ -32,26 +32,26 @@ if Rails.env.production?
   c2 = Category.create(name: "Fashion", description: "It's so beautiful!")
   c3 = Category.create(name: "Books", description: "It's so interresting!")
   CategoryTranslation.create([{lang: "fr", name: "Alimentation", description: "C'est tellement bon!", category_id: c1.id}, {lang: "fr", name: "Mode", description: "C'est tellement beau!", category_id: c2.id}, {lang: "fr", name: "Livres", description: "C'est tellement interressant!", category_id: c3.id}])
-  c1.cover.attach(io: File.open('~/mp/current/app/assets/images/categories/food.jpg'), filename: 'food.jpg')
-  c2.cover.attach(io: File.open('~/mp/current/app/assets/images/categories/fashion.jpg'), filename: 'fashion.jpg')
-  c3.cover.attach(io: File.open('~/mp/current/app/assets/images/categories/books.jpg'), filename: 'books.jpg')
+  c1.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/categories/food.jpg'), filename: 'food.jpg')
+  c2.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/categories/fashion.jpg'), filename: 'fashion.jpg')
+  c3.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/categories/books.jpg'), filename: 'books.jpg')
   
   s1 = Seller.new(name: "Alfredo Choco", slug: "alfredo-choco", email: "alfredo@mp.com", password: "password", password_confirmation: "password", description: "Best chocolates in Berlin", translations:"en|fr", confirmed_at: DateTime.now)
-  s1.cover.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/cover.jpg'), filename: 'cover.jpg')
+  s1.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/cover.jpg'), filename: 'cover.jpg')
   s1.save
   SellerTranslation.create(lang: "fr", description: "Les meilleurs chocolats de Berlin", seller_id: s1.id)
 
   Location.create(name: "Office", slug: "office", recipient: "Alfredo Choco", street: "Weserstraße 100", city: "Berlin", country: "Germany", postal_code: "12047", delivery: true, billing: true, owner_type: "Seller", owner_id: s1.id)
 
   s2 = Seller.new(name: "Ciara Flowers", slug: "ciara-flowers", email: "ciara@mp.com", password: "password", password_confirmation: "password", description: "All the colors of Mother Nature", translations:"en|fr", confirmed_at: DateTime.now)
-  s2.cover.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/cover.jpg'), filename: 'cover.jpg')
+  s2.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/cover.jpg'), filename: 'cover.jpg')
   s2.save
   SellerTranslation.create(lang: "fr", description: "Toutes les couleurs de Dame Nature", seller_id: s2.id)
 
   Location.create(name: "Warehouse", slug: "warehaouse", recipient: "Ciara Flowers", street: "Innstraße 10", city: "Berlin", country: "Germany", postal_code: "12045", delivery: true, billing: true, owner_type: "Seller", owner_id: s2.id)
 
   s3 = Seller.new(name: "Julie & the Sea", slug: "julie-and-the-sea", email: "julie@mp.com", password: "password", password_confirmation: "password", description: "Everything you need to set sail, and more", translations:"en|fr", confirmed_at: DateTime.now)
-  s3.cover.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/cover.jpg'), filename: 'cover.jpg')
+  s3.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/cover.jpg'), filename: 'cover.jpg')
   s3.save
   SellerTranslation.create(lang: "fr", description: "Tout ce dont vous avez besoin pour prendre le large, et plus encore", seller_id: s3.id)
 
@@ -63,10 +63,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p1 = Product.new(name: name, category: c1.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s1.id)
-    p1.cover.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/absolutely-sweet/cover.jpg'), filename: 'cover.jpg')
-    p1.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/absolutely-sweet/img1.jpg'), filename: 'img1.jpg')
-    p1.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/absolutely-sweet/img2.jpg'), filename: 'img2.jpg')
-    p1.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/absolutely-sweet/img3.jpg'), filename: 'img3.jpg')
+    p1.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/absolutely-sweet/cover.jpg'), filename: 'cover.jpg')
+    p1.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/absolutely-sweet/img1.jpg'), filename: 'img1.jpg')
+    p1.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/absolutely-sweet/img2.jpg'), filename: 'img2.jpg')
+    p1.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/absolutely-sweet/img3.jpg'), filename: 'img3.jpg')
     p1.save
     ProductTag.create(tag: "yummy", lang: "en", product_id: p1.id)
     ProductTag.create(tag: "delicious", lang: "en", product_id: p1.id)
@@ -80,10 +80,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p2 = Product.new(name: name, category: c2.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s1.id)
-    p2.cover.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/apron-classic/cover.jpg'), filename: 'cover.jpg')
-    p2.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/apron-classic/img1.jpg'), filename: 'img1.jpg')
-    p2.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/apron-classic/img2.jpg'), filename: 'img2.jpg')
-    p2.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/apron-classic/img3.jpg'), filename: 'img3.jpg')
+    p2.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/apron-classic/cover.jpg'), filename: 'cover.jpg')
+    p2.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/apron-classic/img1.jpg'), filename: 'img1.jpg')
+    p2.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/apron-classic/img2.jpg'), filename: 'img2.jpg')
+    p2.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/apron-classic/img3.jpg'), filename: 'img3.jpg')
     p2.save
     ProductTag.create(tag: "classy", lang: "en", product_id: p2.id)
     ProductTag.create(tag: "ageless", lang: "en", product_id: p2.id)
@@ -97,10 +97,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p3 = Product.new(name: name, category: c3.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s1.id)
-    p3.cover.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/almond-recipes/cover.jpg'), filename: 'cover.jpg')
-    p3.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/almond-recipes/img1.jpg'), filename: 'img1.jpg')
-    p3.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/almond-recipes/img2.jpg'), filename: 'img2.jpg')
-    p3.images.attach(io: File.open('~/mp/current/app/assets/images/alfredo-choco/almond-recipes/img3.jpg'), filename: 'img3.jpg')
+    p3.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/almond-recipes/cover.jpg'), filename: 'cover.jpg')
+    p3.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/almond-recipes/img1.jpg'), filename: 'img1.jpg')
+    p3.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/almond-recipes/img2.jpg'), filename: 'img2.jpg')
+    p3.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/alfredo-choco/almond-recipes/img3.jpg'), filename: 'img3.jpg')
     p3.save
     ProductTag.create(tag: "full of ideas", lang: "en", product_id: p3.id)
     ProductTag.create(tag: "yummy", lang: "en", product_id: p3.id)
@@ -114,10 +114,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p4 = Product.new(name: name, category: c1.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s2.id)
-    p4.cover.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/aqua-rose/cover.jpg'), filename: 'cover.jpg')
-    p4.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/aqua-rose/img1.jpg'), filename: 'img1.jpg')
-    p4.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/aqua-rose/img2.jpg'), filename: 'img2.jpg')
-    p4.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/aqua-rose/img3.jpg'), filename: 'img3.jpg')
+    p4.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/aqua-rose/cover.jpg'), filename: 'cover.jpg')
+    p4.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/aqua-rose/img1.jpg'), filename: 'img1.jpg')
+    p4.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/aqua-rose/img2.jpg'), filename: 'img2.jpg')
+    p4.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/aqua-rose/img3.jpg'), filename: 'img3.jpg')
     p4.save
     ProductTag.create(tag: "exotic", lang: "en", product_id: p4.id)
     ProductTag.create(tag: "yummy", lang: "en", product_id: p4.id)
@@ -131,10 +131,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p5 = Product.new(name: name, category: c2.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s2.id)
-    p5.cover.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/amazing-dress/cover.jpg'), filename: 'cover.jpg')
-    p5.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/amazing-dress/img1.jpg'), filename: 'img1.jpg')
-    p5.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/amazing-dress/img2.jpg'), filename: 'img2.jpg')
-    p5.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/amazing-dress/img3.jpg'), filename: 'img3.jpg')
+    p5.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/amazing-dress/cover.jpg'), filename: 'cover.jpg')
+    p5.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/amazing-dress/img1.jpg'), filename: 'img1.jpg')
+    p5.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/amazing-dress/img2.jpg'), filename: 'img2.jpg')
+    p5.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/amazing-dress/img3.jpg'), filename: 'img3.jpg')
     p5.save
     ProductTag.create(tag: "colorful", lang: "en", product_id: p5.id)
     ProductTag.create(tag: "classy", lang: "en", product_id: p5.id)
@@ -148,10 +148,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p6 = Product.new(name: name, category: c3.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s2.id)
-    p6.cover.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/book-violet/cover.jpg'), filename: 'cover.jpg')
-    p6.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/book-violet/img1.jpg'), filename: 'img1.jpg')
-    p6.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/book-violet/img2.jpg'), filename: 'img2.jpg')
-    p6.images.attach(io: File.open('~/mp/current/app/assets/images/ciara-flowers/book-violet/img3.jpg'), filename: 'img3.jpg')
+    p6.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/book-violet/cover.jpg'), filename: 'cover.jpg')
+    p6.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/book-violet/img1.jpg'), filename: 'img1.jpg')
+    p6.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/book-violet/img2.jpg'), filename: 'img2.jpg')
+    p6.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/ciara-flowers/book-violet/img3.jpg'), filename: 'img3.jpg')
     p6.save
     ProductTag.create(tag: "full of ideas", lang: "en", product_id: p6.id)
     ProductTag.create(tag: "beautiful", lang: "en", product_id: p6.id)
@@ -165,10 +165,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p7 = Product.new(name: name, category: c1.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s3.id)
-    p7.cover.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/appetizing-oysters/cover.jpg'), filename: 'cover.jpg')
-    p7.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/appetizing-oysters/img1.jpg'), filename: 'img1.jpg')
-    p7.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/appetizing-oysters/img2.jpg'), filename: 'img2.jpg')
-    p7.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/appetizing-oysters/img3.jpg'), filename: 'img3.jpg')
+    p7.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/appetizing-oysters/cover.jpg'), filename: 'cover.jpg')
+    p7.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/appetizing-oysters/img1.jpg'), filename: 'img1.jpg')
+    p7.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/appetizing-oysters/img2.jpg'), filename: 'img2.jpg')
+    p7.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/appetizing-oysters/img3.jpg'), filename: 'img3.jpg')
     p7.save
     ProductTag.create(tag: "delicious", lang: "en", product_id: p7.id)
     ProductTag.create(tag: "seafood", lang: "en", product_id: p7.id)
@@ -182,10 +182,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p8 = Product.new(name: name, category: c2.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s3.id)
-    p8.cover.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/ahab-cap/cover.jpg'), filename: 'cover.jpg')
-    p8.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/ahab-cap/img1.jpg'), filename: 'img1.jpg')
-    p8.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/ahab-cap/img2.jpg'), filename: 'img2.jpg')
-    p8.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/ahab-cap/img3.jpg'), filename: 'img3.jpg')
+    p8.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/ahab-cap/cover.jpg'), filename: 'cover.jpg')
+    p8.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/ahab-cap/img1.jpg'), filename: 'img1.jpg')
+    p8.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/ahab-cap/img2.jpg'), filename: 'img2.jpg')
+    p8.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/ahab-cap/img3.jpg'), filename: 'img3.jpg')
     p8.save
     ProductTag.create(tag: "classy", lang: "en", product_id: p8.id)
     ProductTag.create(tag: "captain", lang: "en", product_id: p8.id)
@@ -199,10 +199,10 @@ if Rails.env.production?
     price = (1500 * (i+1)) / 10
     price_ev = (1500 * (i+1)) / 12
     p9 = Product.new(name: name, category: c3.id, description: "Amazing " + name + "! " + lorem, price: price, price_excl_vat: price_ev, translations:"en|fr", seller_id: s3.id)
-    p9.cover.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/aquatic-novel/cover.jpg'), filename: 'cover.jpg')
-    p9.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/aquatic-novel/img1.jpg'), filename: 'img1.jpg')
-    p9.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/aquatic-novel/img2.jpg'), filename: 'img2.jpg')
-    p9.images.attach(io: File.open('~/mp/current/app/assets/images/julie-and-the-sea/aquatic-novel/img3.jpg'), filename: 'img3.jpg')
+    p9.cover.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/aquatic-novel/cover.jpg'), filename: 'cover.jpg')
+    p9.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/aquatic-novel/img1.jpg'), filename: 'img1.jpg')
+    p9.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/aquatic-novel/img2.jpg'), filename: 'img2.jpg')
+    p9.images.attach(io: File.open('/home/deploy/mp/releases/20191209050156/app/assets/images/julie-and-the-sea/aquatic-novel/img3.jpg'), filename: 'img3.jpg')
     p9.save
     ProductTag.create(tag: "ageless", lang: "en", product_id: p9.id)
     ProductTag.create(tag: "captain", lang: "en", product_id: p9.id)
