@@ -52,6 +52,7 @@ RSpec.describe "Client -", type: :feature do
     it "gets redirected back to basket page after sign in" do
       sign_up_client
       click_link "Log out"
+      add_product_to_basket
       visit basket_path("en", @basket)
       click_link "Place order"
       find(:xpath, "//a[@href='/en/clients/sign_in?origin=basket']").click

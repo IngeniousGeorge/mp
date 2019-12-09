@@ -1,9 +1,5 @@
 class OrdersController < ApplicationController
 
-  # def new
-
-  # end
-
   def create
     respond_to do |format|
       if Clerk.proceed_order(current_client, current_client.basket)
@@ -17,10 +13,4 @@ class OrdersController < ApplicationController
       end
     end
   end
-
-  private
-
-    # def order_params
-    #   params.require(:order).permit(:id, :client_id, :amount, order_sales_attributes: [:id, :seller_id, :amount, :order_id], order_products_attributes: [:id, :product_id, :quantity, :order_sale_id, :order_id])
-    # end
 end

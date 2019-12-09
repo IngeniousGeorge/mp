@@ -2,13 +2,13 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
+    #home
     root to: 'home#index'
-
-    #miscelanious
     get '/about', to: 'home#about', as: 'about'
     get '/contact', to: 'home#contact', as: 'contact'
     get '/photos', to: 'home#photos', as: 'photos'
     get '/resume', to: 'home#resume', as: 'resume'
+    get '/download_resume', to: "home#download_resume", as: 'download_resume'
 
     #DEVISE:
     devise_for :admin_users, ActiveAdmin::Devise.config
@@ -40,15 +40,11 @@ Rails.application.routes.draw do
     end
 
     #CATALOGUE:
-    # resources :sellers, only: :index
     resources :products, only: :show
 
     get '/catalogue(/:page)', to: 'products#index', as: 'catalogue'
     get '/s/:id(/:page)', to: 'products#index_seller', as: 'c_seller'
     get '/c/:id(/:page)', to: 'products#index_category', as: 'c_category'
-    # get '/seller/:id', to: 'sellers#show', as: 'seller_show'
-    # get '/loc/:id(/:page)', to: 'products#index_loc', as: 'c_location'
-    # get '/tag/:id(/:page)', to: 'products#index_tag', as: 'c_tag'
 
     #CHECKOUT
     resources :baskets, only: :show
@@ -61,15 +57,3 @@ Rails.application.routes.draw do
     # end
   end
 end
-
-# get "c/:id/dashboard" => 'dashboard_clients#show', as: :client_dashboard
-# resources :clients, path: "c", only: [:edit, :update, :destroy], path_names: { edit: "account" } do
-#   resource :basket, only: [:edit, :update], path_names: { edit: "" }
-#   resource :locations, only: [:edit, :update], path_names: { edit: "" }
-# end
-
-# get "s/:id/dashboard" => 'dashboard_sellers#show', as: :seller_dashboard
-# resources :sellers, path: "s", only: [:edit, :update], path_names: { edit: "account" } do
-#   resources :products, only: [:create, :edit, :update], path: "p", path_names: { edit: "edit" }
-#   resources :locations, only: [:create, :edit, :update], path_names: { edit: "" }
-# end

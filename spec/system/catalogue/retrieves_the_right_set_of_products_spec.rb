@@ -52,7 +52,7 @@ RSpec.describe "Catalogue path - ", type: :feature do
 
     before do
       seller = create(:seller)
-      20.times do |i|
+      30.times do |i|
         create_valid_product({name: "Product Name #{'%02d' % i}", price: (i * 1000)}, seller)
       end
     end
@@ -61,16 +61,16 @@ RSpec.describe "Catalogue path - ", type: :feature do
       visit "en/catalogue"
 
       expect(page).to have_text("Product Name 00")
-      expect(page).to have_text("Product Name 07")
-      expect(page).to have_content("Product Name", count: 8)
+      expect(page).to have_text("Product Name 11")
+      expect(page).to have_content("Product Name", count: 12)
     end
 
     it "can retrieve 8 more products on page 2" do
       visit "en/catalogue?page=2"
 
-      expect(page).to have_text("Product Name 08")
-      expect(page).to have_text("Product Name 15")
-      expect(page).to have_content("Product Name", count: 8)
+      expect(page).to have_text("Product Name 12")
+      expect(page).to have_text("Product Name 23")
+      expect(page).to have_content("Product Name", count: 12)
     end
 
     it "can show more products per page" do
@@ -90,7 +90,7 @@ RSpec.describe "Catalogue path - ", type: :feature do
     it "can order products by price descending" do
       visit "en/catalogue?sort=price&order=desc"
 
-      expect(page).to have_text("Product Name 15")
+      expect(page).to have_text("Product Name 29")
       expect(page).not_to have_text("Product Name 00")
     end
 

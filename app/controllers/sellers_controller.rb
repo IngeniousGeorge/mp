@@ -1,12 +1,9 @@
 class SellersController < ApplicationController
-  before_action :set_seller, only: [:show, :update, :update_cover, :attach_image, :delete_image]
-  before_action :translate_seller, only: [:show]
-  before_action :placeholder_images, only: [:show]
+  before_action :set_seller, only: [:update, :update_cover, :attach_image, :delete_image]
+  # before_action :translate_seller, only: [:show]
+  # before_action :placeholder_images, only: [:show]
   before_action :authenticate_seller!, only: [:update, :update_cover, :attach_image, :delete_image]
   # load_and_authorize_resource :seller, find_by: :slug, only: [:update]
-
-  def show
-  end
 
   def index
     @sellers = Seller.all

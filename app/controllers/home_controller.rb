@@ -16,4 +16,8 @@ class HomeController < ApplicationController
 
   def resume
   end
+
+  def download_resume
+    send_file "#{Rails.root}/app/assets/images/resume/resume-jc-belouard.pdf", type: "application/pdf", x_sendfile: true
+  end
 end

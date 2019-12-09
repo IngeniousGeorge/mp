@@ -16,7 +16,7 @@
       <% if current_client %>
         <%= link_to t(:place_order), orders_path, method: :post, class: "btn btn-primary" %>
       <% else %>
-        <%= link_to t(:place_order), new_client_registration_path(origin: "basket") %>
+        <%= link_to t(:place_order), new_client_registration_path(origin: "basket"), class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
