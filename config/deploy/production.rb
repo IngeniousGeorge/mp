@@ -5,7 +5,7 @@
 
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
-server "104.248.203.45", user: "deploy", roles: %w{app db web}
+server "178.128.198.96", user: "deploy", roles: %w{app db web}
 
 
 # role-based syntax
@@ -66,19 +66,6 @@ namespace :db do
       within release_path do
         with rails_env: fetch(:production) do
           execute :rake, 'db:drop'
-        end
-      end
-    end
-  end
-end
-
-namespace :db do
-  desc 'DB reset'
-  task :rollback_origin do
-    on primary :db do
-      within release_path do
-        with rails_env: fetch(:production) do
-          execute :rake, 'db:migrate:down VERSION=0001'
         end
       end
     end

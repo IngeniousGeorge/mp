@@ -19,6 +19,6 @@ test:
 
 production:
   <<: *default
-  database: mp_production
+  database: mp
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
