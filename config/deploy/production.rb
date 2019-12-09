@@ -64,7 +64,7 @@ namespace :db do
   task :drop do
     on primary :db do
       within release_path do
-        with rails_env: fetch(:production) do
+        with rails_env: fetch(:stage) do
           execute :rake, 'db:drop'
         end
       end
@@ -77,7 +77,7 @@ namespace :db do
   task :seed do
     on primary :db do
       within release_path do
-        with rails_env: fetch(:production) do
+        with rails_env: fetch(:stage) do
           execute :rake, 'db:seed'
         end
       end
