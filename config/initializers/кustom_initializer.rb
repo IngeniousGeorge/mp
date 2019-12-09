@@ -1,5 +1,5 @@
 # DOT ENV
-Dotenv.load Rails.root.join('.env') unless Rails.env.production? 
+# Dotenv.load Rails.root.join('.env') unless Rails.env.production? 
 
 # Assets
 
