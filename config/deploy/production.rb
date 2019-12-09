@@ -60,6 +60,7 @@ server "157.230.109.26", user: "deploy", roles: %w{app db web}
 #   }
 
 after "deploy:finished", :copy_files
+after "deploy:finished", :db_seed
 
 namespace :deploy do
   desc "Copy gitignored files"
@@ -67,6 +68,19 @@ namespace :deploy do
     on roles(:app) do
       run_locally do
         execute "scp /home/ig/Code/mp/keyfile.json deploy@157.230.109.26:#{current_path}/keyfile.json"
+      end
+    end
+  end
+end
+
+namespace :deploy do
+  desc 'DB seed'
+  task :db_seed do
+    on primary :db do
+      within release_path do
+        with rails_env: fetch(:stage) do
+          execute :rake, 'db:seed'
+        end
       end
     end
   end
@@ -105,19 +119,6 @@ namespace :db do
       within release_path do
         with rails_env: fetch(:stage) do
           execute :rake, 'db:seed'
-        end
-      end
-    end
-  end
-end
-
-namespace :db do
-  desc 'DB seed'
-  task :replant do
-    on primary :db do
-      within release_path do
-        with rails_env: fetch(:stage) do
-          execute :rake, 'db:seed:replant'
         end
       end
     end
