@@ -58,3 +58,16 @@ server "104.248.203.45", user: "deploy", roles: %w{app db web}
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+
+namespace :db do
+  desc 'DB drop'
+  task :drop do
+    on primary :db do
+      within release_path do
+        with rails_env: fetch(:production) do
+          execute :rake, 'db:drop'
+        end
+      end
+    end
+  end
+end
