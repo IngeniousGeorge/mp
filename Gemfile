@@ -27,6 +27,7 @@ gem 'image_processing', '~> 1.7', '>= 1.7.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'ransack', '~> 2.0', '>= 2.0.1'
 gem 'webpacker', '~> 3.5', '>= 3.5.5'
+gem 'whenever', '~> 1.0'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
