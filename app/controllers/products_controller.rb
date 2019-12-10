@@ -14,8 +14,6 @@ class ProductsController < ApplicationController
     @namespace = "c/" + params['id']
     params['category'] = get_category_id
     redirect_to root_path(params['locale']), alert: "Category not found." and return if params['category'] == "no match"
-    p Category.all
-    p params['category']
     @presentee = Category.find(params['category'])
     get_index_data
     presentee_translate
@@ -151,7 +149,7 @@ class ProductsController < ApplicationController
     end
 
     def presentee_translate
-      @presentee = @presentee.translate_object(params['locale']) unless params['locale'] == I18n.default_locale
+      @presentee = @presentee.translate_object(params['locale']) unless params['locale'] == I18n.default_locale.to_s
     end
 
     def current_ability
