@@ -68,7 +68,9 @@ class ApplicationController < ActionController::Base
           @current_basket = Basket.create!
           cookies['basket_id'] = @current_basket.id
         else
-          @current_basket = Basket.find(cookies['basket_id']) # where instead / create new if []
+          @current_basket = Basket.where("id = ?", cookies['basket_id']).first
+          @current_basket = Basket.create! if @current_basket == nil
+          cookies['basket_id'] = @current_basket.id
         end
       end
     end
