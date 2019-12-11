@@ -13,7 +13,7 @@ It uses:
 · **Active Admin** for the admin interface  
 · **Rspec** & **Capybara** for testing  
 · **Capistrano** for deployment  
-It is hosted on a droplet on **Digital Ocean** for the [production app](http://ingeniousgeorge.com) and the [repo] is hosted on **Github**.  
+It is hosted on a droplet on **Digital Ocean** for the [production app](http://market-place-demo.com) and the [repo](https://github.com/IngeniousGeorge/mp) is hosted on **Github**.  
 I elected not to use an ecommerce gem like Spree for educational purposes and because I felt like most of the issues of a market place could be addressed with core Rails.  
 
 The main requirements at the time of conception, and besides the obvious ones expected from a multi-seller market place, were:  
