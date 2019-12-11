@@ -4,7 +4,7 @@ en:
   subtitle: "demo"
   main_title: "Market Place"
   welcome: "welcome!"
-  welcome_text_html: "This is a demo multi-seller market place I developed as part of my portfolio. Feel free to test things around and change the data, it is automatically reset every hour. You can log in with the form default values for client and seller.<br/>See my <a href='/resume' style='color:black;'>resume</a> for more details." 
+  welcome_text_html: "This is a demo multi-seller market place I developed as part of my portfolio. Feel free to test things around and change the data, it is automatically reset every hour. You can log in with the form default values for <a href='/clients/sign_in' style='color:purple;'>client<a/> and <a href='/sellers/sign_in' style='color:purple;'>seller<a/>.<br/>You can also access the <a href='/admin' style='color:purple;'>admin panel<a/> with email: admin@example.com and password: password.<br/>See my <a href='/resume' style='color:purple;'>resume</a> for more details." 
   seller: "seller"  
   sellers: "sellers"
   all_categories: "all categories"
