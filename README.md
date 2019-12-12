@@ -1,11 +1,11 @@
-## README
+## Market Place Demo
 
-This Ruby on Rails web app is a demo of a market place.   
-It's a project I started working on for my former employer but which never completed.  
+This a project I started working on for my former employer but which never completed.  
 I took it upon myself to apply all I've learnt in the last few years spent studiyng development as an autodidact and try to make it the most clean code I can produce.  
-You can consider it my master thesis, if you will.  
+You can consider it my master thesis, if you will.
 
-It uses:
+## Built With
+
 · **Rails** 5.2.3 and **Ruby** 2.6.3  
 · **Postgres** for the DB  
 · **Devise** for authentification  
@@ -14,7 +14,7 @@ It uses:
 · **Rspec** & **Capybara** for testing  
 · **Capistrano** for deployment  
 It is hosted on a droplet on **Digital Ocean** for the [production app](http://market-place-demo.com) and the [repo](https://github.com/IngeniousGeorge/mp) is hosted on **Github**.  
-I elected not to use an ecommerce gem like Spree for educational purposes and because I felt like most of the issues of a market place could be addressed with core Rails.  
+## Features  
 
 The main requirements at the time of conception, and besides the obvious ones expected from a multi-seller market place, were:  
 · Give complete autonomy to a non-technical admin to run the site  
@@ -23,13 +23,17 @@ The main requirements at the time of conception, and besides the obvious ones ex
 · Meaningful urls to help with SEO, especially urls with proper sellers' names and categories  
 · Geolocalisation of all clients and sellers to eventually promote local circuits and handle delivery  
 They are all implemented and functional in the current version of the app.  
+
+## Tests
   
 I've followed a mostly BDD style, with most of the testing suite being located in spec/system folder.  
 They offer good coverage because any issue at unit level will likely be caught by one or more of those tests.  
-But, as useful as they are in the first phases of development, they become cumbersome in a more complete app, as they break when the front end changes.  
 Test coverage: 79%  
 
-This app is still being developped with production in mind, yet I admit it is far from ready for it.  
+## Author
+
+This is my [resume](http://www.market-place-demo.com/en/resume).   
+You can contact me at jcbelouard@gmail.com for more information.  
 
 ---
 ##### In the next section I will detail all the noteworthy design decisions I've made
@@ -110,5 +114,3 @@ The same system could be used to bypass DB calls for data that doesn't change to
 
 I could have mentioned polymorphic locations, dashboard controllers, custom image validators, custom pagination, but they are more in line with standard MVC design and didn't really answer a specific, out of the ordinary issue.  
 
-This is my [resume]().   
-You can contact me at jcbelouard@gmail.com for more information.  
