@@ -20,7 +20,7 @@ gem 'database_cleaner', '~> 1.7' #used for seeding temporary production data
 gem 'devise', '~> 4.5'
 gem 'faraday', '~> 0.15.3'
 gem 'friendly_id', '~> 5.2', '>= 5.2.4'
-gem 'geocoder', '~> 1.5'
+gem 'geocoder', '~> 1.6'
 gem 'google-cloud-storage', '~> 1.15'
 gem 'haml', '~> 5.1', '>= 5.1.2'
 gem 'image_processing', '~> 1.7', '>= 1.7.1'
